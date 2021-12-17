@@ -1,0 +1,265 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+header .logo img {
+  width: 130px;
+}
+
+button:hover {
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.36);
+}
+
+.breadcrumbs {
+  text-align: left;
+}
+
+.breadcrumbs a,
+.breadcrumbs span {
+  font-size: 14px;
+  color: #262626;
+}
+
+.nav li.nav-item a {
+  padding-top: 0;
+  padding-bottom: 0;
+  color: #212529;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.nav li.nav-item a:hover {
+  color: #212529;
+  text-decoration: underline;
+}
+
+.nav li.nav-item:not(:last-child) a {
+  border-right: solid 2px #212529;
+}
+
+.nav li.nav-item a.active {
+  text-decoration: underline;
+}
+
+.nav li.nav-account {
+  padding: 0 16px;
+  margin-top: -5px;
+}
+
+.nav li.nav-account img {
+  width: 28px;
+}
+
+section.hero-section .row {
+  height: 55vh;
+}
+
+section.hero-section .refresh {
+  text-align: right;
+  cursor: pointer;
+}
+
+.main-wrap h1 {
+  font-size: 64px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.main-wrap p {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.single-order:hover {
+  background-color: #efefef;
+}
+
+.single-order-header {
+  padding: 50px 25px;
+  border-top: solid 3px #212529;
+  display: flex;
+  justify-content: space-between;
+}
+
+.single-order-header h2 {
+  font-size: 36px;
+  font-weight: 600;
+  text-decoration: underline;
+  margin-bottom: 35px;
+}
+
+.single-order-header p {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.single-order-header .header-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.single-order-header .header-controls .order-status {
+  font-size: 36px;
+  text-align: center;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.single-order-header .header-controls button {
+  border: none;
+  outline: none;
+  padding: 15px 50px;
+  background-color: #333;
+  color: #fff;
+  font-weight: 500;
+}
+
+.single-offer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  border-top: solid 1px #A7A7A7;
+}
+
+.single-offer .offer-type span {
+  color: #333;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.single-offer p {
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+}
+
+.single-offer .offer-price h4 {
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+.single-offer .offer-button button {
+  outline: none;
+  border: none;
+  background-color: #E6342A;
+  color: #fff;
+  font-size: 18px;
+  padding: 15px 22px;
+  font-weight: 500;
+}
+
+.single-offer .offer-button.send-offer button,
+.single-offer .offer-button.confirm-shipped button {
+  background-color: #22b728;
+}
+
+.live_request input {
+  border: 1px solid #343434;
+  color: #212529;
+  height: 50px;
+  border-radius: 0;
+  padding-left: 8px;
+  margin-top: 6px;
+}
+
+.live_request .offer_price {
+  width: 200px;
+  font-weight: 600;
+}
+
+#new_request {
+  padding: 50px 25px;
+  border-top: solid 3px #212529;
+}
+
+#new_request .new-request-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.new-request-container label {
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+.new-request-container input {
+  width: 100%;
+  border: 1px solid #343434;
+  color: #212529;
+  height: 50px;
+  border-radius: 0;
+  padding-left: 8px;
+  margin-top: 6px;
+}
+
+.new-request-container input.request_title {
+  font-weight: bold;
+}
+
+.new-request-container button {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 60px;
+  background-color: #E6342A;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.button-expired {
+  opacity: .6;
+  pointer-events: none;
+}
+
+#my_account_client {
+  padding: 50px 25px;
+  border-top: solid 3px #212529;
+}
+
+#my_account_client .my-account-client-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.my-account-client-container input {
+  width: 100%;
+  border: 1px solid #343434;
+  color: #212529;
+  height: 50px;
+  border-radius: 0;
+  padding-left: 8px;
+  margin-top: 6px;
+}
+
+.my-account-client-container label {
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+.my-account-client-container button {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 60px;
+  background-color: #E6342A;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 10px;
+}
