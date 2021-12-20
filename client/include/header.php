@@ -35,7 +35,7 @@
 				<li class="nav-item"><a href="/client/new-request" class="nav-link">New Request</a></li>
 				<li class="nav-item"><a href="/client/my-requests" class="nav-link">My Requests</a></li>
 				<li class="nav-item"><a href="/client/shipped" class="nav-link">Shipped</a></li>
-				<li class="nav-item"><a href="/client/logout" class="nav-link">Log out</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
 				<li class="nav-account"><a href="/client/account"><img src="/media/account-icon.svg"/></a></li>
 			</ul>
 		</div>

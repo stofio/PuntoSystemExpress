@@ -35,7 +35,7 @@
 				<li class="nav-item"><a href="/supplier/today" class="nav-link">Today Requests</a></li>
 				<li class="nav-item"><a href="/supplier/offers" class="nav-link">My Offers</a></li>
 				<li class="nav-item"><a href="/supplier/shipped" class="nav-link">Shipped</a></li>
-				<li class="nav-item"><a href="/supplier/logout" class="nav-link">Log out</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
 				<li class="nav-account"><a href="/supplier/account"><img src="/media/account-icon.svg"/></a></li>
 			</ul>
 		</div>
