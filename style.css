@@ -2,6 +2,14 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+a {
+  color: #E6342A;
+}
+
+a:hover {
+  color: #E6342A;
+}
+
 header .logo img {
   width: 130px;
 }
@@ -195,7 +203,8 @@ section.hero-section .refresh {
   margin-bottom: 20px;
 }
 
-.new-request-container input {
+.new-request-container input,
+.new-request-container textarea {
   width: 100%;
   border: 1px solid #343434;
   color: #212529;
@@ -203,6 +212,11 @@ section.hero-section .refresh {
   border-radius: 0;
   padding-left: 8px;
   margin-top: 6px;
+}
+
+.new-request-container textarea {
+  padding-top: 10px;
+  min-height: 80px;
 }
 
 .new-request-container input.request_title {
@@ -262,4 +276,47 @@ section.hero-section .refresh {
   color: #fff;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.tabcontent {
+  display: none;
+}
+
+.tab {
+  margin-bottom: -3px;
+}
+
+.tablinks {
+  border: solid 3px #212529;
+  background-color: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #212529;
+}
+
+.tablinks:not(:last-child) {
+  border-right: none;
+}
+
+.tablinks.active {
+  border-bottom: solid 3px #fff;
+  text-decoration: underline;
+}
+
+.tab button:hover {
+  box-shadow: none;
+}
+
+.pageitem {
+  border: solid 2px #212529;
+}
+
+.pageitem a {
+  color: #212529;
+  font-weight: 600;
+}
+
+.pageitem.active a {
+  color: #E6342A;
 }

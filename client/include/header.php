@@ -1,3 +1,10 @@
+<?php 
+/**
+ * restrict access
+ */
+require_once 'include/auth.php'; 
+
+?>
 <!doctype html>
 <html lang="en">
   <head>

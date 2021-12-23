@@ -1,3 +1,10 @@
+<?php 
+/**
+ * restrict access
+ */
+require_once 'include/auth.php'; 
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,7 +39,7 @@
 
 			<ul class="nav">
 				<li class="nav-item"><a href="/supplier" class="nav-link" aria-current="page">Dashboard</a></li>
-				<li class="nav-item"><a href="/supplier/today" class="nav-link">Today Requests</a></li>
+				<li class="nav-item"><a href="/supplier/active" class="nav-link">Active Requests</a></li>
 				<li class="nav-item"><a href="/supplier/offers" class="nav-link">My Offers</a></li>
 				<li class="nav-item"><a href="/supplier/shipped" class="nav-link">Shipped</a></li>
 				<li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>

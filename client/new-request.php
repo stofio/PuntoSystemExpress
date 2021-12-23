@@ -1,9 +1,6 @@
 <?php $page_title = 'New Request'; ?>
 <?php require_once 'include/header.php'; ?>
-
-
 <link href="/vendor/bootstrap-datetimepicker-master/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
  
     <section class="text-center hero-section">
         <div class="breadcrumbs">
@@ -20,35 +17,45 @@
 
     <section id="new_request">
 
-        <form id="new_request_form">
+        <form id="new_request_form" enctype="multipart/form-data" autocomplete="off">
             <div class="new-request-container row">
                 <div class="col-md-6">
-                    <label>Title request<br>
-                        <input type="text" class="request_title" placeholder="Title request" value="Express Shipping" required/>
+                    <label>Shipment title<br>
+                        <input type="text" name="title" class="request_title" placeholder="Shipment title" value="Express Shipping" required/>
                     </label>
                     <div class="row">
                         <div class="col-md-6">
                             <label>Available from<br>
-                                <input type="text" class="request_available_from" placeholder="Available from" required/>
+                                <input type="text" name="from_time" class="request_available_from" placeholder="Available from" required/>
                             </label>
                         </div>
                         <div class="col-md-6">
                             <label>Delivered within<br>
-                                <input type="text" class="request_delivered_withing" placeholder="Available within" required/>
+                                <input type="text" name="to_time" class="request_delivered_withing" placeholder="Available within" required/>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label>From<br>
-                        <input type="text" class="request_from" placeholder="From" required/>
+                        <input type="text" name="from_place" class="request_from" placeholder="From" required/>
                     </label>
                     <label>To<br>
-                        <input type="text" class="request_to" placeholder="To" required/>
+                        <input type="text" name="to_place" class="request_to" placeholder="To" required/>
                     </label>
                 </div>
                 <div class="col-md-12">
-                    <button type="submit">Send request</button>
+                    <label>Note<br>
+                        <textarea placeholder="Note" name="note"></textarea>
+                    </label>
+                </div>
+                <div class="col-md-12">
+                    <label>Attachments (files larger then 50MB will not be uploaded)<br>
+                        <input type="file" name="files[]" id="files" multiple />
+                    </label>
+                </div>
+                <div class="col-md-12">
+                    <button name="send_request" type="submit">Send request</button>
                 </div>
             </div>
         </form>
