@@ -2,32 +2,29 @@
 
     session_start();
 
-    include '../../functions.php';
+    include '../../../functions.php';
 
 
     $userid = $_SESSION['user_id'];
-    $title = test_input($_POST['title']);
-    $from_time = test_input($_POST['from_time']);
-    $to_time = test_input($_POST['to_time']);
-    $valid_until = test_input($_POST['valid_until']);
-    $from_place = test_input($_POST['from_place']);
-    $to_place = test_input($_POST['to_place']);
+    $request_id = $_POST['request_id'];
+    $good_delivery = test_input($_POST['good_delivery']);
+    $good_collection = test_input($_POST['good_collection']);
+    $offer_price = test_input($_POST['offer_price']);
+    $offer_active_until = test_input($_POST['offer_active_until']);
     $note = test_input($_POST['note']);
     $files_names_array = array();
 
     //files
-    $upload_dir = '../uploads/';
+    $upload_dir = '../../uploads/';
     $allowed_types = array('jpg', 'png', 'jpeg', 'gif', 'pdf', 'xml', 'doc', 'docx', 'zip', 'rar');
     $maxsize = 50 * 1024 * 1024; //50 MiB
 
     //validate
     if(
-        (empty($title))or
-        (empty($from_time))or
-        (empty($to_time))or
-        (empty($valid_until))or
-        (empty($from_place))or
-        (empty($to_place))
+        (empty($request_id))or
+        (empty($good_delivery))or
+        (empty($good_collection))or
+        (empty($offer_price))
     ) {
     //missing fields
         echo 'Missing required fields';
@@ -87,22 +84,39 @@
         }
     }
 
-    //set request status to LIVE - 1
+    //status of the shipping request is LIVE - 1
     //save data to db
     $attach = serialize($files_names_array); //serialized array
     $created = date('Y-m-d h:i:s', time());
 
-    $from_formatted = date('Y-m-d h:i:s', strtotime($from_time));
-    $to_formatted = date('Y-m-d h:i:s', strtotime($to_time));
-    $expire_formatted = date('Y-m-d h:i:s', strtotime($valid_until));
+    $from_formatted = date('Y-m-d h:i:s', strtotime($good_collection));
+    $to_formatted = date('Y-m-d h:i:s', strtotime($good_delivery));
+    $valid_formatted = date('Y-m-d h:i:s', strtotime($offer_active_until));
 
-    $sql = "INSERT INTO requests (useridfk, request_status, title, from_place, to_place, from_time, to_time, valid_until, note, attachments, created)
-    VALUES ('$userid', '1', '$title', '$from_place', '$to_place', '$from_formatted', '$to_formatted', '$expire_formatted', '$note', '$attach', '$created')";
+    $sql = "INSERT INTO offers (offer_useridfk, requestidfk, offer_status, collect_time, deliver_time, valid_until, price, offer_note, offer_attachments, offer_created)
+    VALUES ('$userid', '$request_id', '1', '$from_formatted', '$to_formatted', '$valid_formatted', '$offer_price', '$note', '$attach', '$created')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
+        echo "New record created successfully <br>";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
+
+
+    //mark request as TOCONFIRM
+    $sql2 = "SELECT COUNT(offer_id) FROM offers WHERE `requestidfk` = $request_id";
+    $sql2result = mysqli_query($conn, $sql2);
+    $sql2rows = mysqli_fetch_row($sql2result)[0];  
+    
+    //if there are 3 or more offers
+    if($sql2rows >= 3) {
+        //mark request as TOCONFIRM
+        $sql3 = "UPDATE requests SET request_status= 2 WHERE id = $request_id";
+        if(mysqli_query($conn, $sql3)) {
+            echo "Updated request TOCONFIRM <br>";
+        }
+    }
+
+
  
 ?>

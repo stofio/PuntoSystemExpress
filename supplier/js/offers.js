@@ -2,13 +2,12 @@ $(document).ready(function() {
   //
   //load LIVE tab
   //
-  $("#target-content").load("include/live/get_live_requests.php?page=1");
-  $(".page-link1.page-link").click(function() {
+  $("#target-content").load("include/live_requests/get_live_requests.php?page=1");
+  $(".page-link").click(function() {
     var id = $(this).attr("data-id");
     var select_id = $(this).parent().attr("id");
-
     $.ajax({
-      url: "include/live/get_live_requests.php",
+      url: "include/live_requests/get_live_requests.php",
       type: "GET",
       data: {
         page: id
@@ -18,20 +17,21 @@ $(document).ready(function() {
         $("#target-content").html(dataResult);
         $(".pageitem").removeClass("active");
         $("#" + select_id).addClass("active");
+
       }
     });
   });
 
   //
-  //load TOCONFIRM tab
+  //load TOSHIP tab
   //
-  $("#target-content2").load("include/toconfirm/get_to_confirm_requests.php?page=1");
+  $("#target-content2").load("include/toship_requests/get_toship_requests.php?page=1");
   $(".page-link2.page-link").click(function() {
     var id = $(this).attr("data-id");
     var select_id = $(this).parent().attr("id");
 
     $.ajax({
-      url: "include/toconfirm/get_to_confirm_requests.php",
+      url: "include/toship_requests/get_toship_requests.php",
       type: "GET",
       data: {
         page: id.replace('tc-', '')
@@ -46,14 +46,14 @@ $(document).ready(function() {
   });
 
   //
-  //load TOSHIP tab
+  //load ENDED tab
   //
-  $("#target-content3").load("include/toship/get_toship_requests.php?page=1");
+  $("#target-content3").load("include/ended_requests/get_ended_requests.php?page=1");
   $(".page-link3.page-link").click(function() {
     var id = $(this).attr("data-id");
     var select_id = $(this).parent().attr("id");
     $.ajax({
-      url: "include/toship/get_toship_requests.php",
+      url: "include/ended_requests/get_ended_requests.php",
       type: "GET",
       data: {
         page: id.replace('ts-', '')
@@ -66,38 +66,17 @@ $(document).ready(function() {
       }
     });
   });
-
-});
-
-$(document).on('click', '#cancelLiveOffer', (e) => {
-  var currentOrder = $(e.target).parents('.single-order');
-  if (confirm(`Do you want to Cancel the '${currentOrder.find('.order-title').html()}' request? 
-  All the suppliers have already received a notification email about the request.`)) {
-    // YES
-    $.ajax({
-      url: "include/live/delete_live_requests.php",
-      type: "POST",
-      data: {
-        id: currentOrder.find('.request_id').val()
-      },
-      cache: false,
-      success: function(dataResult) {
-        console.log(dataResult)
-        currentOrder.remove();
-      }
-    });
-  }
 });
 
 
-$(document).on('click', '.blockOffer', (e) => {
+$(document).on('click', '.confirm_shipped', (e) => {
   var currentOffer = $(e.target).parents('.single-offer');
   var currentRequest = $(e.target).parents('.single-order');
-  if (confirm(`Do you want to accept the offer of ${currentOffer.find('.offer-price h4').html()}?
-  The offer will be moved to TO SHIP tab, from where you can contact the supplier directly by email.`)) {
+  if (confirm(`Do you want to mark the request '${currentRequest.find('.order-title').html()}' as SHIPPED?
+  This action will notify the client that the shipping is on the way.`)) {
     // YES
     $.ajax({
-      url: "include/toconfirm/block_offer.php",
+      url: "include/toship_requests/set_shipped_request.php",
       type: "POST",
       data: {
         offer_id: currentOffer.find('.offer_id').val(),
@@ -105,21 +84,23 @@ $(document).on('click', '.blockOffer', (e) => {
       },
       cache: false,
       success: function(dataResult) {
+        console.log(dataResult);
 
         //show success message
         var success = `<div style="padding: 10px 25px"
-              <h2 class="mb-4">The supplier will be notified by email to ship your request of ${currentOffer.find('.offer-price h4').html()}.<h2>
-              <p>You will be notified by email when the shipment is on the way.</p>
-              <p>You can contact the supplier from the TO SHIP tab.</p>
+              <h2 class="mb-4">You can find this request in the <a href="/supplier/shipped">Shipped</a> section.<h2>
+              <p>The client will be notified that the shipping is on the way.</p>
               </div>
               `;
-        $(currentRequest).fadeOut('slow', () => {
-          $(currentRequest).empty().html(success).fadeIn();
+        $(currentOffer).fadeOut('slow', () => {
+          $(currentOffer).empty().html(success).fadeIn();
         });
+
       }
     });
   }
 });
+
 
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;

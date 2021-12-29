@@ -134,6 +134,10 @@ section.hero-section .refresh {
   border-top: solid 1px #A7A7A7;
 }
 
+.single-offer .offer-type {
+  min-width: 115px;
+}
+
 .single-offer .offer-type span {
   color: #333;
   font-size: 20px;
@@ -154,6 +158,16 @@ section.hero-section .refresh {
   font-weight: 700;
   text-align: center;
   margin: 0;
+}
+
+.offer-price textarea {
+  width: 100%;
+  border: 1px solid #343434;
+  color: #212529;
+  border-radius: 0;
+  padding-left: 8px;
+  padding-top: 3px;
+  margin-top: 6px;
 }
 
 .single-offer .offer-button button {
@@ -178,11 +192,16 @@ section.hero-section .refresh {
   border-radius: 0;
   padding-left: 8px;
   margin-top: 6px;
+  background-color: #fff;
 }
 
 .live_request .offer_price {
   width: 200px;
   font-weight: 600;
+}
+
+.live_request textarea.note_area {
+  height: 100px;
 }
 
 #new_request {
@@ -308,15 +327,35 @@ section.hero-section .refresh {
   box-shadow: none;
 }
 
-.pageitem {
+.pageitem,
+.pageitem2,
+.pageitem3 {
   border: solid 2px #212529;
 }
 
-.pageitem a {
+.pageitem a,
+.pageitem2 a,
+.pageitem3 a {
   color: #212529;
   font-weight: 600;
 }
 
-.pageitem.active a {
-  color: #E6342A;
+.pageitem.active a,
+.pageitem2.active a,
+.pageitem3.active a {
+  background-color: #E6342A;
+  color: #fff;
+}
+
+button.sendEmail {
+  background-color: #333 !important;
+}
+
+.contact-supplier button {
+  border: none;
+  outline: none;
+  padding: 15px 50px;
+  background-color: #333;
+  color: #fff;
+  font-weight: 500;
 }

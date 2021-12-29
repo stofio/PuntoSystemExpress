@@ -19,31 +19,36 @@
 
         <form id="new_request_form" enctype="multipart/form-data" autocomplete="off">
             <div class="new-request-container row">
-                <div class="col-md-6">
+
+                <div class="col-md-4">
                     <label>Shipment title<br>
                         <input type="text" name="title" class="request_title" placeholder="Shipment title" value="Express Shipping" required/>
                     </label>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Available from<br>
-                                <input type="text" name="from_time" class="request_available_from" placeholder="Available from" required/>
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Delivered within<br>
-                                <input type="text" name="to_time" class="request_delivered_withing" placeholder="Available within" required/>
-                            </label>
-                        </div>
-                    </div>
+                    <label>Available from<br>
+                        <input type="text" name="from_time" class="request_available_from" placeholder="Available from" required/>
+                    </label>
+
+
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-md-4">
                     <label>From<br>
                         <input type="text" name="from_place" class="request_from" placeholder="From" required/>
                     </label>
+                    <label>Delivered within<br>
+                        <input type="text" name="to_time" class="request_delivered_within" placeholder="Available within" required/>
+                    </label>
+                </div>
+
+                <div class="col-md-4">
                     <label>To<br>
                         <input type="text" name="to_place" class="request_to" placeholder="To" required/>
                     </label>
+                    <label>Valid until<br>
+                        <input type="text" name="valid_until" class="request_expire" placeholder="Valid until" required/>
+                    </label>
                 </div>
+
                 <div class="col-md-12">
                     <label>Note<br>
                         <textarea placeholder="Note" name="note"></textarea>

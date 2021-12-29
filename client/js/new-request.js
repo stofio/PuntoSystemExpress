@@ -2,8 +2,9 @@
 
   //dates inputs
   $(".request_available_from").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
-  $(".request_delivered_withing").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
-  $('.request_available_from, .request_delivered_withing').keypress(function(e) {
+  $(".request_delivered_within").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
+  $(".request_expire").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
+  $('.request_available_from, .request_delivered_within, .request_expire').keypress(function(e) {
     e.preventDefault();
     return false;
   });

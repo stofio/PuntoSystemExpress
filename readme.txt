@@ -1,0 +1,1 @@
+It may get some errors on the pagination.php files, because every file gives each pagenumbers the same id tag, divided in tabs 

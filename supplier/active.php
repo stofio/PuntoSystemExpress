@@ -17,108 +17,13 @@
         </div>
     </section>
 
-    <section id="supp_offers_list">
+    <section id="active_requests">
 
-        <div class="single-order">
-            <div class="single-order-header">
-                <div class="header-details">
-                    <h2 class="order-title">Spedizione Express #01135</h2>
-                    <div class="order-details">
-                        <p><b>From</b> Antwerp, BE</p>
-                        <p><b>To</b> Turin, IT</p>
-                        <p><b>Available from</b> 31/12/2021 18:00</p>
-                        <p><b>Delivered within</b> 01/01/2022 09:00</p>
-                        <p>Offer Available Untill 29/12/2021</p>
-                    </div>
-                </div>
-                <div class="header-controls">
-                    <span class="order-status">LIVE</span>
-                    <button type="button">Send email</button>
-                </div>
-            </div>
-            <div class="live_request single-order-body">
-                <form class="offer_form">
-                    <div class="single-offer">
-                        <div class="offer-type">
-                            <span>MAKE YOUR OFFER</span>
-                        </div>
-                        <div class="offer-collection">
-                            <p>
-                                <b>Good Collection Time</b><br>
-                                <input size="16" type="text" placeholder="dd-mm-yyyy hh:ii" class="good_collection" required>
-                            </p>
-                        </div>
-                        <div class="offer-delivery">
-                            <p>
-                                <b>Good Delivery Time</b><br>
-                                <input size="16" type="text" placeholder="dd-mm-yyyy hh:ii" class="good_delivery" required>
-                            </p>
-                        </div>
-                        <div class="offer-price">
-                            <p><b>Price</b></p>
-                            <h4>€ 
-                                <input type="text" class="offer_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
-                            </h4>
-                        </div>
-                        <div class="offer-button send-offer">
-                            <button type="submit">Send Offer</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <div id="target-content">loading...</div>
 
-        <div class="single-order">
-            <div class="single-order-header">
-                <div class="header-details">
-                    <h2 class="order-title">Spedizione Express #01135</h2>
-                    <div class="order-details">
-                        <p><b>From</b> Antwerp, BE</p>
-                        <p><b>To</b> Turin, IT</p>
-                        <p><b>Available from</b> 31/12/2021 18:00</p>
-                        <p><b>Delivered within</b> 01/01/2022 09:00</p>
-                        <p>Offer Available Untill 29/12/2021</p>
-                    </div>
-                </div>
-                <div class="header-controls">
-                    <span class="order-status">LIVE</span>
-                    <button type="button">Send email</button>
-                </div>
-            </div>
-            <div class="live_request single-order-body">
-                <form class="offer_form">
-                    <div class="single-offer">
-                        <div class="offer-type">
-                            <span>MAKE YOUR OFFER</span>
-                        </div>
-                        <div class="offer-collection">
-                            <p>
-                                <b>Good Collection Time</b><br>
-                                <input size="16" type="text" placeholder="dd-mm-yyyy hh:ii" class="good_collection" required>
-                            </p>
-                        </div>
-                        <div class="offer-delivery">
-                            <p>
-                                <b>Good Delivery Time</b><br>
-                                <input size="16" type="text" placeholder="dd-mm-yyyy hh:ii" class="good_delivery" required>
-                            </p>
-                        </div>
-                        <div class="offer-price">
-                            <p><b>Price</b></p>
-                            <h4>€ 
-                                <input type="text" class="offer_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
-                            </h4>
-                        </div>
-                        <div class="offer-button send-offer">
-                            <button type="submit">Send Offer</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-
-        
+        <div class="clearfix">
+            <ul class="pagination"> <?php include 'include/active_requests/pagination.php'; ?> </ul>
+        </div>     
 
     </section>
 
