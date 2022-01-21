@@ -223,14 +223,41 @@ section.hero-section .refresh {
 }
 
 .new-request-container input,
+.new-request-container select,
+.new-request-container .select2-selection,
 .new-request-container textarea {
   width: 100%;
-  border: 1px solid #343434;
+  border: 1px solid #343434 !important;
   color: #212529;
-  height: 50px;
-  border-radius: 0;
+  height: 50px !important;
+  border-radius: 0 !important;
   padding-left: 8px;
   margin-top: 6px;
+}
+
+.new-request-container input#files {
+  border: solid 1px #999 !important;
+}
+
+.new-request-container .select2-selection {
+  display: flex !important;
+}
+
+.select2-dropdown {
+  border-color: #000 !important;
+}
+
+.new-request-container .select2-selection__rendered,
+.select2-selection__arrow {
+  display: flex !important;
+  align-items: center;
+  height: 100% !important;
+  padding-left: 0 !important;
+}
+
+.select2-selection__rendered {
+  color: #212529;
+  font-weight: 400;
 }
 
 .new-request-container textarea {
@@ -358,4 +385,91 @@ button.sendEmail {
   background-color: #333;
   color: #fff;
   font-weight: 500;
+}
+
+.error-container {
+  width: 100%;
+}
+
+.error-warn {
+  width: 100%;
+  padding: 15px;
+  border: solid 1px #d1180e;
+  background-color: #e6342a17;
+  color: #d1180e;
+  font-size: 16px !important;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.error-warn span {
+  font-size: 25px;
+}
+
+.colli-container {
+  border: solid 1px #999;
+  padding: 20px 50px 20px 20px;
+  margin-bottom: 20px;
+  margin-top: 6px;
+}
+
+.collo-single {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.collo-single:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.collo-single input {
+  height: 35px !important;
+}
+
+.collo-single input:not(:last-child) {}
+
+.collo-single label {
+  margin-left: 10px !important;
+  margin: 0;
+  width: auto;
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+.collo-single span {
+  margin-right: 20px;
+  font-size: 22px;
+  color: #999;
+}
+
+#new-collo {
+  color: #e6342a;
+  cursor: pointer;
+}
+
+#new-collo:hover {
+  text-decoration: underline;
+}
+
+.remov-col {
+  position: absolute;
+  right: -50px;
+}
+
+.remov-col:hover {
+  color: #e6342a;
+}
+
+.coll-nu {
+  width: 155px;
+}
+
+.helpBtn {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  color: #fff;
+  background-color: #212529;
+  padding: 3px 8px;
 }

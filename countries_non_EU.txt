@@ -1,0 +1,8 @@
+Andorra,
+Bosnia Herzegovina,
+Liechtenstein,
+Norway,
+San Marino,
+Serbia,
+Swiss,
+United Kingdom

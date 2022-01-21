@@ -17,8 +17,8 @@
 
     <div class="tab">
         <button id="liveTabBtn" class="tablinks active" onclick="openTab(event, 'liveReq')">LIVE</button><!--
-        --><button class="tablinks" onclick="openTab(event, 'toConfReq')">TO CONFIRM</button><!--
-        --><button class="tablinks" onclick="openTab(event, 'toShipReq')">TO SHIP</button>
+    --><button class="tablinks" onclick="openTab(event, 'toConfReq')">TO CONFIRM</button><!--
+    --><button class="tablinks" onclick="openTab(event, 'toShipReq')">TO SHIP</button>
     </div>
 
     <!--    
@@ -47,7 +47,7 @@
         </div>
 
     </section>
-
+ 
 
     <!--    
          TO SHIP tab

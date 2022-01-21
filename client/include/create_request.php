@@ -4,6 +4,14 @@
 
     include '../../functions.php';
 
+    //include_once 'email_new_request.php';
+
+    $colli = $_POST['colli'];
+
+    //echo $colli;
+
+    return;
+
 
     $userid = $_SESSION['user_id'];
     $title = test_input($_POST['title']);
@@ -24,7 +32,7 @@
     if(
         (empty($title))or
         (empty($from_time))or
-        (empty($to_time))or
+        (empty($to_time))or 
         (empty($valid_until))or
         (empty($from_place))or
         (empty($to_place))
@@ -101,6 +109,10 @@
 
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";
+        /**
+         * send email to all clients
+         */
+        //sendEmailNewRequest();
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }

@@ -2,6 +2,20 @@
 
   var current = location.pathname.replace('/supplier/', '');
 
+
+
+  //add help button
+  var helpBtn = `
+      <a href="mailto:info@puntosystemgroup.com"><div class="helpBtn">� Need Help?</div></a>
+  `;
+  $('body').append(helpBtn);
+
+
+
+
+  /**
+   * this next 2 parts needs to stay at bottom, cause of return
+   */
   //if its home
   if (current == '') {
     $('.nav li:first-child a').addClass('active');
@@ -15,5 +29,6 @@
       $this.addClass('active');
     }
   })
+
 
 })();
