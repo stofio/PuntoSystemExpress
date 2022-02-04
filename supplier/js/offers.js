@@ -45,6 +45,30 @@ $(document).ready(function() {
     });
   });
 
+
+  //
+  //load GOING tab
+  //
+  $("#target-content4").load("include/going_requests/get_going_requests.php?page=1");
+  $(".page-link4.page-link").click(function() {
+    var id = $(this).attr("data-id");
+    var select_id = $(this).parent().attr("id");
+    $.ajax({
+      url: "include/going_requests/get_going_requests.php",
+      type: "GET",
+      data: {
+        page: id.replace('tg-', '')
+      },
+      cache: false,
+      success: function(dataResult) {
+        $("#target-content4").html(dataResult);
+        $(".pageitem4").removeClass("active");
+        $("#tg-" + select_id).addClass("active");
+      }
+    });
+  });
+
+
   //
   //load ENDED tab
   //
@@ -66,7 +90,12 @@ $(document).ready(function() {
       }
     });
   });
+
+
+
+
 });
+
 
 
 $(document).on('click', '.confirm_shipped', (e) => {
@@ -98,6 +127,34 @@ $(document).on('click', '.confirm_shipped', (e) => {
 
       }
     });
+  }
+});
+
+
+$(document).on('click', '.sped_ritirata', (e) => {
+  var currentOffer = $(e.target).parents('.single-offer');
+  var currentRequest = $(e.target).parents('.single-order');
+  if (confirm(`Confirm current order as TO CONCLUDE?`)) {
+    // YES
+    $('.sped_ritirata').fadeOut('slow', () => {
+      $('.conclude_form').fadeIn('fast');
+      $('.order-status').html('TO COMPLETE');
+    });
+
+  }
+});
+
+
+$(document).on('submit', '.conclude_form', (e) => {
+  e.preventDefault();
+  var currentOffer = $(e.target).parents('.single-offer');
+  var currentRequest = $(e.target).parents('.single-order');
+  if (confirm(`Mark current order as SHIPPED?`)) {
+    // YES
+    $(e.target).parents('.single-order').fadeOut('slow', () => {
+      $('#goingReq').append('<p class="mt-4">No ongoing requests yet...</p>');
+    });
+
   }
 });
 

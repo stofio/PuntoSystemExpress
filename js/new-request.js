@@ -8,6 +8,7 @@
   $("#new_request_form").on("submit", (e) => {
     e.preventDefault();
 
+    return;
     var formData = new FormData(e.currentTarget);
 
     //append serialized colli to formData
@@ -27,8 +28,8 @@
 
         //show success message
         var success = `<h2 class="mb-4">Your shipment request is LIVE<h2>
-                      <p>You will be notified by email about new offers, but you can also check the <a href="/client/my-requests">My Requests</a> section.</p>
-        `;
+                        <p>You will be notified by email about new offers, but you can also check the <a href="/client/my-requests">My Requests</a> section.</p>
+          `;
         $('#new_request_form').fadeOut('slow', () => {
           $('#new_request').append(success);
         });
@@ -165,8 +166,8 @@
 
   function showCountryWarning() {
     var warn = `<p class="error-warn" id="warn-non-eu-to"><span>⚠</span> 
-                  The country of destination does not belong to the European Union. Your request requires specific study. Our customer service will contact you shortly after with the best transport option.
-                </p>`;
+                    The country of destination does not belong to the European Union. Your request requires specific study. Our customer service will contact you shortly after with the best transport option.
+                  </p>`;
     $('#warn-non-eu-to').remove();
 
     $('.error-container').append(warn);
@@ -176,14 +177,29 @@
   function addNewCollo() {
     var collo = `
     <div class="collo-single">
-      <span class="coll-nu"></span>
-      <label>Weight</label><input type="text" class="collo-kg" placeholder="In KG, E.g. 350" required>
-      <label>Lenght</label><input type="text" class="collo-l" placeholder="In m, E.g. 5" required>
-      <label>Width</label><input type="text" class="collo-w" placeholder="In m, E.g. 1.2" required>
-      <label>Height</label><input type="text" class="collo-h" placeholder="In m, E.g. 2.4" required>
-      <span class="remov-col">✕</span>
+    <span class="coll-nu">1</span>
+    <div>
+        <label>Packaging</label><input type="text" class="packaing" placeholder="Packaging" required>
     </div>
-    `;
+    <div>
+        <label>Weight</label><input type="text" class="collo-kg" placeholder="In KG, E.g. 350" required>
+    </div>
+    <div>
+        <label>Lenght</label><input type="text" class="collo-l" placeholder="In m, E.g. 5" required>
+    </div>
+    <div>
+        <label>Width</label><input type="text" class="collo-w" placeholder="In m, E.g. 1.2" required>
+    </div>
+    <div>
+        <label>Height</label><input type="text" class="collo-h" placeholder="In m, E.g. 2.4" required>
+    </div>
+    <div>
+        <label>Stackable</label>
+        <input type="checkbox" name="temp_cont">
+    </div>
+    <span class="remov-col">✕</span>
+    </div>
+      `;
 
     $(collo).insertBefore(('#new-collo'));
     reorderNumbers();
@@ -221,8 +237,8 @@
 
   function showWeightWarning() {
     var warn = `<p class="error-warn" id="warn-weight"><span>⚠</span> 
-                    The unit weight is too high for transport with standard express vehicles. Your request requires specific study. Our customer service will contact you soon after.  
-                </p>`;
+                      The unit weight is too high for transport with standard express vehicles. Your request requires specific study. Our customer service will contact you soon after.  
+                  </p>`;
     $('#warn-weight').remove();
 
     $('.error-container').append(warn);
@@ -250,8 +266,8 @@
 
   function showMeasureWarning() {
     var warn = `<p class="error-warn" id="warn-measure"><span>⚠</span> 
-                  The dimensions do not allow transport by standard express means. Your request requires specific study. Our customer service will contact you shortly after with the best transport option.    
-                </p>`;
+                    The dimensions do not allow transport by standard express means. Your request requires specific study. Our customer service will contact you shortly after with the best transport option.    
+                  </p>`;
     $('#warn-measure').remove();
 
     $('.error-container').append(warn);

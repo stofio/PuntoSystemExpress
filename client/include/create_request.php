@@ -8,7 +8,9 @@
 
     $colli = $_POST['colli'];
 
-    //echo $colli;
+    echo $colli; 
+
+    echo $_POST;
 
     return;
 

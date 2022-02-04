@@ -28,6 +28,18 @@ button:hover {
   color: #262626;
 }
 
+.nav {
+  align-items: center;
+}
+
+.nav #loginBtn {
+  background-color: #e5352a;
+  color: #fff;
+  border: none;
+  padding: 8px 25px;
+  margin: 0 1rem;
+}
+
 .nav li.nav-item a {
   padding-top: 0;
   padding-bottom: 0;
@@ -59,13 +71,108 @@ button:hover {
   width: 28px;
 }
 
-section.hero-section .row {
-  height: 55vh;
+section.hero-section .hh {
+  height: 20vh;
+  background-color: #e5352a;
+  color: #fff;
+  display: flex;
+  justify-content: center;
 }
 
 section.hero-section .refresh {
   text-align: right;
   cursor: pointer;
+}
+
+.hero .hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media(min-width: 1024px) {
+  .hero .hero-right h1 {
+    font-size: 60px;
+  }
+}
+
+.hero .hero-right button {
+  background-color: #e5352a;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 20px;
+}
+
+.what-we-offer {
+  background-color: #e5352a;
+  padding: 40px 0;
+}
+
+.what-we-offer .offer-cont p {
+  max-width: 250px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.what-we-offer .offer-cont img {
+  width: 100%;
+  max-width: 250px;
+}
+
+@media(min-width: 768px) {
+  .what-we-offer .border-right {
+    border-right: solid 2px #fff;
+  }
+}
+
+@media(max-width: 768px) {
+  .what-we-offer .border-right {
+    border-bottom: solid 2px #fff;
+    margin-bottom: 20px;
+  }
+}
+
+@media(min-width: 768px) {
+  .how-it-work {
+    background-image: url(media/home-how-it-w.png);
+    background-position: 100% 0;
+    background-size: 42%;
+    background-repeat: no-repeat;
+  }
+}
+
+.how-it-work ul li {
+  margin-bottom: 15px;
+}
+
+footer {
+  background-color: #333;
+}
+
+footer * {
+  color: #fff;
+}
+
+footer .social a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 6px;
+  background-color: #A7A7A7;
+  border-radius: 100px;
+  padding: 10px;
+}
+
+footer .social img {
+  width: 100%;
+}
+
+.footer-right {
+  text-align: right;
 }
 
 .main-wrap h1 {
@@ -206,7 +313,6 @@ section.hero-section .refresh {
 
 #new_request {
   padding: 50px 25px;
-  border-top: solid 3px #212529;
 }
 
 #new_request .new-request-container {
@@ -278,6 +384,27 @@ section.hero-section .refresh {
   color: #fff;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.trans-req {
+  display: flex;
+  margin-top: 6px;
+}
+
+.trans-req input[type="checkbox"] {
+  width: 50px !important;
+  height: 30px !important;
+  margin-right: 8px;
+}
+
+.trans-req div {
+  display: flex;
+  align-items: center;
+}
+
+.trans-req label {
+  margin: 0;
+  font-weight: 500;
 }
 
 .button-expired {
@@ -430,11 +557,14 @@ button.sendEmail {
 .collo-single input:not(:last-child) {}
 
 .collo-single label {
-  margin-left: 10px !important;
+  font-size: 14px;
   margin: 0;
+}
+
+.collo-single div {
+  margin-left: 10px !important;
   width: auto;
   margin-right: 5px;
-  font-size: 14px;
 }
 
 .collo-single span {
@@ -455,6 +585,7 @@ button.sendEmail {
 .remov-col {
   position: absolute;
   right: -50px;
+  top: 35px;
 }
 
 .remov-col:hover {
@@ -472,4 +603,34 @@ button.sendEmail {
   color: #fff;
   background-color: #212529;
   padding: 3px 8px;
+}
+
+.pagination {
+  margin: 0;
+}
+
+.offer-conclude button[type="submit"] {
+  border: none;
+  outline: none;
+  padding: 15px 50px;
+  background-color: #22b728;
+  color: #fff;
+  font-weight: 500;
+}
+
+.offer-conclude button[type="button"] {
+  border: none;
+  outline: none;
+  padding: 15px 50px;
+  background-color: #E6342A;
+  color: #fff;
+  font-weight: 500;
+}
+
+.conclude_form input[type="file"] {
+  width: 266px;
+}
+
+.conclude_form {
+  display: none;
 }

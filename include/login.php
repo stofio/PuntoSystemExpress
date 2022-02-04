@@ -1,6 +1,7 @@
 <?php
 
-include 'functions.php';
+include 'functions.php'; 
+
 if(isset($_POST['login'])):
   if ((!empty($_POST['username'])&&(!empty($_POST['password']))))
   {

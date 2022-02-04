@@ -7,7 +7,7 @@
  
     <section class="text-center hero-section">
         <div class="breadcrumbs">
-            <span><a href="/client">Client dashboard</a></span> » 
+            <span><a href="/client">Client dashboard</a></span> »
             <span><?php echo $page_title; ?></span>
         </div>
         <div class="row align-items-center">
@@ -20,7 +20,7 @@
 
     <section id="new_request">
 
-        <form id="new_request_form" enctype="multipart/form-data" autocomplete="off">
+        <form id="new_request_form" enctype="multipart/form-data" autocomplete="off"> 
             <div class="new-request-container row">
 
                 <div class="col-md-4">
