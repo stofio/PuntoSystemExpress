@@ -33,17 +33,35 @@ while ($row = mysqli_fetch_array($rs_result)) {
         <div class="single-order">
             <div class="single-order-header">
                 <div class="header-details">
-                    <h2 class="order-title"><?php echo $row["title"]; ?></h2>
+                    <h2 class="order-title">ID #<?php echo $row["id"]; ?></h2>
                     <div class="order-details">
-                        <p><b>From</b> <?php echo $row["from_place"]; ?></p>
-                        <p><b>To</b> <?php echo $row["to_place"]; ?></p>
+                        <p><b>From</b> <?php echo $row["from_place"]; ?>, <?php echo $row["loading_point"]; ?></p>
+                        <p><b>To</b> <?php echo $row["to_place"]; ?>, <?php echo $row["discharge_point"]; ?></p>
                         <p><b>Available from</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
                         <p><b>Delivered within</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
-                        <p>Offer Available Until <?php echo substr($row["valid_until"], 0, -3); ?></p>
+                    </div>
+                    <div class="mt-3">
+                        <p><b>Packing list</b></p>
+                        <?php 
+                            $jsonColli = $row["colli"];
+
+                            $colli = unserialize($jsonColli);
+                            //var_dump($colli['colli']);
+                            foreach ($colli['colli'] as $c) {
+                                $n = $c['name'];
+                                $we = $c['weight'];
+                                $le = $c['lenght'];
+                                $wi = $c['width'];
+                                $hi = $c['height'];
+                                $st = $c['stack'] == 1 ? '✓' : '✗';
+                                echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                              }
+                            
+                            ?>
                     </div>
                 </div>
                 <div class="header-controls">
-                    <span class="order-status">LIVE</span>
+                    <span class="order-status">Processing</span>
                     <a href="mailto:<?php echo $row["email"]; ?>">
                         <button type="button">Send email</button>
                     </a>
@@ -66,13 +84,12 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     <div class="offer-price">
                         <h4>€ <?php echo $row["price"]; ?></h4>
                     </div>
-                    <div class="offer-button">
+                    <!-- <div class="offer-button">
                         <button type="button">Withdraw</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
-
 
 <?php  
 };  

@@ -25,7 +25,7 @@ button:hover {
 .breadcrumbs a,
 .breadcrumbs span {
   font-size: 14px;
-  color: #262626;
+  color: #fff;
 }
 
 .nav {
@@ -69,6 +69,12 @@ button:hover {
 
 .nav li.nav-account img {
   width: 28px;
+}
+
+section.hero-section {
+  background-color: #e6342a;
+  color: #fff;
+  padding: 20px 0 70px;
 }
 
 section.hero-section .hh {
@@ -189,6 +195,7 @@ footer .social img {
 
 .single-order:hover {
   background-color: #efefef;
+  position: relative;
 }
 
 .single-order-header {
@@ -218,10 +225,10 @@ footer .social img {
 }
 
 .single-order-header .header-controls .order-status {
-  font-size: 36px;
+  font-size: 26px;
+  color: #e6342a;
   text-align: center;
   font-weight: 600;
-  text-decoration: underline;
 }
 
 .single-order-header .header-controls button {
@@ -277,7 +284,8 @@ footer .social img {
   margin-top: 6px;
 }
 
-.single-offer .offer-button button {
+.single-offer .offer-button button,
+.single-order .view-button button {
   outline: none;
   border: none;
   background-color: #E6342A;
@@ -459,6 +467,10 @@ footer .social img {
   margin-bottom: -3px;
 }
 
+.tabs-container {
+  transform: translateY(-55px);
+}
+
 .tablinks {
   border: solid 3px #212529;
   background-color: #fff;
@@ -530,7 +542,7 @@ button.sendEmail {
 }
 
 .error-warn span {
-  font-size: 25px;
+  font-size: 15px;
 }
 
 .colli-container {
@@ -603,6 +615,7 @@ button.sendEmail {
   color: #fff;
   background-color: #212529;
   padding: 3px 8px;
+  z-index: 8888;
 }
 
 .pagination {
@@ -633,4 +646,86 @@ button.sendEmail {
 
 .conclude_form {
   display: none;
+}
+
+.is-invalid .select2-container--default .select2-selection--single {
+  border-color: #dc3545;
+}
+
+.login-modal input {
+  width: 100%;
+  border: 1px solid #343434 !important;
+  color: #212529;
+  height: 50px !important;
+  border-radius: 0 !important;
+  padding-left: 8px;
+  margin-top: 6px;
+}
+
+.login-modal button[type="submit"] {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 60px;
+  background-color: #E6342A;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.login-modal button[type="button"] {
+  outline: none;
+  border: none;
+}
+
+.load-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, .4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.load-screen img {
+  width: 50px;
+}
+
+#active_requests .single-order .panel-collapse {
+  display: none;
+}
+
+#active_requests .single-order .single-offer {
+  background-color: #e1e1e1;
+}
+
+.arrow-toggle {
+  text-align: center;
+  background-color: #e1e1e1;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.arrow-toggle:hover {
+  background-color: #cdcdcd;
+}
+
+.arrow-toggle span {
+  transform: rotate(90deg);
+  display: inline-block;
+  font-size: 22px;
+  transition-duration: .3s;
+}
+
+.panel-collapse *,
+.arrow-toggle * {
+  user-select: none;
+}
+
+.choose-offer-details p {
+  margin-bottom: 5px;
 }

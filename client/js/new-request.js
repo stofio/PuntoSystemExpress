@@ -9,30 +9,26 @@
     e.preventDefault();
 
     var formData = new FormData(e.currentTarget);
+    var formDataWithColli = appendSerializedColli(formData);
 
-    //append serialized colli to formData
-    appendSerializedColli(formData);
-
-    console.log(formData);
+    showLoading();
 
     $.ajax({
       url: '/client/include/create_request.php',
-      data: formData,
+      data: formDataWithColli,
       processData: false,
       contentType: false,
       type: 'POST',
       success: function(data) {
-        console.log(data);
-        //send email
+        hideLoading();
 
         //show success message
         var success = `<h2 class="mb-4">Your shipment request is LIVE<h2>
-                      <p>You will be notified by email about new offers, but you can also check the <a href="/client/my-requests">My Requests</a> section.</p>
-        `;
+          <p>You will be notified by email about new offers, but you can also check the <a href="/client/my-requests">My quotes</a> section.</p>
+          `;
         $('#new_request_form').fadeOut('slow', () => {
           $('#new_request').append(success);
         });
-
       }
     });
   });
@@ -95,6 +91,7 @@
   });
 
 
+
   /**
    * 
    * @param {*} formData e.currentTarget of form submit
@@ -104,22 +101,27 @@
     var colliArr = [];
 
     $.each($('.collo-single'), (i, collo) => {
+      var name = $(collo).find('.collo-name').val();
       var we = $(collo).find('.collo-kg').val();
       var le = $(collo).find('.collo-l').val();
       var wi = $(collo).find('.collo-w').val();
       var he = $(collo).find('.collo-h').val();
+      var stack = $(collo).find('.collo-stack').is(":checked");
 
       colliArr.push({
+        name: name,
         weight: we,
         lenght: le,
         width: wi,
-        height: he
+        height: he,
+        stack: stack
       });
     })
 
     var data = { colli: colliArr };
     var serializedColli = JSON.stringify(data)
     formData.append('colli', serializedColli);
+    return formData;
   }
 
 
@@ -165,8 +167,8 @@
 
   function showCountryWarning() {
     var warn = `<p class="error-warn" id="warn-non-eu-to"><span>⚠</span> 
-                  The country of destination does not belong to the European Union. Your request requires specific study. Our customer service will contact you shortly after with the best transport option.
-                </p>`;
+                    The country of destination does not belong to the European Union. Your request requires specific study. Our customer service will contact you shortly after with the best transport option.
+                  </p>`;
     $('#warn-non-eu-to').remove();
 
     $('.error-container').append(warn);
@@ -176,14 +178,29 @@
   function addNewCollo() {
     var collo = `
     <div class="collo-single">
-      <span class="coll-nu"></span>
-      <label>Weight</label><input type="text" class="collo-kg" placeholder="In KG, E.g. 350" required>
-      <label>Lenght</label><input type="text" class="collo-l" placeholder="In m, E.g. 5" required>
-      <label>Width</label><input type="text" class="collo-w" placeholder="In m, E.g. 1.2" required>
-      <label>Height</label><input type="text" class="collo-h" placeholder="In m, E.g. 2.4" required>
-      <span class="remov-col">✕</span>
+    <span class="coll-nu">1</span>
+    <div>
+        <label>Packaging</label><input type="text" class="collo-name" placeholder="Packaging" required>
     </div>
-    `;
+    <div>
+        <label>Weight</label><input type="text" class="collo-kg" placeholder="In KG, E.g. 350" required>
+    </div>
+    <div>
+        <label>Lenght</label><input type="text" class="collo-l" placeholder="In m, E.g. 5" required>
+    </div>
+    <div>
+        <label>Width</label><input type="text" class="collo-w" placeholder="In m, E.g. 1.2" required>
+    </div>
+    <div>
+        <label>Height</label><input type="text" class="collo-h" placeholder="In m, E.g. 2.4" required>
+    </div>
+    <div>
+        <label>Stackable</label>
+        <input type="checkbox" class="collo-stack">
+    </div>
+    <span class="remov-col">✕</span>
+    </div>
+      `;
 
     $(collo).insertBefore(('#new-collo'));
     reorderNumbers();
@@ -221,8 +238,8 @@
 
   function showWeightWarning() {
     var warn = `<p class="error-warn" id="warn-weight"><span>⚠</span> 
-                    The unit weight is too high for transport with standard express vehicles. Your request requires specific study. Our customer service will contact you soon after.  
-                </p>`;
+                      The unit weight is too high for transport with standard express vehicles. Your request requires specific study. Our customer service will contact you soon after.  
+                  </p>`;
     $('#warn-weight').remove();
 
     $('.error-container').append(warn);
@@ -250,11 +267,24 @@
 
   function showMeasureWarning() {
     var warn = `<p class="error-warn" id="warn-measure"><span>⚠</span> 
-                  The dimensions do not allow transport by standard express means. Your request requires specific study. Our customer service will contact you shortly after with the best transport option.    
-                </p>`;
+                    The dimensions do not allow transport by standard express means. Your request requires specific study. Our customer service will contact you shortly after with the best transport option.    
+                  </p>`;
     $('#warn-measure').remove();
 
     $('.error-container').append(warn);
+  }
+
+
+  function showLoading() {
+    $('body').append(`
+    <div class="load-screen">
+      <img src="/media/loading-buffering.gif" />
+    </div>
+    `).css("overflow", "hidden");
+  }
+
+  function hideLoading() {
+    $('.load-screen').remove();
   }
 
 

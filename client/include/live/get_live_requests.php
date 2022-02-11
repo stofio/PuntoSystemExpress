@@ -1,10 +1,15 @@
 <?php
+/**
+ * page with CLIENT current requests/quotes
+ */
 
 session_start();
 
 include '../../../functions.php';
 
 $userid = $_SESSION['user_id'];
+
+
 
 $limit = 5;  
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
@@ -26,28 +31,55 @@ while ($row = mysqli_fetch_array($rs_result)) {
          <div class="single-order">
             <input type="hidden" class="request_id" name="request_id" value="<?php echo $row["id"]; ?>">
             <div class="single-order-header">
-                <div class="header-details">
-                    <h2 class="order-title"><?php echo $row["title"]; ?></h2>
-                    <div class="order-details">
-                        <p><b>From</b> <?php echo $row["from_place"]; ?></p>
-                        <p><b>To</b> <?php echo $row["to_place"]; ?></p>
-                        <p><b>Available from</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
-                        <p><b>Delivered within</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
-                        <p>Offer Available Until <?php echo substr($row["valid_until"], 0, -3); ?></p>
+                <div class="header-details" style="width:80%">
+                    <h2 class="order-title">ID #<?php echo $row["id"]; ?></h2>
+                    <div class="order-details row">
+                        <div class="col-md-6">
+                            <p><b>From</b> <?php echo $row["from_place"]; ?>, <?php echo $row["loading_point"]; ?></p>
+                            <p><b>To</b> <?php echo $row["to_place"]; ?>, <?php echo $row["discharge_point"]; ?></p>
+                            <p><b>Available</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
+                            <p><b>Delivered</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
+                            <p><b>Commodity</b> <?php echo $row["commodity"]; ?></p>
+                            <p><b>ADR</b> <?php echo $row["adr"] == 0 ? '✗' : '✓'; ?></p>
+                            <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
+                        </div>
                     </div>
                 </div>
                 <div class="header-controls">
-                    <span class="order-status">LIVE</span>
-                </div>
-            </div>
-            <div class="live_request single-order-body">
-                <div class="single-offer">
-                    <div class="offer-type">
-                        <span>WAITING FOR OFFERS</span>
-                    </div>
-                    <div class="offer-button">
-                        <button id="cancelLiveOffer" type="button">Cancel Request</button>
-                    </div>
+                    <span class="order-status">
+                        
+                        
+                        <?php
+                            $time_limit = 600; //10 min
+                            $now = time();
+                            $created = strtotime($row["created"]);
+                            $time_passed = $now - $created;
+                            //$time_passed = date('i:s', $now - $created);
+                            $remaining_time = $time_limit - $time_passed;
+
+ 
+
+                            if ($remaining_time <=0) {
+                                $time_remaining = 'Bookable 
+                                    <div class="offer-button view-button mt-3">
+                                        <button class="viewQuote" type="button">View the quote</button>
+                                    </div>';
+                            }
+                            else {
+                                $time_remaining = 'Processing quote <br><span class="the-time">' . date('i:s', $remaining_time) . '</span>';
+                            }
+                                
+                        ?>
+                        <span 
+                        data-time-limit="<?php echo $time_limit; ?>" 
+                        class="time-passed">
+                            <?php echo $time_remaining; ?>
+                        </span>
+                                            
+                    </span>
                 </div>
             </div>
         </div>

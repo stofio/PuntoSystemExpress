@@ -1,6 +1,0 @@
-<?php
-
-//CHECK IF OFFER OR REQUEST EXPIRED and MARK
-//RUN ON HEADER
-
-?>

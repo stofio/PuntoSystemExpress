@@ -5,11 +5,11 @@
 
 
     <section class="text-center hero-section">
-        <div class="breadcrumbs">
+        <div class="breadcrumbs container"> 
             <span><a href="/supplier">Supplier dashboard</a></span> » 
             <span><?php echo $page_title; ?></span>
         </div>
-        <div class="row align-items-center">
+        <div class="align-items-center">
             <div>
                 <h1><?php echo $page_title; ?></h1>
                 <p>Discover currently active requests of shipment</p>
@@ -17,21 +17,26 @@
         </div>
     </section>
 
-    <section id="active_requests">
+<div class="container main-wrap">
 
-        <div id="target-content">loading...</div>
+        <section id="active_requests">
 
-        <div class="clearfix">
-            <ul class="pagination"> <?php include 'include/active_requests/pagination.php'; ?> </ul>
-        </div>     
+            <div id="target-content">loading...</div>
 
-    </section>
+            <div class="clearfix">
+                <ul class="pagination"> <?php include 'include/active_requests/pagination.php'; ?> </ul>
+            </div>     
+
+        </section>
+
+</div> <!-- container -->
 
     
-
-    <div style="height:500px"></div>
 
 
     <script src="/vendor/bootstrap-datetimepicker-master/bootstrap-datetimepicker.min.js"></script>
     <script src="/supplier/js/active.js"></script>
-    <?php require_once 'include/footer.php'; ?>
+
+
+<?php require_once $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>
+

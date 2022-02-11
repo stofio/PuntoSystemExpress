@@ -3,40 +3,55 @@
   var euCountries = [];
   var nonEuCountries = [];
 
+  var formDataSaved; //save form data before login
 
   //form submit
   $("#new_request_form").on("submit", (e) => {
     e.preventDefault();
 
-    return;
-    var formData = new FormData(e.currentTarget);
+    //show popup
+    $('#loginModalForm').modal('show');
 
+
+    var formData = new FormData(e.currentTarget);
     //append serialized colli to formData
+
     appendSerializedColli(formData);
 
-    console.log(formData);
+  });
+
+
+  $("#loginModalForm form").on("submit", (e) => {
+    e.preventDefault();
+
+    var formData = new FormData(e.currentTarget);
+    showLoading();
 
     $.ajax({
-      url: '/client/include/create_request.php',
+      url: '../include/checkLogin.php',
       data: formData,
       processData: false,
       contentType: false,
       type: 'POST',
       success: function(data) {
-        console.log(data);
-        //send email
-
-        //show success message
-        var success = `<h2 class="mb-4">Your shipment request is LIVE<h2>
-                        <p>You will be notified by email about new offers, but you can also check the <a href="/client/my-requests">My Requests</a> section.</p>
-          `;
-        $('#new_request_form').fadeOut('slow', () => {
-          $('#new_request').append(success);
-        });
-
+        hideLoading();
+        var accepted = data; //true/false
+        if (accepted == 0) {
+          $('.error-container-login-req').append(`
+          <div class="error-warn">
+            <span>Wrong username or password. Request a CLIENT account or retry.</span>
+            </div>`);
+        } else if (accepted == 1) {
+          pubblishRequest(() => {
+            //send email then
+            location.href = "/client/my-requests";
+          });
+        }
       }
     });
+
   });
+
 
   //show non-EU selected warning
   $('.request_to').on('change', () => {
@@ -95,6 +110,24 @@
     });
   });
 
+  function pubblishRequest(callback) {
+    for (var pair of formDataSaved.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
+    }
+    $.ajax({
+      url: '/include/create_request.php',
+      data: formDataSaved,
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: function(data) {
+        if (typeof callback === 'function') {
+          callback();
+        }
+      }
+    });
+  }
+
 
   /**
    * 
@@ -105,22 +138,27 @@
     var colliArr = [];
 
     $.each($('.collo-single'), (i, collo) => {
+      var name = $(collo).find('.collo-name').val();
       var we = $(collo).find('.collo-kg').val();
       var le = $(collo).find('.collo-l').val();
       var wi = $(collo).find('.collo-w').val();
       var he = $(collo).find('.collo-h').val();
+      var stack = $(collo).find('.collo-stack').is(":checked");
 
       colliArr.push({
+        name: name,
         weight: we,
         lenght: le,
         width: wi,
-        height: he
+        height: he,
+        stack: stack
       });
     })
 
     var data = { colli: colliArr };
     var serializedColli = JSON.stringify(data)
     formData.append('colli', serializedColli);
+    formDataSaved = formData;
   }
 
 
@@ -179,7 +217,7 @@
     <div class="collo-single">
     <span class="coll-nu">1</span>
     <div>
-        <label>Packaging</label><input type="text" class="packaing" placeholder="Packaging" required>
+        <label>Packaging</label><input type="text" class="collo-name" placeholder="Packaging" required>
     </div>
     <div>
         <label>Weight</label><input type="text" class="collo-kg" placeholder="In KG, E.g. 350" required>
@@ -195,7 +233,7 @@
     </div>
     <div>
         <label>Stackable</label>
-        <input type="checkbox" name="temp_cont">
+        <input type="checkbox" class="collo-stack">
     </div>
     <span class="remov-col">✕</span>
     </div>
@@ -271,6 +309,19 @@
     $('#warn-measure').remove();
 
     $('.error-container').append(warn);
+  }
+
+
+  function showLoading() {
+    $('body').append(`
+    <div class="load-screen">
+      <img src="/media/loading-buffering.gif" />
+    </div>
+    `).css("overflow", "hidden");
+  }
+
+  function hideLoading() {
+    $('.load-screen').remove();
   }
 
 

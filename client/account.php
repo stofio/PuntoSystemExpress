@@ -1,6 +1,7 @@
 <?php $page_title = 'My Account'; ?>
 <?php require_once 'include/header.php'; ?>
 
+<div class="container main-wrap">
 
     <section class="text-center hero-section">
         <div class="breadcrumbs">
@@ -22,18 +23,24 @@
             <div class="my-account-client-container row">
                 <div class="col-md-6">
                     <label>Full Name<br>
-                        <input type="text" class="full_name" placeholder="Full Name" required/>
+                        <input type="text" name="full_name" placeholder="Full Name" required/>
                     </label>
                     <label>Company Name<br>
-                        <input type="text" class="company_name" placeholder="Company Name" required/>
+                        <input type="text" name="company_name" placeholder="Company Name" required/>
+                    </label>
+                    <label>Default Loading place<br>
+                        <input type="text" name="def_load_place" placeholder="Default Loading place" required/>
                     </label>
                 </div>
                 <div class="col-md-6">
                     <label>Phone<br>
-                        <input type="text" class="phone" placeholder="Phone" required/>
+                        <input type="text" name="phone" placeholder="Phone" required/>
                     </label>
                     <label>Email<br>
-                        <input type="text" class="company_name" placeholder="Email" required/>
+                        <input type="text" name="company_name" placeholder="Email" required/>
+                    </label>
+                    <label>Default Delivery place<br>
+                        <input type="text" name="def_deliv_place" placeholder="Default Delivery place" required/>
                     </label>
                 </div>
                 <div class="col-md-12">
@@ -43,6 +50,10 @@
         </form>
     </section>
 
+</div> <!-- container -->
 
-       
-<?php require_once 'include/footer.php'; ?>
+
+<script src="/client/js/my-requests.js"></script>
+
+
+<?php include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>  

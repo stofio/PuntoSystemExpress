@@ -1,8 +1,8 @@
 <?php 
 /**
- * restrict access
+ * CLIENT header
  */
-require_once 'include/auth.php'; 
+require_once 'include/auth.php';  
 
 ?>
 <!doctype html>
@@ -31,24 +31,26 @@ require_once 'include/auth.php';
 
 
 	
-	<header class="container py-3 mb-4 border-bottom">
+	<header class="container py-3 border-bottom">
 		<div class="d-flex flex-wrap justify-content-center align-items-center">
 			<a href="/" class="logo d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 				<img src="/media/logo.png" />
 			</a>
 
 			<ul class="nav">
-				<li class="nav-item"><a href="/client" class="nav-link" aria-current="page">Dashboard</a></li>
-				<li class="nav-item"><a href="/client/new-request" class="nav-link">New Request</a></li>
-				<li class="nav-item"><a href="/client/my-requests" class="nav-link">My Requests</a></li>
-				<li class="nav-item"><a href="/client/shipped" class="nav-link">Shipped</a></li>
+				<li class="nav-item"><a href="/client" class="nav-link" aria-current="page">Home</a></li>
+				<li class="nav-item"><a href="/client/new-request" class="nav-link">New shipment</a></li>
+				<li class="nav-item"><a href="/client/my-requests" class="nav-link">My quotes</a></li>
+				<li class="nav-item"><a href="/client/shipped" class="nav-link">Delivered</a></li>
+				<li class="nav-item"><a href="/client/account" class="nav-link">My account</a></li>
 				<li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
-				<li class="nav-account"><a href="/client/account"><img src="/media/account-icon.svg"/></a></li>
 			</ul>
 		</div>
 	</header>
 
+	<script src="js/header.js"></script>
 
-	<div class="container main-wrap">
+
+	
 
 	

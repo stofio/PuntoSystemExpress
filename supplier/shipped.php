@@ -29,4 +29,4 @@
     <script src="/supplier/js/shipped.js"></script>
 
 
-<?php require_once 'include/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>

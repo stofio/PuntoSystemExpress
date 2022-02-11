@@ -10,4 +10,4 @@
     <li><a href="/supplier/account">Edit your account</a></li>
 </ul>
 
-<?php require_once 'include/footer.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>

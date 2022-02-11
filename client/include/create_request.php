@@ -2,42 +2,55 @@
 
     session_start();
 
-    include '../../functions.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
     //include_once 'email_new_request.php';
 
-    $colli = $_POST['colli'];
+    //var_dump($_POST);
 
-    echo $colli; 
-
-    echo $_POST;
-
-    return;
-
+  //  var_dump($_SESSION);
+//return 0;
 
     $userid = $_SESSION['user_id'];
-    $title = test_input($_POST['title']);
+    $name = test_input($_POST['name']);
+    $phone = test_input($_POST['phone']);
+    $email = test_input($_POST['email']);
+    $shipment_ref = test_input($_POST['shipment_ref']);
+    $commodity = test_input($_POST['commodity']);
+    $adr = test_input($_POST['adr']) == true ? 1 : 0;
+    $temp_cont = test_input($_POST['temp_cont']) == true ? 1 : 0;
     $from_time = test_input($_POST['from_time']);
-    $to_time = test_input($_POST['to_time']);
-    $valid_until = test_input($_POST['valid_until']);
+    $to_time = test_input($_POST['to_time']);   
     $from_place = test_input($_POST['from_place']);
     $to_place = test_input($_POST['to_place']);
+    $loading_point = test_input($_POST['loading_point']);
+    $discharge_point = test_input($_POST['discharge_point']);
     $note = test_input($_POST['note']);
+    $colli = $_POST['colli'];
     $files_names_array = array();
+    $created = date('Y-m-d H:i:s', time());
+
+    
 
     //files
-    $upload_dir = '../uploads/';
+    $upload_dir = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
     $allowed_types = array('jpg', 'png', 'jpeg', 'gif', 'pdf', 'xml', 'doc', 'docx', 'zip', 'rar');
     $maxsize = 50 * 1024 * 1024; //50 MiB
 
     //validate
     if(
-        (empty($title))or
+        (empty($name))or
+        (empty($phone))or
+        (empty($email))or
+        (empty($shipment_ref))or
+        (empty($commodity))or
         (empty($from_time))or
         (empty($to_time))or 
-        (empty($valid_until))or
         (empty($from_place))or
-        (empty($to_place))
+        (empty($to_place))or
+        (empty($loading_point))or
+        (empty($discharge_point))or
+        (empty($colli))
     ) {
     //missing fields
         echo 'Missing required fields';
@@ -100,14 +113,15 @@
     //set request status to LIVE - 1
     //save data to db
     $attach = serialize($files_names_array); //serialized array
-    $created = date('Y-m-d h:i:s', time());
+
+    $colliSer = serialize(json_decode($colli , TRUE));
+
 
     $from_formatted = date('Y-m-d h:i:s', strtotime($from_time));
     $to_formatted = date('Y-m-d h:i:s', strtotime($to_time));
-    $expire_formatted = date('Y-m-d h:i:s', strtotime($valid_until));
 
-    $sql = "INSERT INTO requests (useridfk, request_status, title, from_place, to_place, from_time, to_time, valid_until, note, attachments, created)
-    VALUES ('$userid', '1', '$title', '$from_place', '$to_place', '$from_formatted', '$to_formatted', '$expire_formatted', '$note', '$attach', '$created')";
+    $sql = "INSERT INTO requests (useridfk, request_status, name, phone, email, shipment_ref, commodity, adr, temp_cont,  from_place, to_place, from_time, to_time, loading_point, discharge_point, colli, note, attachments, created)
+    VALUES ('$userid', '1', '$name', '$phone', '$email', '$shipment_ref', '$commodity', '$adr', '$temp_cont', '$from_place', '$to_place', '$from_formatted', '$to_formatted', '$loading_point', '$discharge_point', '$colliSer', '$note', '$attach', '$created')";
 
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";

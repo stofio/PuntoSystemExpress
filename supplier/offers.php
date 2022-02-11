@@ -3,11 +3,11 @@
 
  
     <section class="text-center hero-section">
-        <div class="breadcrumbs">
+        <div class="breadcrumbs container">
             <span><a href="/supplier">Supplier dashboard</a></span> » 
             <span><?php echo $page_title; ?></span>
         </div>
-        <div class="row align-items-center">
+        <div class="align-items-center">
             <div>
                 <h1><?php echo $page_title; ?></h1>
                 <p>Discover your active offers</p>
@@ -15,10 +15,10 @@
         </div>
     </section>
 
-   
+<div class="container main-wrap tabs-container">
 
     <div class="tab">
-        <button id="liveTabBtn" class="tablinks active" onclick="openTab(event, 'liveReq')">LIVE</button><!--
+        <button id="liveTabBtn" class="tablinks active" onclick="openTab(event, 'liveReq')">PROCESSING</button><!--
         --><button class="tablinks" onclick="openTab(event, 'toShipReq')">TO SHIP</button><!--
         --><button class="tablinks" onclick="openTab(event, 'goingReq')">ONGOING</button><!--
         --><button class="tablinks" onclick="openTab(event, 'endedReq')">ENDED</button>
@@ -170,9 +170,8 @@
 
 
   
-
-
+</div> <!-- container -->
 
     <script src="/supplier/js/offers.js"></script>
 
-<?php require_once 'include/footer.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>

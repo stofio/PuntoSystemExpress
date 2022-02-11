@@ -2,7 +2,14 @@ $(document).ready(function() {
   //
   //load LIVE tab
   //
-  $("#target-content").load("include/live/get_live_requests.php?page=1");
+  $("#target-content").load("include/live/get_live_requests.php?page=1", () => {
+    startTimers((currentQuote) => {
+      currentQuote.parents('.order-status').html(`Bookable 
+      <div class="offer-button view-button mt-3">
+          <button class="viewQuote" type="button">View the quote</button>
+      </div>`);
+    })
+  });
   $(".page-link1.page-link").click(function() {
     var id = $(this).attr("data-id");
     var select_id = $(this).parent().attr("id");
@@ -69,25 +76,33 @@ $(document).ready(function() {
 
 });
 
-$(document).on('click', '#cancelLiveOffer', (e) => {
+// $(document).on('click', '#cancelLiveOffer', (e) => {
+//   var currentOrder = $(e.target).parents('.single-order');
+//   if (confirm(`Do you want to Cancel the '${currentOrder.find('.order-title').html()}' request? 
+//   All the suppliers have already received a notification email about the request.`)) {
+//     // YES
+//     $.ajax({
+//       url: "include/live/delete_live_requests.php",
+//       type: "POST",
+//       data: {
+//         id: currentOrder.find('.request_id').val()
+//       },
+//       cache: false,
+//       success: function(dataResult) {
+//         console.log(dataResult)
+//         currentOrder.remove();
+//       }
+//     });
+//   }
+// });
+
+
+$(document).on('click', '.viewQuote', (e) => {
   var currentOrder = $(e.target).parents('.single-order');
-  if (confirm(`Do you want to Cancel the '${currentOrder.find('.order-title').html()}' request? 
-  All the suppliers have already received a notification email about the request.`)) {
-    // YES
-    $.ajax({
-      url: "include/live/delete_live_requests.php",
-      type: "POST",
-      data: {
-        id: currentOrder.find('.request_id').val()
-      },
-      cache: false,
-      success: function(dataResult) {
-        console.log(dataResult)
-        currentOrder.remove();
-      }
-    });
-  }
+  var quoteId = currentOrder.find('input.request_id').val()
+  location.href = "/client/choose-offer?i=" + quoteId;
 });
+
 
 
 $(document).on('click', '.blockOffer', (e) => {
@@ -134,4 +149,44 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+
+//start timer
+function startTimers(callback) {
+
+
+  $.each($('.the-time'), (e, i) => {
+    var timeLimit = $(i).attr('data-time-limit'); // s
+
+    var timePassed = $(i).html().replace(/\s/g, ''); // mm:ss
+    //var timePassedStmp = (timePassed.split(":")[0] * 60) + timePassed.split(":")[1]; // timestamp
+
+    console.log(timePassed)
+      //return;
+    var interval = setInterval(function() {
+      var timer = timePassed.split(':');
+      //by parsing integer, I avoid all extra string processing
+      var minutes = parseInt(timer[0], 10);
+      var seconds = parseInt(timer[1], 10);
+      --seconds;
+      minutes = (seconds < 0) ? --minutes : minutes;
+      minutes = (minutes < 10) ? '0' + minutes : minutes;
+      if (minutes < 0) clearInterval(interval);
+      seconds = (seconds < 0) ? 59 : seconds;
+      seconds = (seconds < 10) ? '0' + seconds : seconds;
+      //minutes = (minutes < 10) ?  minutes : minutes;
+      $(i).html(minutes + ':' + seconds);
+      timePassed = minutes + ':' + seconds;
+
+
+      if (timePassed == '00:00') {
+        if (typeof callback == 'function') {
+          callback($(i));
+        }
+      }
+    }, 1000);
+
+  })
+
 }

@@ -1,6 +1,7 @@
 <?php $page_title = 'Shipped'; ?>
 <?php require_once 'include/header.php'; ?>
 
+<div class="container main-wrap">
 
  
     <section class="text-center hero-section">
@@ -27,7 +28,10 @@
     </section>
 
 
-    <script src="/client/js/shipped.js"></script>
+    
+</div> <!-- container -->
+    
+<script src="/client/js/shipped.js"></script>
 
 
-<?php require_once 'include/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>  

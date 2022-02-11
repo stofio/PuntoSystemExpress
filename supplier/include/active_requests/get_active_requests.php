@@ -37,21 +37,49 @@ while ($row = mysqli_fetch_array($rs_result)) {
 
         <div class="single-order">
             <div class="single-order-header">
-                <div class="header-details">
-                    <h2 class="order-title"><?php echo $row["title"]; ?></h2>
-                    <div class="order-details">
-                        <p><b>From</b> <?php echo $row["from_place"]; ?></p>
-                        <p><b>To</b> <?php echo $row["to_place"]; ?></p>
-                        <p><b>Available from</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
-                        <p><b>Delivered within</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
-                        <p>Offer Available Until <?php echo substr($row["valid_until"], 0, -3); ?></p>
+                <div class="header-details" style="width:80%">
+                    <h2 class="order-title">ID #<?php echo $row["id"]; ?></h2>
+                    <div class="order-details row">
+                        <div class="col-md-6">
+                            <p><b>From</b> <?php echo $row["from_place"]; ?>, <?php echo $row["loading_point"]; ?></p>
+                            <p><b>To</b> <?php echo $row["to_place"]; ?>, <?php echo $row["discharge_point"]; ?></p>
+                            <p><b>Available</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
+                            <p><b>Delivered</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
+                            <p><b>Commodity</b> <?php echo $row["commodity"]; ?></p>
+                            <p><b>ADR</b> <?php echo $row["adr"] == 0 ? '✗' : '✓'; ?></p>
+                            <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
+                        </div>
                     </div>
+                   
                 </div>
                 <div class="header-controls">
                     <span class="order-status">LIVE</span>
                 </div>
             </div>
-            <div class="live_request single-order-body">
+            <div class="arrow-toggle"><span>❯</span></div>
+            <div class="live_request single-order-body panel-collapse">
+                <div class="mt-3" style="padding: 50px;">
+                        <p><b>Packing list</b></p>
+                        <?php 
+                            $jsonColli = $row["colli"];
+
+                            $colli = unserialize($jsonColli);
+                            //var_dump($colli['colli']);
+                            foreach ($colli['colli'] as $c) {
+                                $n = $c['name'];
+                                $we = $c['weight'];
+                                $le = $c['lenght'];
+                                $wi = $c['width'];
+                                $hi = $c['height'];
+                                $st = $c['stack'] == 1 ? '✓' : '✗';
+                                echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                              }
+                            
+                            ?>
+                    </div>
                 <form class="offer_form" enctype="multipart/form-data" autocomplete="off">
                     <input type="hidden" class="request_id" name="request_id" value="<?php echo $row["id"]; ?>">
                     <div class="single-offer">

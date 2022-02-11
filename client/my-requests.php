@@ -1,24 +1,25 @@
-<?php $page_title = 'My Requests'; ?>
+<?php $page_title = 'My Quotes'; ?>
 <?php require_once 'include/header.php'; ?>
-
  
-    <section class="text-center hero-section">
-        <div class="breadcrumbs">
+    <section class="text-center hero-section"> 
+        <div class="breadcrumbs container">
             <span><a href="/client">Client dashboard</a></span> » 
             <span><?php echo $page_title; ?></span>
         </div>
         <div class="row align-items-center">
             <div>
                 <h1><?php echo $page_title; ?></h1>
-                <p>Discover your currently active requests</p>
+                <p>Discover your request history</p>
             </div>
         </div>
     </section>
 
+<div class="container main-wrap tabs-container">
+ 
     <div class="tab">
-        <button id="liveTabBtn" class="tablinks active" onclick="openTab(event, 'liveReq')">LIVE</button><!--
-    --><button class="tablinks" onclick="openTab(event, 'toConfReq')">TO CONFIRM</button><!--
-    --><button class="tablinks" onclick="openTab(event, 'toShipReq')">TO SHIP</button>
+        <button id="liveTabBtn" class="tablinks active" onclick="openTab(event, 'liveReq')">PROCESSING</button><!--
+    --><button class="tablinks" onclick="openTab(event, 'toConfReq')">BOOKED</button><!--
+    --><button class="tablinks" onclick="openTab(event, 'toShipReq')">IN TRANSIT</button>
     </div>
 
     <!--    
@@ -64,6 +65,9 @@
 
 
 
-    <script src="/client/js/my-requests.js"></script>
+</div> <!-- container -->
+    
 
-<?php require_once 'include/footer.php'; ?> 
+<script src="/client/js/my-requests.js"></script>
+
+<?php include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>  

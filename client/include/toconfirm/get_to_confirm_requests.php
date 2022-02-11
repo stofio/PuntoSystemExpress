@@ -40,7 +40,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 <div class="header-controls">
                     <span class="order-status">TO CONFIRM</span>
                 </div>
-            </div> 
+            </div>  
             <div class="live_request single-order-body">
                 
                 <?php
@@ -85,24 +85,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 
                 ?>
 
-                <div class="single-offer">
-                    <div class="offer-type">
-                        <span>CHEAPEST</span>
-                    </div>
-                    <div class="offer-collection">
-                        <p><b>Good Collection</b><br><?php echo substr($cheapestOffer['collect_time'], 0, -3); ?></p>
-                    </div>
-                    <div class="offer-delivery">
-                        <p><b>Good Delivery</b><br><?php echo substr($cheapestOffer['deliver_time'], 0, -3); ?></p>
-                    </div>
-                    <div class="offer-price">
-                        <h4>€ <?php echo $cheapestOffer['price'] ?></h4>
-                    </div>
-                    <div class="offer-button">
-                        <input type="hidden" class="offer_id" value="<?php echo $cheapestOffer['offer_id'] ?>">
-                        <button class="blockOffer" type="button">Block Offer</button>
-                    </div>
-                </div>
+                
                 
                 <?php 
 

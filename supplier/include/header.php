@@ -1,9 +1,9 @@
 <?php 
 /**
- * restrict access
+ * SUPPLIER header
  */
-require_once 'include/auth.php'; 
-
+require_once 'include/auth.php';  
+ 
 ?>
 <!doctype html>
 <html lang="en">
@@ -31,7 +31,7 @@ require_once 'include/auth.php';
 
 
 	
-	<header class="container py-3 mb-4 border-bottom">
+	<header class="container py-3 border-bottom">
 		<div class="d-flex flex-wrap justify-content-center align-items-center">
 			<a href="/" class="logo d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 				<img src="/media/logo.png" />
@@ -49,6 +49,6 @@ require_once 'include/auth.php';
 	</header>
 
 
-	<div class="container main-wrap">
+	<script src="js/header.js"></script>
 
 	
