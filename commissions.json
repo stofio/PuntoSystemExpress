@@ -1,0 +1,51 @@
+{
+  "commissions": {
+    "default": {
+      "minimo": "0",
+      "massimo": "1500",
+      "tariffe": {
+        "valore": "300",
+        "sotto": {
+          "percent": "",
+          "fixed": "300"
+        },
+        "sopra": {
+          "percent": "30",
+          "fixed": ""
+        }
+      }
+    }
+  },
+  "users": {
+    "1": {
+      "minimo": "0",
+      "massimo": "1500",
+      "tariffe": {
+        "valore": "300",
+        "sotto": {
+          "percent": "",
+          "fixed": "300"
+        },
+        "sopra": {
+          "percent": "30",
+          "fixed": ""
+        }
+      }
+    },
+    "2": {
+      "minimo": "0",
+      "massimo": "1500",
+      "tariffe": {
+        "valore": "300",
+        "sotto": {
+          "percent": "",
+          "fixed": "300"
+        },
+        "sopra": {
+          "percent": "30",
+          "fixed": ""
+        }
+      }
+    }
+  }
+}

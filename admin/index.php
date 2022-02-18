@@ -1,12 +1,18 @@
-<?php $page_title = 'Express'; ?>
+<?php $page_title = 'Admin'; ?>
 <?php require_once 'include/header.php'; ?>
-<h1>Client dashboard</h1>
 
-<ul>
-    <li><a href="/client/new-request">Send a new request of shipment and get offers</a></li>
-    <li><a href="/client/my-requests">Discover offers from your requests</a></li>
-    <li><a href="/client/shipped">See your shipped requests</a></li>
-    <li><a href="/client/account">Edit your account</a></li>
-</ul>
+<div class="container pt-5">
+<h1>Admin dashboard</h1>
 
-<?php require_once 'include/footer.php'; ?>
+    <ul>
+        <li class="nav-item"><a href="/admin" class="nav-link" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="/admin/waiting-approval" class="nav-link">Waiting approval</a></li>
+        <li class="nav-item"><a href="/admin/approved" class="nav-link">Approved</a></li>
+        <li class="nav-item"><a href="/admin/archive" class="nav-link">Archive</a></li>
+        <li class="nav-item"><a href="/admin/rates" class="nav-link">Rates</a></li>
+        <li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
+    </ul>
+
+</div>
+
+<?php include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>  

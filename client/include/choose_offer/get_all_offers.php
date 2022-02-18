@@ -5,8 +5,7 @@
 $currentRequestId = $reqId; //set on include
 
 $sql2 = "SELECT * FROM offers WHERE `requestidfk` = $currentRequestId";
-
-$rs_result2 = mysqli_query($conn, $sql2);  
+$rs_result2 = mysqli_query($conn, $sql2);   
 
 while ($row = mysqli_fetch_array($rs_result2)) {  
    // var_dump($row);

@@ -39,7 +39,10 @@
           location.href = "/client/my-requests";
         } else if (accepted == 2) {
           location.href = "/supplier";
+        } else if (accepted == 3) {
+          location.href = "/admin";
         }
+
 
       }
     });

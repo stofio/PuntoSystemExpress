@@ -2,7 +2,7 @@
 
 session_start();
 
-include '../../../functions.php';
+include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 $offer_id = $_POST['offer_id'];
 $request_id = $_POST['request_id'];

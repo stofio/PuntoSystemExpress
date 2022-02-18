@@ -88,7 +88,29 @@
       //addNonEuCountriesOptions('.request_from_non_eu_group', countriesArray);
       addNonEuCountriesOptions('.request_to_non_eu_group', countriesArray);
     });
+
+    get_default_user_data();
   });
+
+
+  function get_default_user_data() {
+    $.ajax({
+      url: "include/get_user_data.php",
+      type: "GET",
+      processData: false,
+      contentType: false,
+      cache: false,
+      success: function(dataResult) {
+        //show success message
+        var userObj = JSON.parse(dataResult);
+
+        $('input[name="name"]').val(userObj.name + ' ' + userObj.surname);
+        $('input[name="loading_point"]').val(userObj.def_loading_place);
+        $('input[name="discharge_point"]').val(userObj.def_disch_place);
+
+      }
+    });
+  }
 
 
 

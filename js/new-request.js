@@ -41,7 +41,7 @@
           <div class="error-warn">
             <span>Wrong username or password. Request a CLIENT account or retry.</span>
             </div>`);
-        } else if (accepted == 1) {
+        } else if (accepted == 2) { //if client
           pubblishRequest(() => {
             //send email then
             location.href = "/client/my-requests";

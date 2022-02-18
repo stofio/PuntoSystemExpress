@@ -104,38 +104,6 @@ $(document).on('click', '.viewQuote', (e) => {
 });
 
 
-
-$(document).on('click', '.blockOffer', (e) => {
-  var currentOffer = $(e.target).parents('.single-offer');
-  var currentRequest = $(e.target).parents('.single-order');
-  if (confirm(`Do you want to accept the offer of ${currentOffer.find('.offer-price h4').html()}?
-  The offer will be moved to TO SHIP tab, from where you can contact the supplier directly by email.`)) {
-    // YES
-    $.ajax({
-      url: "include/toconfirm/block_offer.php",
-      type: "POST",
-      data: {
-        offer_id: currentOffer.find('.offer_id').val(),
-        request_id: currentRequest.find('.request_id').val()
-      },
-      cache: false,
-      success: function(dataResult) {
-
-        //show success message
-        var success = `<div style="padding: 10px 25px"
-              <h2 class="mb-4">The supplier will be notified by email to ship your request of ${currentOffer.find('.offer-price h4').html()}.<h2>
-              <p>You will be notified by email when the shipment is on the way.</p>
-              <p>You can contact the supplier from the TO SHIP tab.</p>
-              </div>
-              `;
-        $(currentRequest).fadeOut('slow', () => {
-          $(currentRequest).empty().html(success).fadeIn();
-        });
-      }
-    });
-  }
-});
-
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;
 
@@ -154,8 +122,6 @@ function openTab(evt, tabName) {
 
 //start timer
 function startTimers(callback) {
-
-
   $.each($('.the-time'), (e, i) => {
     var timeLimit = $(i).attr('data-time-limit'); // s
 

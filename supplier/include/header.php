@@ -30,7 +30,7 @@ require_once 'include/auth.php';
   <body>
 
 
-	
+	 
 	<header class="container py-3 border-bottom">
 		<div class="d-flex flex-wrap justify-content-center align-items-center">
 			<a href="/" class="logo d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
@@ -41,9 +41,9 @@ require_once 'include/auth.php';
 				<li class="nav-item"><a href="/supplier" class="nav-link" aria-current="page">Dashboard</a></li>
 				<li class="nav-item"><a href="/supplier/active" class="nav-link">Active Requests</a></li>
 				<li class="nav-item"><a href="/supplier/offers" class="nav-link">My Offers</a></li>
-				<li class="nav-item"><a href="/supplier/shipped" class="nav-link">Shipped</a></li>
+				<li class="nav-item"><a href="/supplier/shipped" class="nav-link">Archive</a></li>
+				<li class="nav-item"><a href="/supplier/account" class="nav-link">My account</a></li>
 				<li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
-				<li class="nav-account"><a href="/supplier/account"><img src="/media/account-icon.svg"/></a></li>
 			</ul>
 		</div>
 	</header>

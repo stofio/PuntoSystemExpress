@@ -1,5 +1,5 @@
 <?php 
-include_once '../functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 $userId = $_SESSION['user_id'];
 

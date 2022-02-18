@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require $_SERVER['DOCUMENT_ROOT'].'/functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 //return false if wrong email or passw
 
@@ -26,12 +26,17 @@ if ((!empty($_POST['username'])&&(!empty($_POST['password'])))) {
       if($role == 1) { // SUPPLIER - 1 
         $_SESSION['user_id'] = $id;
         $_SESSION['role_id'] = $role;        
-        echo 2;
+        echo 1;
       }
       else if($role == 2) { // CLIENT - 2 
         $_SESSION['user_id'] = $id;
         $_SESSION['role_id'] = $role;        
-        echo 1;
+        echo 2;
+      }
+      else if($role == 3) { // ADMIN - 3
+        $_SESSION['user_id'] = $id;
+        $_SESSION['role_id'] = $role;        
+        echo 3;
       }
       
     } 

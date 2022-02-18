@@ -1,8 +1,17 @@
     <section class="text-center hero-section">
-        <div class="hh align-items-center">
-            <div>
-                <h1><b><u>New Request</u></b></h1>
-                <p>Request a new quote</p>
+        <div class="container">
+            <div class="align-items-center">
+                <div class="breadcrumbs">
+                    
+                    <span><a href="<?php echo isset($homeLink) ? $homeLink : '/'; ?>"><?php echo isset($breadcrumbs) ? $breadcrumbs : 'Home'; ?></a></span> » 
+                    <span><?php echo isset($page_title) ? $page_title : 'New Shipment'; ?></span>
+                </div>
+                <div class="row align-items-center">
+                    <div>
+                        <h1>New Request</h1>
+                        <p>Request a new quote</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

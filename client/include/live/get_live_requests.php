@@ -1,11 +1,11 @@
 <?php
 /**
  * page with CLIENT current requests/quotes
- */
+ */ 
 
 session_start();
 
-include '../../../functions.php';
+include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 $userid = $_SESSION['user_id'];
 

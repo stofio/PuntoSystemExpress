@@ -203,6 +203,7 @@ footer .social img {
   border-top: solid 3px #212529;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .single-order-header h2 {
@@ -221,7 +222,8 @@ footer .social img {
 .single-order-header .header-controls {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: end;
+  position: relative;
 }
 
 .single-order-header .header-controls .order-status {
@@ -229,6 +231,9 @@ footer .social img {
   color: #e6342a;
   text-align: center;
   font-weight: 600;
+  position: absolute;
+  right: 30px;
+  top: 0;
 }
 
 .single-order-header .header-controls button {
@@ -263,7 +268,7 @@ footer .social img {
 
 .single-offer p {
   font-size: 18px;
-  line-height: 22px;
+  line-height: 26px;
   margin: 0;
 }
 
@@ -420,12 +425,12 @@ footer .social img {
   pointer-events: none;
 }
 
-#my_account_client {
+.my_account {
   padding: 50px 25px;
   border-top: solid 3px #212529;
 }
 
-#my_account_client .my-account-client-container {
+.my_account .my-account-client-container {
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -695,7 +700,8 @@ button.sendEmail {
   width: 50px;
 }
 
-#active_requests .single-order .panel-collapse {
+#active_requests .single-order .panel-collapse,
+#toapprove_requests .single-order .panel-collapse {
   display: none;
 }
 
@@ -721,11 +727,21 @@ button.sendEmail {
   transition-duration: .3s;
 }
 
-.panel-collapse *,
-.arrow-toggle * {
-  user-select: none;
-}
-
 .choose-offer-details p {
   margin-bottom: 5px;
+}
+
+.order-details {
+  width: 100%;
+}
+
+.admin-approval h3 {
+  background-color: #e6342a;
+  padding-left: 10px;
+  color: #fff;
+}
+
+.admin-approval .supp-offer {
+  padding-left: 30px;
+  border-left: solid;
 }

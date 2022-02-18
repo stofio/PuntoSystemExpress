@@ -2,7 +2,7 @@
 
 session_start();
 
-include '../../../functions.php';
+include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 $offer_id = $_POST['offer_id'];
 $request_id = $_POST['request_id'];
@@ -17,11 +17,12 @@ if ($conn->query($sql) === TRUE) {
 }
 
 
-//set request to 3 - TOSHIP
-$sql2 = "UPDATE requests SET request_status = 3 WHERE id = $request_id";
+//set request to 2 - BOOKED
+$sql2 = "UPDATE requests SET request_status = 2 WHERE id = $request_id";
+//HERE IT WAS request_status = 3 ???????????
 
 if ($conn->query($sql2) === TRUE) {
     echo "Request updated successfully";
-  } else {
+} else {
     echo "Error updating request: " . $conn->error;
-  }
+}
