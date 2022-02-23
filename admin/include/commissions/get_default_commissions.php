@@ -1,12 +1,20 @@
 <?php
+/**
+ * ADMIN page with requests to approve
+ */
 
-$string = file_get_contents($_SERVER['DOCUMENT_ROOT']."/commissions.json");
-$json_a = json_decode($string,true)['commissions'];
+include_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
-var_dump($json_a);
 
-// foreach ($json_a as $key => $value){
-//   echo  $key . ':' . $value;
-// }
+//get json file 
+$jsonString = file_get_contents($_SERVER['DOCUMENT_ROOT']."/commissions_default.json");
+$commissionsArr = json_decode($jsonString,true);
+
+
+//DEFAULTS
+$minComm = $commissionsArr['min_commission']; //euro
+$molPerc = $commissionsArr['mol_perc']; //%
+
+
 
 ?>

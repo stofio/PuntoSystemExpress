@@ -1,9 +1,8 @@
 <?php
 /**
- * page with CLIENT current requests/quotes
+ * ADMIN page with requests to approve
  */
 
-session_start();
 
 include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
@@ -29,7 +28,7 @@ while ($request = mysqli_fetch_array($rs_result)) {
     $client = mysqli_fetch_assoc($result2);
 
     //get offer
-    $sql3 = "SELECT * FROM offers WHERE `requestidfk` =" . $request["id"] . " AND `offer_status` = 2"; //get the offer thats booked  
+    $sql3 = "SELECT * FROM offers WHERE `requestidfk` =" . $request["id"] . " AND `offer_status` = 2"; //get the offer that are booked  
     $result3 = mysqli_query($conn, $sql3);  
     $offer = mysqli_fetch_assoc($result3);
 
@@ -37,7 +36,6 @@ while ($request = mysqli_fetch_array($rs_result)) {
     $sql4 = "SELECT * FROM users WHERE `userid` =" . $offer["offer_useridfk"];  
     $result4 = mysqli_query($conn, $sql4);  
     $supplier = mysqli_fetch_assoc($result4);
-
 
 ?>  
 

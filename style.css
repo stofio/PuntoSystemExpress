@@ -298,6 +298,7 @@ footer .social img {
   font-size: 18px;
   padding: 15px 22px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .single-offer .offer-button.send-offer button,
@@ -744,4 +745,43 @@ button.sendEmail {
 .admin-approval .supp-offer {
   padding-left: 30px;
   border-left: solid;
+}
+
+.user-commissions,
+.def-commissions {
+  padding: 50px 25px;
+  border-bottom: solid 3px #212529;
+  position: relative;
+}
+
+.commissions-box {
+  display: flex;
+  align-items: center;
+}
+
+.commissions-box input {
+  width: 90px;
+  font-weight: 600;
+}
+
+.commissions-box button {
+  outline: none;
+  border: none;
+  background-color: #E6342A;
+  color: #fff;
+  font-size: 18px;
+  padding: 5px 25px;
+  font-weight: 500;
+}
+
+.commissions-box .c-name {
+  width: 30%;
+}
+
+.user-commissions .commissions-box {
+  padding: 15px 0 15px 25px;
+}
+
+.user-commissions .commissions-box:hover {
+  background-color: #ebebeb;
 }
