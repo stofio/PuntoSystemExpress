@@ -1,7 +1,7 @@
-<?php $page_title = 'Archive'; ?>
+<?php $page_title = 'Manual Requests'; ?>
 <?php require_once 'include/header.php'; ?>
 
-
+ 
 
 
 <section class="text-center hero-section"> 
@@ -12,7 +12,7 @@
     <div class="row align-items-center">
         <div>
             <h1><?php echo $page_title; ?></h1>
-            <p>View archived or processed requests</p>
+            <p>View requests completed manually</p>
         </div>
     </div>
 </section>
@@ -23,7 +23,7 @@
     <div id="target-content">loading...</div>
 
     <div class="clearfix">
-        <ul class="pagination"> <?php include 'include/archive/pagination.php'; ?> </ul>
+        <ul class="pagination"> <?php include 'include/manual/pagination.php'; ?> </ul>
     </div>
 
 
@@ -47,13 +47,13 @@
         }
     })
 
-    $("#target-content").load("include/archive/get_archived.php?page=1");
+    $("#target-content").load("include/manual/get_manual.php?page=1");
     $(".page-link.page-link").click(function() {
         var id = $(this).attr("data-id");
         var select_id = $(this).parent().attr("id");
 
         $.ajax({
-        url: "include/archive/get_archived.php",
+        url: "include/manual/get_manual.php",
         type: "GET",
         data: {
             page: id

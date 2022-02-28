@@ -125,6 +125,7 @@ section.hero-section .refresh {
 .what-we-offer .offer-cont img {
   width: 100%;
   max-width: 250px;
+  max-height: 85px;
 }
 
 @media(min-width: 768px) {
@@ -519,7 +520,8 @@ footer .social img {
   color: #fff;
 }
 
-button.sendEmail {
+button.sendEmail,
+button.greybtn {
   background-color: #333 !important;
 }
 
@@ -702,7 +704,8 @@ button.sendEmail {
 }
 
 #active_requests .single-order .panel-collapse,
-#toapprove_requests .single-order .panel-collapse {
+#toapprove_requests .single-order .panel-collapse,
+.intransit.panel-collapse {
   display: none;
 }
 
@@ -784,4 +787,23 @@ button.sendEmail {
 
 .user-commissions .commissions-box:hover {
   background-color: #ebebeb;
+}
+
+a.view-request {
+  font-size: 18px;
+  color: #333333;
+  text-decoration: none;
+  padding: 0px 10px;
+  border: solid;
+}
+
+a.view-request:hover {
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.36);
+}
+
+.order-notice {
+  font-size: 13px;
+  color: #212529;
+  display: flex;
+  justify-content: center;
 }

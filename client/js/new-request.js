@@ -3,12 +3,40 @@
   var euCountries = [];
   var nonEuCountries = [];
 
+  var isManual = 0; //0 if all forManual = false
+
+  var forManual = {
+    measures: false,
+    weight: false,
+    country: false
+  };
+
+  $('h1').on('click', () => {
+    if (forManual.measures || forManual.weight || forManual.country) {
+      isManual = 1;
+    } else {
+      isManual = 0;
+    }
+
+    console.log(forManual)
+    console.log(isManual)
+  });
+
 
   //form submit
   $("#new_request_form").on("submit", (e) => {
     e.preventDefault();
 
     var formData = new FormData(e.currentTarget);
+
+    if (forManual.measures || forManual.weight || forManual.country) {
+      isManual = 1;
+    } else {
+      isManual = 0;
+    }
+
+    formData.append("manual", isManual);
+
     var formDataWithColli = appendSerializedColli(formData);
 
     showLoading();
@@ -22,10 +50,21 @@
       success: function(data) {
         hideLoading();
 
+        if (isManual) { //manual
+          var success = `
+          <div class="container">
+          <h2 class="mb-4">Your shipment request will be processed MANUALLY.<h2>
+            <p>Your request requires specific study. Our customer service will contact you soon after. You can find your request in the <a href="/client/my-requests">My quotes</a> section.</p>
+            </div>`;
+        } else { //live
+          var success = `
+          <div class="container">
+          <h2 class="mb-4">Your shipment request is LIVE<h2>
+            <p>You will be notified by email about new offers, but you can also check the <a href="/client/my-requests">My quotes</a> section.</p>
+            </div>`;
+        }
+
         //show success message
-        var success = `<h2 class="mb-4">Your shipment request is LIVE<h2>
-          <p>You will be notified by email about new offers, but you can also check the <a href="/client/my-requests">My quotes</a> section.</p>
-          `;
         $('#new_request_form').fadeOut('slow', () => {
           $('#new_request').append(success);
         });
@@ -38,6 +77,10 @@
     var selected = $(".request_to option:selected").text();
     if (nonEuCountries.includes(selected)) {
       showCountryWarning();
+      forManual.country = true;
+    } else {
+      hideCountryWarning();
+      forManual.country = false;
     }
   });
 
@@ -196,6 +239,10 @@
     $('.error-container').append(warn);
   }
 
+  function hideCountryWarning() {
+    $('#warn-non-eu-to').remove();
+  }
+
 
   function addNewCollo() {
     var collo = `
@@ -252,9 +299,11 @@
     if (isNaN(totWeight)) return;
 
     if (totWeight > maxWeight) {
-      showWeightWarning()
+      showWeightWarning();
+      forManual.weight = true;
     } else {
       $('#warn-weight').remove();
+      forManual.weight = false;
     }
   }
 
@@ -273,17 +322,27 @@
     var maxH = 200;
 
     $('#warn-measure').remove();
+    forManual.measures = false;
 
     $.each($('.collo-l'), (i, l) => {
-      if ($(l).val() * 1 > maxL) showMeasureWarning();
+      if ($(l).val() * 1 > maxL) {
+        showMeasureWarning();
+        forManual.measures = true;
+      };
     })
 
     $.each($('.collo-w'), (i, w) => {
-      if ($(w).val() * 1 > maxW) showMeasureWarning();
+      if ($(w).val() * 1 > maxW) {
+        showMeasureWarning();
+        forManual.measures = true;
+      };
     })
 
     $.each($('.collo-h'), (i, h) => {
-      if ($(h).val() * 1 > maxH) showMeasureWarning();
+      if ($(h).val() * 1 > maxH) {
+        showMeasureWarning();
+        forManual.measures = true;
+      };
     })
   }
 

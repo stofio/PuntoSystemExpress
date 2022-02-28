@@ -28,17 +28,17 @@
         <h2 class="text-center mb-5"><b><u>What we offer</u></b></h2>
         <div class="col-md-4 text-center offer-cont p-5 pt-0 pb-0 border-right">
           <h4><b>GLOBAL COVERAGE</b></h4>
-          <img class="mb-3 mt-2" src="/media/logo.png">
+          <img class="mb-3 mt-2" src="/media/covereg.svg">
           <p>We will collect your cargo, be it standard, dangerous or temperature controlled, in 3 hours from your request, everywhere in the European Union.</p>
         </div>
         <div class="col-md-4 text-center offer-cont p-5 pt-0 pb-0 border-right">
           <h4><b>SPEED</b></h4>
-          <img class="mb-3 mt-2" src="/media/logo.png">
+          <img class="mb-3 mt-2" src="/media/speed.svg">
           <p>The trucks we employ have a maximum payload of 1000 kg, and they guarantee an express delivery without stops or deviations everywhere in the European Union.</p>
         </div>
         <div class="col-md-4 text-center offer-cont p-5 pt-0 pb-0">
           <h4><b>SAVINGS</b></h4>
-          <img class="mb-3 mt-2" src="/media/logo.png">
+          <img class="mb-3 mt-2" src="/media/savings.svg">
           <p>Whereas normal dedicated services require payment of both legs of the journey of the truck, we will charge you only the outward trip.</p>
         </div>
       </div>

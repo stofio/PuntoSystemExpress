@@ -30,21 +30,22 @@ $(document).ready(function() {
   });
 
   //
-  //load TOCONFIRM tab
+  //load BOOKED tab
   //
-  $("#target-content2").load("include/toconfirm/get_to_confirm_requests.php?page=1");
+  $("#target-content2").load("include/booked/get_booked.php?page=1");
   $(".page-link2.page-link").click(function() {
     var id = $(this).attr("data-id");
     var select_id = $(this).parent().attr("id");
 
     $.ajax({
-      url: "include/toconfirm/get_to_confirm_requests.php",
+      url: "include/booked/get_booked.php",
       type: "GET",
       data: {
         page: id.replace('tc-', '')
       },
       cache: false,
       success: function(dataResult) {
+        console.log(dataResult);
         $("#target-content2").html(dataResult);
         $(".pageitem2").removeClass("active");
         $("#tc-" + select_id).addClass("active");
@@ -101,6 +102,31 @@ $(document).on('click', '.viewQuote', (e) => {
   var currentOrder = $(e.target).parents('.single-order');
   var quoteId = currentOrder.find('input.request_id').val()
   location.href = "/client/choose-offer?i=" + quoteId;
+});
+
+$(document).on('click', '.viewRequest', (e) => {
+  var currentOrder = $(e.target).parents('.single-order');
+  var reqId = currentOrder.find('input.request_id').val()
+  location.href = "/client/view-request?i=" + reqId;
+});
+
+$(document).on('click', '.archiveRequest', (e) => {
+  var $currentOrder = $(e.target).parents('.single-order');
+  var reqId = $currentOrder.find('input.request_id').val()
+
+  $.ajax({
+    url: "include/live/move_archive.php",
+    type: "POST",
+    data: {
+      reqId: reqId
+    },
+    cache: false,
+    success: function(dataResult) {
+      console.log(dataResult);
+      $currentOrder.slideUp(300);
+    }
+  });
+
 });
 
 

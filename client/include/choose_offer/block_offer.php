@@ -15,7 +15,7 @@ if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error updating offer: " . $conn->error;
 }
-
+ 
 
 //set request to 2 - BOOKED
 $sql2 = "UPDATE requests SET request_status = 2 WHERE id = $request_id";

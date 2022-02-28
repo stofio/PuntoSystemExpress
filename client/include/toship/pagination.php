@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 $userid = $_SESSION['user_id'];
 
 $limit = 5;
-$sql = "SELECT COUNT(id) FROM requests WHERE `request_status` = 3 AND `useridfk` = $userid";  
+$sql = "SELECT COUNT(id) FROM requests WHERE `request_status` = 4 AND `useridfk` = $userid";  
 $rs_result = mysqli_query($conn, $sql);  
 $row = mysqli_fetch_row($rs_result);  
 $total_records = $row[0];  

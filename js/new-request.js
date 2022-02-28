@@ -3,6 +3,14 @@
   var euCountries = [];
   var nonEuCountries = [];
 
+  var isManual = 0; //0 if all forManual = false
+
+  var forManual = {
+    measures: false,
+    weight: false,
+    country: false
+  };
+
   var formDataSaved; //save form data before login
 
   //form submit
@@ -14,8 +22,16 @@
 
 
     var formData = new FormData(e.currentTarget);
-    //append serialized colli to formData
 
+    if (forManual.measures || forManual.weight || forManual.country) {
+      isManual = 1;
+    } else {
+      isManual = 0;
+    }
+
+    formData.append("manual", isManual);
+
+    //append serialized colli to formData
     appendSerializedColli(formData);
 
   });
@@ -34,6 +50,7 @@
       contentType: false,
       type: 'POST',
       success: function(data) {
+        console.log(data);
         hideLoading();
         var accepted = data; //true/false
         if (accepted == 0) {
@@ -41,7 +58,7 @@
           <div class="error-warn">
             <span>Wrong username or password. Request a CLIENT account or retry.</span>
             </div>`);
-        } else if (accepted == 2) { //if client
+        } else if (accepted == 1) { //if client
           pubblishRequest(() => {
             //send email then
             location.href = "/client/my-requests";
@@ -58,6 +75,10 @@
     var selected = $(".request_to option:selected").text();
     if (nonEuCountries.includes(selected)) {
       showCountryWarning();
+      forManual.country = true;
+    } else {
+      hideCountryWarning();
+      forManual.country = false;
     }
   });
 
@@ -211,6 +232,10 @@
     $('.error-container').append(warn);
   }
 
+  function hideCountryWarning() {
+    $('#warn-non-eu-to').remove();
+  }
+
 
   function addNewCollo() {
     var collo = `
@@ -267,9 +292,11 @@
     if (isNaN(totWeight)) return;
 
     if (totWeight > maxWeight) {
-      showWeightWarning()
+      showWeightWarning();
+      forManual.weight = true;
     } else {
       $('#warn-weight').remove();
+      forManual.weight = false;
     }
   }
 
@@ -288,17 +315,27 @@
     var maxH = 200;
 
     $('#warn-measure').remove();
+    forManual.measures = false;
 
     $.each($('.collo-l'), (i, l) => {
-      if ($(l).val() * 1 > maxL) showMeasureWarning();
+      if ($(l).val() * 1 > maxL) {
+        showMeasureWarning();
+        forManual.measures = true;
+      };
     })
 
     $.each($('.collo-w'), (i, w) => {
-      if ($(w).val() * 1 > maxW) showMeasureWarning();
+      if ($(w).val() * 1 > maxW) {
+        showMeasureWarning();
+        forManual.measures = true;
+      };
     })
 
     $.each($('.collo-h'), (i, h) => {
-      if ($(h).val() * 1 > maxH) showMeasureWarning();
+      if ($(h).val() * 1 > maxH) {
+        showMeasureWarning();
+        forManual.measures = true;
+      };
     })
   }
 

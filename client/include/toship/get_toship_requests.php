@@ -10,12 +10,12 @@ $limit = 5;
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;  
   
-$sql = "SELECT * FROM requests WHERE `request_status` = 3 AND `useridfk` = $userid 
+$sql = "SELECT * FROM requests WHERE `request_status` = 4 AND `useridfk` = $userid 
 ORDER BY created DESC LIMIT $start_from, $limit";  
 $rs_result = mysqli_query($conn, $sql);  
 
 //echo $userid;
-if($rs_result->num_rows == 0) echo '<p class="mt-4">No requests to ship...</p>';
+if($rs_result->num_rows == 0) echo '<p class="mt-4">No requests in transit...</p>';
 
 
 ?>
@@ -39,7 +39,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     </div>
                 </div>
                 <div class="header-controls">
-                    <span class="order-status">TO SHIP</span>
+                    <span class="order-status">IN TRANSIT</span>
                 </div>
             </div> 
             <div class="live_request single-order-body">
@@ -82,8 +82,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         </a>
                     </div>
                 </div>
-           
-
+                
             </div>
         </div>
 

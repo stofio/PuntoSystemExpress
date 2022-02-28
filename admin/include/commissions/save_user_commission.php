@@ -5,10 +5,12 @@ session_start();
 
 include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
+
 $commid = $_POST['commid'];
 $userid = $_POST['userid'];
-$min_commission = $_POST['min_commission'];
-$mol_percent = $_POST['mol_percent'];
+$min_commission = $_POST['min_commission'] == '' ? 0 : $_POST['min_commission'] ;
+$mol_percent = $_POST['mol_percent'] == '' ? 0 : $_POST['mol_percent'];
+
 
 //update commission
 if($commid == null) {

@@ -30,9 +30,14 @@
                     <label class="me-5"> MOL =  
                         <input type="text" name="mol_perc" class="only-numb" placeholder="I.e. 30" required value="<?php echo $molPerc; ?>"/> %
                     </label>
+                    <label class="me-5"> Margin =  
+                        <input type="text" name="margin" class="only-numb" placeholder="I.e. 1500" required value="<?php echo $margin; ?>"/> €
+                    </label>
                 </div>
                 <button type="submit">Save</button>
             </div>
+            <p class="mt-4">If supplier offer is > <?php echo $margin; ?>€ always apply <?php echo $molPerc; ?>%.</p>
+            <p>If supplier offer is < <?php echo $margin; ?>€ apply <?php echo $minComm; ?>€ or <?php echo $molPerc; ?>% if bigger.</p>
         </form>
 
     </div>

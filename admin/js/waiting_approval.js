@@ -46,20 +46,13 @@ $(document).on('submit', '.offer_form', (e) => {
   e.preventDefault();
   var formData = new FormData(e.currentTarget);
 
-  if (formData.get('shipment_ref') == 0) {
-    //MOVE TO MANUAL
-    submitAndMoveManual(formData);
-  } else {
-    //APPROVE
-    submitAndApprove(formData);
-  }
-
+  submitAndApprove(formData, e.target);
 
 
 });
 
 
-function submitAndApprove(formData) {
+function submitAndApprove(formData, target) {
   if (confirm(`Confirm and submit BeOne Ref. Number: ${formData.get('beone_ref')}?`)) {
     // YES
     $.ajax({
@@ -76,42 +69,13 @@ function submitAndApprove(formData) {
               <h2 class="mb-4 mt-5">Request approved.<h2>
               <p>The supplier will be notified about the changes.</p>
               <p>The BeOne Ref. Number is: ${formData.get('beone_ref')}</p>
+              <p>You can find this request in the <a href="/admin/archive">archive</a></p>
               </div>
               `;
 
         //SEND EMAIL TO ADMIN
-        $(e.target).fadeOut('slow', () => {
-          $(e.target).empty().html(success).fadeIn();
-        });
-      }
-    });
-  }
-}
-
-
-function submitAndMoveManual(formData) {
-  if (confirm(`Set request as MANUAL?`)) {
-    // YES
-    $.ajax({
-      url: "include/waiting_approval/submit-manual.php",
-      type: "POST",
-      data: formData,
-      processData: false,
-      contentType: false,
-      cache: false,
-      success: function(dataResult) {
-        //show success message
-        console.log(dataResult)
-        var success = `<div style="padding: 10px 25px"
-              <h2 class="mb-4 mt-5">Request moved to manual.<h2>
-              <p>The request is moved into Archive.</p>
-              <p>The request will be continued manually.</p>
-              </div>
-              `;
-
-        //SEND EMAIL TO ADMIN
-        $(e.target).fadeOut('slow', () => {
-          $(e.target).empty().html(success).fadeIn();
+        $(target).fadeOut('slow', () => {
+          $(target).empty().html(success).fadeIn();
         });
       }
     });

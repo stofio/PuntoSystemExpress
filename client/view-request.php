@@ -1,4 +1,4 @@
-<?php $page_title = 'Choose Offer'; ?>
+<?php $page_title = 'View Request'; ?>
 <?php require_once 'include/header.php'; ?>
 
 <?php  
@@ -9,17 +9,24 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 $requestid = $_GET['i'];
 $userid = $_SESSION['user_id'];
 
-$sql = "SELECT * FROM requests WHERE `id` = $requestid AND `request_status` = 1 AND `useridfk` = $userid";
-
-
+//get request, if null redirect
+$sql = "SELECT * FROM requests WHERE `id` = $requestid AND `useridfk` = $userid";
 if ($result = mysqli_query($conn, $sql)) {
     $row = mysqli_fetch_array($result);
     //redirect
     if($row == null) {
         header('Location: /client/my-requests');
     }
-
 }
+
+//get statuses
+$sql2 = "SELECT * FROM request_status WHERE statusid = " . $row["request_status"];
+$result2 = mysqli_query($conn, $sql2);
+$status = mysqli_fetch_assoc($result2);
+
+//if status live redirect
+if($status['statusname'] == 'LIVE') header('Location: /client/my-requests');
+  
 
 ?>
 
@@ -28,7 +35,7 @@ if ($result = mysqli_query($conn, $sql)) {
     <div class="my-5">
         <div class="d-flex choose-offer-details" style="justify-content: space-between">
             <div class="header-details" style="width: 100%">
-                <h2 class="order-title">ID #<?php echo $row["id"]; ?></h2>
+                <h2 class="order-title">ID #<?php echo $row["id"]; ?> - Status <span style="color:#e6342a"><?php echo $status['statusname'] ?></span></h2>
                 <div class="order-details row">
                     <div class="col-md-6">
                         <p><b>From</b> <?php echo $row["from_place"]; ?>, <?php echo $row["loading_point"]; ?></p>
@@ -43,7 +50,7 @@ if ($result = mysqli_query($conn, $sql)) {
                         <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="mt-4">
                 <p><b>Packing list</b></p>
                 <?php 
                     $jsonColli = $row["colli"];
@@ -61,27 +68,48 @@ if ($result = mysqli_query($conn, $sql)) {
                         }
                     
                     ?>
-                </div>   
+                </div>    
                 <div class="mt-4">
                     <p><b>Note</b></p>
                     <p><?php echo $row["note"] ?></p>
-                </div>    
+                </div>  
+
+                <div class="mt-5">
+                <?php
+
+                    //get offers of this request
+                    $currentRequestId = $row["id"];
+                    $sql2 = "SELECT * FROM offers WHERE `requestidfk` = $currentRequestId AND `offer_status` not in (1)";
+                    $rs_result2 = mysqli_query($conn, $sql2);  
+
+                    $offer = mysqli_fetch_assoc($rs_result2);
+
+                ?>
+
+
+                    <div class="single-offer">
+                        <div class="offer-type">
+                            <span>BOOKED OFFER</span>
+                        </div>
+                        <div class="offer-collection">
+                            <p><b>Good Collection</b><br><?php echo substr($offer['collect_time'], 0, -3); ?></p>
+                        </div>
+                        <div class="offer-delivery">
+                            <p><b>Good Delivery</b><br><?php echo substr($offer['deliver_time'], 0, -3); ?></p>
+                        </div>
+                        <div class="offer-price">
+                         <h4>€ <?php echo getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']) ?></h4>
+                        </div>
+                    
+                    </div>
+                </div>
+                
             </div>     
-        </div>
-
-        <div class="live_request single-order-body panel-collapse">
-            <h1 class="mt-4"><u>Choose the best option for you</u></h1>
-            <?php
-                $reqId = $row['id'];
-                include 'include/choose_offer/get_all_offers.php'; 
-            ?>
-
         </div>
     </div>
 
 </div> <!-- container -->
 
 
-<script src="/client/js/choose-offer.js"></script>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php'; ?>  

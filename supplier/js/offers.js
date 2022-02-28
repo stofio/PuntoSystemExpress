@@ -47,14 +47,14 @@ $(document).ready(function() {
 
 
   //
-  //load GOING tab
+  //load IN TRANSIT tab
   //
-  $("#target-content4").load("include/going_requests/get_going_requests.php?page=1");
+  $("#target-content4").load("include/intransit/get_transit_requests.php?page=1");
   $(".page-link4.page-link").click(function() {
     var id = $(this).attr("data-id");
     var select_id = $(this).parent().attr("id");
     $.ajax({
-      url: "include/going_requests/get_going_requests.php",
+      url: "include/intransit/get_transit_requests.php",
       type: "GET",
       data: {
         page: id.replace('tg-', '')
@@ -98,27 +98,29 @@ $(document).ready(function() {
 
 
 
-$(document).on('click', '.confirm_shipped', (e) => {
-  var currentOffer = $(e.target).parents('.single-offer');
+$(document).on('submit', '.conf_shipped', (e) => {
+  e.preventDefault();
+  var currentOffer = $(e.target).find('.single-offer');
   var currentRequest = $(e.target).parents('.single-order');
-  if (confirm(`Do you want to mark the request '${currentRequest.find('.order-title').html()}' as SHIPPED?
-  This action will notify the client that the shipping is on the way.`)) {
+  if (confirm(`Notify the client that the request '${currentRequest.find('.order-title').html()}' is IN TRANSIT?`)) {
     // YES
+    var formData = new FormData(e.currentTarget);
+
     $.ajax({
       url: "include/toship_requests/set_shipped_request.php",
       type: "POST",
-      data: {
-        offer_id: currentOffer.find('.offer_id').val(),
-        request_id: currentRequest.find('.request_id').val()
-      },
+      processData: false,
+      contentType: false,
+      data: formData,
       cache: false,
       success: function(dataResult) {
         console.log(dataResult);
 
         //show success message
         var success = `<div style="padding: 10px 25px"
-              <h2 class="mb-4">You can find this request in the <a href="/supplier/shipped">Shipped</a> section.<h2>
-              <p>The client will be notified that the shipping is on the way.</p>
+            <h2>The client will be notified that the shipping is on the way.</h2>
+              <p class="mb-4">You can find this request in the IN TRANSIT tab.<p>
+              
               </div>
               `;
         $(currentOffer).fadeOut('slow', () => {
@@ -134,8 +136,11 @@ $(document).on('click', '.confirm_shipped', (e) => {
 $(document).on('click', '.sped_ritirata', (e) => {
   var currentOffer = $(e.target).parents('.single-offer');
   var currentRequest = $(e.target).parents('.single-order');
-  if (confirm(`Confirm current order as TO CONCLUDE?`)) {
+  if (confirm(`Do you want to set this shipping as DELIVERED? The user will be notified about the changes.`)) {
     // YES
+
+    //SET ORDER STATUS DELIVERED
+
     $('.sped_ritirata').fadeOut('slow', () => {
       $('.conclude_form').fadeIn('fast');
       $('.order-status').html('TO COMPLETE');
@@ -151,12 +156,41 @@ $(document).on('submit', '.conclude_form', (e) => {
   var currentRequest = $(e.target).parents('.single-order');
   if (confirm(`Mark current order as SHIPPED?`)) {
     // YES
+
+    //SET ORDER AS CONCLUDED
+
+
+    var success = `<div style="padding: 10px 25px"
+              <h2 class="mb-4 mt-5">Shipment completed.<h2>
+              <p>The user will be notified about the changes.</p>
+              <p>You can find this request in the <a href="/supplier/shipped">archive</a></p>
+              </div>
+              `;
     $(e.target).parents('.single-order').fadeOut('slow', () => {
-      $('#goingReq').append('<p class="mt-4">No ongoing requests yet...</p>');
+      $('#goingReq').append(success);
     });
+
 
   }
 });
+
+
+
+//expand request
+$(document).on("click", ".arrow-toggle", function(e) {
+  var $_target = $(e.currentTarget);
+  var $_panelBody = $_target.next(".panel-collapse");
+  if ($_panelBody) {
+    //$_panelBody.slideToggle('fast');
+  }
+  if ($_panelBody.css('display') !== 'none') {
+    $_panelBody.slideUp(300);
+    $_target.find('span').css({ 'transform': 'rotate(90deg)' });
+  } else {
+    $_panelBody.slideDown(300);
+    $_target.find('span').css({ 'transform': 'rotate(-90deg)' });
+  }
+})
 
 
 function openTab(evt, tabName) {

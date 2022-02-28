@@ -41,7 +41,7 @@ require_once 'include/auth.php';
 				<li class="nav-item"><a href="/client" class="nav-link" aria-current="page">Home</a></li>
 				<li class="nav-item"><a href="/client/new-request" class="nav-link">New shipment</a></li>
 				<li class="nav-item"><a href="/client/my-requests" class="nav-link">My quotes</a></li>
-				<li class="nav-item"><a href="/client/shipped" class="nav-link">Archive</a></li>
+				<li class="nav-item"><a href="/client/archived" class="nav-link">Archive</a></li>
 				<li class="nav-item"><a href="/client/account" class="nav-link">My account</a></li>
 				<li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
 			</ul>

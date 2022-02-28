@@ -41,7 +41,7 @@ while ($request = mysqli_fetch_array($rs_result)) {
 
          <div class="single-order admin-approval">
             <input type="hidden" class="request_id" name="request_id" value="<?php echo $request["id"]; ?>">
-            <div class="single-order-header">
+            <div class="single-order-header"> 
                 <div class="header-details" style="width:80%">
                     <h2 class="order-title">ID #<?php echo $request["id"]; ?></h2>
                     <div class="order-details row">
@@ -65,7 +65,8 @@ while ($request = mysqli_fetch_array($rs_result)) {
                         </div>
                         <div class="col-md-4 supp-offer">
                             <h3>Offer</h3>
-                            <p><b>Price</b> <?php echo $offer["price"]; ?> €</p>
+                            <p><b>Offer price</b> <?php echo $offer["price"]; ?> €</p>
+                            <p><b>Price (+commission)</b> <?php echo getClientCommissionsCalculated($offer['price'], $request["id"]) ?> €</p>
                             <p><b>Collect time</b> <?php echo substr($offer["collect_time"], 0, -3); ?></p>
                             <p><b>Deliver time</b> <?php echo substr($offer["deliver_time"], 0, -3); ?></p>
                             <p><b>Valid ultil</b> <?php echo substr($offer["valid_until"], 0, -3); ?></p>
@@ -105,7 +106,7 @@ while ($request = mysqli_fetch_array($rs_result)) {
                             $hi = $c['height'];
                             $st = $c['stack'] == 1 ? '✓' : '✗';
                             echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
-                            }
+                        }
                         
                         ?>
                 </div>

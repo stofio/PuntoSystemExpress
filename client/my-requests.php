@@ -37,21 +37,21 @@
 
 
     <!--    
-         TO CONFIRM tab
+         BOOKED tab
     -->
     <section id="toConfReq" class="tabcontent">
 
         <div id="target-content2">loading...</div>
 
         <div class="clearfix">
-            <ul class="pagination"> <?php include 'include/toconfirm/pagination.php'; ?> </ul>
+            <ul class="pagination"> <?php include 'include/booked/pagination.php'; ?> </ul>
         </div>
 
     </section>
  
 
     <!--    
-         TO SHIP tab
+         IN TRANSIT tab
     -->
     <section id="toShipReq" class="tabcontent"> 
 

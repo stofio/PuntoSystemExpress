@@ -29,6 +29,7 @@
     $colli = $_POST['colli'];
     $files_names_array = array();
     $created = date('Y-m-d H:i:s', time());
+    $manual = test_input($_POST['manual']); //manual or live
 
     
 
@@ -120,8 +121,11 @@
     $from_formatted = date('Y-m-d h:i:s', strtotime($from_time));
     $to_formatted = date('Y-m-d h:i:s', strtotime($to_time));
 
-    $sql = "INSERT INTO requests (useridfk, request_status, name, phone, email, shipment_ref, commodity, adr, temp_cont,  from_place, to_place, from_time, to_time, loading_point, discharge_point, colli, note, attachments, created)
-    VALUES ('$userid', '1', '$name', '$phone', '$email', '$shipment_ref', '$commodity', '$adr', '$temp_cont', '$from_place', '$to_place', '$from_formatted', '$to_formatted', '$loading_point', '$discharge_point', '$colliSer', '$note', '$attach', '$created')";
+    
+
+    $sql = "INSERT INTO requests (useridfk, request_status, name, phone, email, shipment_ref, commodity, adr, temp_cont,  from_place, to_place, from_time, to_time, loading_point, discharge_point, colli, note, attachments, created, is_manual)
+    VALUES ('$userid', '1', '$name', '$phone', '$email', '$shipment_ref', '$commodity', '$adr', '$temp_cont', '$from_place', '$to_place', '$from_formatted', '$to_formatted', '$loading_point', '$discharge_point', '$colliSer', '$note', '$attach', '$created', '$manual')";
+
 
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";

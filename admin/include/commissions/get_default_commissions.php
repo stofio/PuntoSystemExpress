@@ -13,6 +13,7 @@ $commissionsArr = json_decode($jsonString,true);
 
 //DEFAULTS
 $minComm = $commissionsArr['min_commission']; //euro
+$margin = $commissionsArr['margin']; //euro
 $molPerc = $commissionsArr['mol_perc']; //%
 
 

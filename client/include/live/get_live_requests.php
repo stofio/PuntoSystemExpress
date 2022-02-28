@@ -15,7 +15,7 @@ $limit = 5;
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;  
   
-$sql = "SELECT * FROM requests WHERE `request_status` = 1 AND `useridfk` = $userid 
+$sql = "SELECT * FROM requests WHERE `request_status` in (1) AND `useridfk` = $userid 
 ORDER BY created DESC LIMIT $start_from, $limit";  
 $rs_result = mysqli_query($conn, $sql);  
 
@@ -51,7 +51,6 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 <div class="header-controls">
                     <span class="order-status">
                         
-                        
                         <?php
                             $time_limit = 600; //10 min
                             $now = time();
@@ -60,18 +59,28 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             //$time_passed = date('i:s', $now - $created);
                             $remaining_time = $time_limit - $time_passed;
 
- 
-
-                            if ($remaining_time <=0) {
-                                $time_remaining = 'Bookable 
+                            if($row["is_manual"] == 1) { //if its manual 
+                                $time_remaining = 'MANUAL 
                                     <div class="offer-button view-button mt-3">
-                                        <button class="viewQuote" type="button">View the quote</button>
-                                    </div>';
+                                        <button class="greybtn archiveRequest" type="button">Move to archive</button>
+                                    </div>
+                                    <div class="offer-button view-button mt-3">
+                                        <a class="view-request viewRequest" type="button">View request</a>
+                                    </div>
+                                    ';
                             }
                             else {
-                                $time_remaining = 'Processing quote <br><span class="the-time">' . date('i:s', $remaining_time) . '</span>';
+                                if ($remaining_time <=0) {
+                                    $time_remaining = 'BOOKABLE 
+                                        <div class="offer-button view-button mt-3">
+                                            <button class="viewQuote" type="button">View the quote</button>
+                                        </div>';
+                                }
+                                else {
+                                    $time_remaining = 'Processing quote <br><span class="the-time">' . date('i:s', $remaining_time) . '</span>';
+                                }
                             }
-                                
+        
                         ?>
                         <span 
                         data-time-limit="<?php echo $time_limit; ?>" 

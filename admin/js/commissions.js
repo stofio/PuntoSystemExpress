@@ -55,7 +55,7 @@
        setTimeout(function() {
          $(e.target).find('button').html('Save');
        }, 1500);
-
+       location.reload();
      }
    });
 

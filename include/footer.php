@@ -15,14 +15,14 @@
         <div class="col-md-4 footer-right">
           <img class="mb-5 mt-2" src="/media/logo.png" width="200">
           <div class="social d-flex justify-content-end">
-            <a href="#">
-              <img src="/media/logo.png" />
+            <a href="https://www.linkedin.com/company/punto-system/" target="_blank">
+              <img src="/media/linkedin.svg" />
             </a>
-            <a href="#">
-              <img src="/media/logo.png" />
+            <a href="https://www.facebook.com/puntosystemgroup/" target="_blank">
+              <img src="/media/facebook.svg" />
             </a>
-            <a href="#">
-              <img src="/media/logo.png" />
+            <a href="https://www.instagram.com/punto.system/" target="_blank">
+              <img src="/media/instagram.svg" />
             </a>
           </div>
         </div>
