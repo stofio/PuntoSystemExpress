@@ -27,7 +27,10 @@ $result2 = mysqli_query($conn, $sql2);
 $status_name = mysqli_fetch_assoc($result2)['statusname'];
 
 //if status live redirect
-if(  $row['request_status'] == 1 && !$row['is_manual'] ) header('Location: /client/my-requests');
+if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
+    echo "<script>location='/client/my-requests'</script>";
+    header('Location: /client/my-requests');
+}
   
 ?>
 

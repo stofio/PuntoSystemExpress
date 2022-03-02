@@ -5,9 +5,13 @@ $password = "";
 $db = "punto_express";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$db);
-// Check connection
-// if (!$conn) {
-//    die("Connection failed: " . mysqli_connect_error());
-// }
-// echo "Connected successfully";
+?>
+
+<?php
+// $servername = "localhost";
+// $username = "expressp_root";
+// $password = "express_system";
+// $db = "expressp_db";
+// // Create connection
+// $conn = mysqli_connect($servername, $username, $password,$db);
 ?>

@@ -5,9 +5,11 @@ include 'functions.php';
 
 if(isset($_SESSION["role_id"])):
   if($_SESSION["role_id"] == 1) { //if supplier
+    echo "<script>location='/supplier'</script>";
     header("Location: /supplier"); 
   }
   else if($_SESSION["role_id"] == 2) { //if client
+    echo "<script>location='/client'</script>";
     header("Location: /client");
   }
 endif; 

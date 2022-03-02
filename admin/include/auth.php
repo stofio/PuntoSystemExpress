@@ -5,6 +5,7 @@
 session_start();
 
 if(!isset($_SESSION["role_id"]) || $_SESSION["role_id"] !== "3") { //if is not admin
+    echo "<script>location='/'</script>";
     header("Location: /");
     exit(); 
 }

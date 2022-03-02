@@ -6,7 +6,7 @@ require_once 'include/account/get_account_data.php';
 $a = $account_data;
 ?>
 
-
+ 
 
     <section class="text-center hero-section">
         <div class="container">

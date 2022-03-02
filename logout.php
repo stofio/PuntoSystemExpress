@@ -4,6 +4,7 @@ session_start();
 if(session_destroy())
 {
 // Redirecting To Home Page
+echo "<script>location='/'</script>";
 header("Location: /");
 }
 ?>

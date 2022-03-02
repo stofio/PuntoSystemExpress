@@ -28,7 +28,7 @@ require_once 'include/auth.php';
     <title><?php echo $page_title; ?> - PuntoSystem Client</title>
   </head>
   <body>
-
+ 
 
 	
 	<header class="container py-3 border-bottom">
