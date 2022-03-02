@@ -10,15 +10,15 @@ $requestid = $_GET['i'];
 $userid = $_SESSION['user_id'];
 
 $sql = "SELECT * FROM requests WHERE `id` = $requestid AND `request_status` = 1 AND `useridfk` = $userid";
+//get request, if null redirect
+$result = mysqli_query($conn, $sql);
 
-
-if ($result = mysqli_query($conn, $sql)) {
+if($result->num_rows == 0) {
+   echo "<script>location='/client/my-requests'</script>";
+   exit();
+} 
+else {
     $row = mysqli_fetch_array($result);
-    //redirect
-    if($row == null) {
-        header('Location: /client/my-requests');
-    }
-
 }
 
 ?>

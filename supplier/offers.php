@@ -21,7 +21,7 @@
         <button id="liveTabBtn" class="tablinks active" onclick="openTab(event, 'liveReq')">PROCESSING</button><!--
         --><button class="tablinks" onclick="openTab(event, 'toShipReq')">TO SHIP</button><!--
         --><button class="tablinks" onclick="openTab(event, 'goingReq')">IN TRANSIT</button><!--
-        --><button class="tablinks" onclick="openTab(event, 'endedReq')">ENDED</button>
+        <button class="tablinks" onclick="openTab(event, 'endedReq')">ENDED</button>-->
     </div>
 
 
@@ -120,15 +120,15 @@
     <!--    
          ENDED tab
     -->
-    <section id="endedReq" class="tabcontent"> 
+    <!-- <section id="endedReq" class="tabcontent"> 
 
         <div id="target-content3">loading...</div>
 
         <div class="clearfix">
-            <ul class="pagination"> <?php include 'include/ended_requests/pagination.php'; ?> </ul>
+            <ul class="pagination"> <?php //include 'include/ended_requests/pagination.php'; ?> </ul>
         </div>
 
-    </section>
+    </section> -->
 
 
   

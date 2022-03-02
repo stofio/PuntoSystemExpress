@@ -15,7 +15,7 @@ $final_to_time = $_POST['final_to_time'];
 $from_formatted = date('Y-m-d h:i:s', strtotime($final_from_time));
 $to_formatted = date('Y-m-d h:i:s', strtotime($final_to_time));
 
-//set offer to 3 - IN TRANSIT
+//set offer to 3 - CONFIRMED
 $sql = "UPDATE offers SET offer_status = 3 WHERE offer_id = $offer_id";
 
 if ($conn->query($sql) === TRUE) {

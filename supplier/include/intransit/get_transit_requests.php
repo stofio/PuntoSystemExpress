@@ -10,17 +10,17 @@ $limit = 5;
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;  
 
-
+ 
 
 $sql = "SELECT *
 FROM `requests` 
 INNER JOIN `offers` on `requests`.`id` = `offers`.`requestidfk` 
 INNER JOIN `users` on `users`.`userid` = `requests`.`useridfk`
-WHERE `offers`.`offer_useridfk` = $userId AND `requests`.`request_status` = 4
+WHERE `offers`.`offer_useridfk` = $userId AND `requests`.`request_status` in (4,5)
 ORDER BY created DESC LIMIT $start_from, $limit";
 $rs_result = mysqli_query($conn, $sql);  
 
-//if($rs_result->num_rows == 0) echo '<p class="mt-4">No in transit requests yet...</p>';
+if($rs_result->num_rows == 0) echo '<p class="mt-4">No in transit requests yet...</p>';
 
 ?>
    
@@ -35,13 +35,21 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 <div class="header-details">
                 <h2 class="order-title">ID #<?php echo $row["id"]; ?></h2>
                     <div class="order-details">
-                        <p><b>Created</b> <?php echo $row["created"]; ?></p>
-                        <p><b>From</b> <?php echo $row["from_place"]; ?></p>
-                        <p><b>To</b> <?php echo $row["to_place"]; ?></p>
-                        <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
-                        <p><b>Commodity</b> <?php echo $row["commodity"]; ?></p>
-                        <p><b>ADR</b> <?php echo $row["adr"] == 0 ? '✗' : '✓'; ?></p>
-                        <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><b>From</b> <?php echo $row["from_place"]; ?></p>
+                                <p><b>To</b> <?php echo $row["to_place"]; ?></p>
+                                <p><b>Time of arrival for loading</b> <?php echo substr($row["final_from_time"], 0, -3); ?></p>
+                                <p><b>Estimated time unloading</b> <?php echo substr($row["final_to_time"], 0, -3); ?></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><b>Commodity</b> <?php echo $row["commodity"]; ?></p>
+                                <p><b>ADR</b> <?php echo $row["adr"] == 0 ? '✗' : '✓'; ?></p>
+                                <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
+                                <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="header-controls">
@@ -50,13 +58,17 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <button type="button">Send email</button>
                     </a> -->
                     <div class="offer-conclude">
-                        <button class="sped_ritirata" type="button" style="float:right">Confirm delivered</button>
-                        <form class="conclude_form" enctype="multipart/form-data" autocomplete="off">
-                            <button class="sped_conclude" type="submit" style="float:right">Shipment completed</button><br>
-                            <label class="mt-3"><b>POD</b> <br>
-                                <input type="file" name="files[]" id="files" multiple />
-                            </label>
-                        </form>
+                        <?php if($row["request_status"] == 4) : //if is IN TRANSIT ?> 
+                            <button class="conf_deliv" type="button" style="float:right">Confirm delivered</button>
+                        <?php elseif($row["request_status"] == 5) ://if is DELIVERED ?>
+                            <form class="conclude_form" enctype="multipart/form-data" autocomplete="off">
+                                    <input type="hidden" name="request_id" value="<?php echo $row["id"]; ?>">
+                                    <button class="sped_conclude" type="submit" style="float:right">Shipment completed</button><br>
+                                    <label class="mt-3"><b>POD</b> <br>
+                                    <input type="file" name="files[]" id="files" multiple />
+                                </label>
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

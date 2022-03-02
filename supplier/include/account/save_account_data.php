@@ -25,8 +25,8 @@ phone='$phone'
 WHERE userid=$userId";
 
 if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
-  header('Location: /supplier/account');
+  echo "Record updated successfully";
+  echo "<script>location='/client/account'</script>";
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }

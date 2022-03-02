@@ -1,4 +1,3 @@
-<!-- account SUPPLIER -->
 <?php $page_title = 'My Account'; ?>
 <?php require_once 'include/header.php'; ?>
 
@@ -27,7 +26,7 @@ $a = $account_data;
     
     <section class="my_account">
 
-    <form id="my_account_supp_form" action="include/account/save_account_data.php" method="post">
+        <form id="my_account_supp_form" action="include/account/save_account_data.php" method="post">
             <div class="my-account-client-container">
                 <div class="row">
                     <div class="col-md-6">

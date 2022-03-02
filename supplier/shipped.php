@@ -3,7 +3,7 @@
 
 
     <section class="text-center hero-section">
-        <div class="breadcrumbs">
+        <div class="breadcrumbs container">
             <span><a href="/supplier">Supplier dashboard</a></span> » 
             <span><?php echo $page_title; ?></span>
         </div>
@@ -15,15 +15,19 @@
         </div>
     </section>
 
-    <section id="supp_offers_list">
+    <div class="container main-wrap">
 
-        <div id="target-content">loading...</div>
+        <section id="supp_offers_list">
 
-        <div class="clearfix">
-            <ul class="pagination"> <?php include 'include/shipped_requests/pagination.php'; ?> </ul>
-        </div>
+            <div id="target-content">loading...</div>
+    
+            <div class="clearfix">
+                <ul class="pagination"> <?php include 'include/shipped_requests/pagination.php'; ?> </ul>
+            </div>
 
-    </section>
+        </section>
+
+    </div>
 
     
     <script src="/supplier/js/shipped.js"></script>

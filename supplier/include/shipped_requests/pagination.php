@@ -8,7 +8,7 @@ $sql = "SELECT COUNT(id)
 FROM `requests` 
 INNER JOIN `offers` on `requests`.`id` = `offers`.`requestidfk` 
 INNER JOIN `users` on `users`.`userid` = `requests`.`useridfk`
-WHERE `offers`.`offer_useridfk` = $userId AND `requests`.`request_status` = 4";
+WHERE `offers`.`offer_useridfk` = $userId AND `requests`.`request_status` = 9";//archived
 
 $rs_result = mysqli_query($conn, $sql);  
 $row = mysqli_fetch_row($rs_result);  

@@ -29,8 +29,8 @@ def_disch_place='$def_deliv_place'
 WHERE userid=$userId";
 
 if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
-  header('Location: /client/account');
+  echo "Record updated successfully";
+  echo "<script>location='/client/account'</script>";
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }

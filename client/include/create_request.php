@@ -8,8 +8,8 @@
 
     //var_dump($_POST);
 
-  //  var_dump($_SESSION);
-//return 0;
+    //  var_dump($_SESSION);
+    //return 0;
 
     $userid = $_SESSION['user_id'];
     $name = test_input($_POST['name']);
@@ -110,19 +110,20 @@
             }
         }
     }
-
-    //set request status to LIVE - 1
-    //save data to db
-    $attach = serialize($files_names_array); //serialized array
+    $attach = serialize($files_names_array); //serialized array images
 
     $colliSer = serialize(json_decode($colli , TRUE));
-
-
+    
+    
+    //save data to db
+    
+    
     $from_formatted = date('Y-m-d h:i:s', strtotime($from_time));
     $to_formatted = date('Y-m-d h:i:s', strtotime($to_time));
-
     
-
+    
+    
+    //set request status to LIVE - 1
     $sql = "INSERT INTO requests (useridfk, request_status, name, phone, email, shipment_ref, commodity, adr, temp_cont,  from_place, to_place, from_time, to_time, loading_point, discharge_point, colli, note, attachments, created, is_manual)
     VALUES ('$userid', '1', '$name', '$phone', '$email', '$shipment_ref', '$commodity', '$adr', '$temp_cont', '$from_place', '$to_place', '$from_formatted', '$to_formatted', '$loading_point', '$discharge_point', '$colliSer', '$note', '$attach', '$created', '$manual')";
 

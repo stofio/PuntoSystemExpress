@@ -11,23 +11,24 @@ $userid = $_SESSION['user_id'];
 
 //get request, if null redirect
 $sql = "SELECT * FROM requests WHERE `id` = $requestid AND `useridfk` = $userid";
-if ($result = mysqli_query($conn, $sql)) {
+$result = mysqli_query($conn, $sql);
+
+if($result->num_rows == 0) {
+    echo "<script>location='/client/my-requests'</script>";
+    exit();
+} 
+else {
     $row = mysqli_fetch_array($result);
-    //redirect
-    if($row == null) {
-        header('Location: /client/my-requests');
-    }
 }
 
-//get statuses
+//get status name
 $sql2 = "SELECT * FROM request_status WHERE statusid = " . $row["request_status"];
 $result2 = mysqli_query($conn, $sql2);
-$status = mysqli_fetch_assoc($result2);
+$status_name = mysqli_fetch_assoc($result2)['statusname'];
 
 //if status live redirect
-if($status['statusname'] == 'LIVE') header('Location: /client/my-requests');
+if(  $row['request_status'] == 1 && !$row['is_manual'] ) header('Location: /client/my-requests');
   
-
 ?>
 
 <div class="container single-order">
@@ -35,7 +36,7 @@ if($status['statusname'] == 'LIVE') header('Location: /client/my-requests');
     <div class="my-5">
         <div class="d-flex choose-offer-details" style="justify-content: space-between">
             <div class="header-details" style="width: 100%">
-                <h2 class="order-title">ID #<?php echo $row["id"]; ?> - Status <span style="color:#e6342a"><?php echo $status['statusname'] ?></span></h2>
+                <h2 class="order-title">ID #<?php echo $row["id"]; ?> - Status <span style="color:#e6342a"><?php echo $status_name ?></span></h2>
                 <div class="order-details row">
                     <div class="col-md-6">
                         <p><b>From</b> <?php echo $row["from_place"]; ?>, <?php echo $row["loading_point"]; ?></p>
@@ -86,7 +87,7 @@ if($status['statusname'] == 'LIVE') header('Location: /client/my-requests');
 
                 ?>
 
-
+                    <?php if( !$row['is_manual'] ) : ?>
                     <div class="single-offer">
                         <div class="offer-type">
                             <span>BOOKED OFFER</span>
@@ -100,8 +101,9 @@ if($status['statusname'] == 'LIVE') header('Location: /client/my-requests');
                         <div class="offer-price">
                          <h4>€ <?php echo getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']) ?></h4>
                         </div>
-                    
                     </div>
+                    <?php endif; ?>
+
                 </div>
                 
             </div>     

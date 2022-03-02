@@ -1,4 +1,3 @@
-<!-- account CLIENT -->
 <?php $page_title = 'My Account'; ?>
 <?php require_once 'include/header.php'; ?>
 
