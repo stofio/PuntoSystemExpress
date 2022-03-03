@@ -7,10 +7,12 @@ $currentRequestId = $reqId; //set on include
 $sql2 = "SELECT * FROM offers WHERE `requestidfk` = $currentRequestId";
 $rs_result2 = mysqli_query($conn, $sql2);   
 
+if($rs_result2->num_rows == 0) echo '<p class="mt-4">Waiting for offers...</p>';
+
 while ($row = mysqli_fetch_array($rs_result2)) {  
    // var_dump($row);
     
-?>
+?> 
 
 <div class="single-offer">
     <div class="offer-collection">

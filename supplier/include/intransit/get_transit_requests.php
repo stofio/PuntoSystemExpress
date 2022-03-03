@@ -54,9 +54,6 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 </div>
                 <div class="header-controls">
                     <span class="order-status">IN TRANSIT</span>
-                    <!-- <a href="mailto:<?php echo $row["email"]; ?>">
-                        <button type="button">Send email</button>
-                    </a> -->
                     <div class="offer-conclude">
                         <?php if($row["request_status"] == 4) : //if is IN TRANSIT ?> 
                             <button class="conf_deliv" type="button" style="float:right">Confirm delivered</button>
@@ -64,9 +61,9 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             <form class="conclude_form" enctype="multipart/form-data" autocomplete="off">
                                     <input type="hidden" name="request_id" value="<?php echo $row["id"]; ?>">
                                     <button class="sped_conclude" type="submit" style="float:right">Shipment completed</button><br>
-                                    <label class="mt-3"><b>POD</b> <br>
-                                    <input type="file" name="files[]" id="files" multiple />
-                                </label>
+                                    <label class="mt-3" style="text-align:left"><b>POD</b> <br>
+                                        <input type="file" name="files[]" id="files" multiple />
+                                    </label>
                             </form>
                         <?php endif; ?>
                     </div>
@@ -74,18 +71,18 @@ while ($row = mysqli_fetch_array($rs_result)) {
             </div>
             <div class="arrow-toggle"><span>❯</span></div>
             <div class="live_request single-order-body panel-collapse intransit">
-                <div class="row" style="padding: 50px 25px;">
+                <div class="row mb-5">
                     <div class="col-md-6 ml-5">
-                        <h4>Request attachments</h4>
+                        <p><b>Request attachments</b></p>
                     </div>
                     <?php if($row["request_status"] !== '0' ) : ?>
                     <div class="col-md-6">
-                        <h4>Offer attachments</h4>
+                        <p><b>Offer attachments</b></p>
                     </div>
                     <?php endif; ?>
                 </div>
-                <div class="mt-3" style="padding: 50px;">
-                    <h4>Packing list</h4>
+                <div class="mt-3" >
+                    <p><b>Packing list</b></p>
                     <?php 
                         $jsonColli = $row["colli"];
 
@@ -103,7 +100,8 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         
                         ?>
                 </div>
-                <div class="single-offer">
+            </div>
+            <div class="single-offer">
                     <input type="hidden" class="offer_id" value="<?php echo $row["offer_id"]; ?>">
                     <div class="offer-type">
                         <span>MY OFFER</span>
@@ -118,7 +116,6 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <h4>€ <?php echo $row["price"]; ?></h4>
                     </div>
                 </div>
-            </div>
         </div>
 
 

@@ -50,16 +50,18 @@
       success: function(data) {
         hideLoading();
 
+        //SEND 1 EMAIL
+
         if (isManual) { //manual
           var success = `
-          <div class="container">
-          <h2 class="mb-4">Your shipment request will be processed MANUALLY.<h2>
+          <div class="container notice-success">
+          <h2 class="mb-4">Your shipment request will be processed MANUALLY.</h2>
             <p>Your request requires specific study. Our customer service will contact you soon after. You can find your request in the <a href="/client/my-requests">My quotes</a> section.</p>
             </div>`;
         } else { //live
           var success = `
-          <div class="container">
-          <h2 class="mb-4">Your shipment request is LIVE<h2>
+          <div class="container notice-success">
+          <h2 class="mb-4">Your shipment request is LIVE</h2>
             <p>You will be notified by email about new offers, but you can also check the <a href="/client/my-requests">My quotes</a> section.</p>
             </div>`;
         }
@@ -98,7 +100,10 @@
 
   //allow only numbers input
   $(document).on('input', 'input.collo-kg, input.collo-l, input.collo-w, input.collo-h', (e) => {
-    $(e.target).val($(e.target).val().replace(/[^\d]/, ''));
+    if (($(e.target).val().split(".").length - 1) > 1) {
+      $(e.target).val($(e.target).val().slice(0, -1));
+    }
+    $(e.target).val($(e.target).val().replace(/[^0-9.]/g, ''));
   });
 
 

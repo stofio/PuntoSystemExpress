@@ -59,6 +59,7 @@ while ($request = mysqli_fetch_array($rs_result)) {
                             <p><b>Email</b> <?php echo $request["email"]; ?></p>
                             <p><b>From</b> <?php echo $request["from_place"]; ?>, <?php echo $request["loading_point"]; ?></p>
                             <p><b>To</b> <?php echo $request["to_place"]; ?>, <?php echo $request["discharge_point"]; ?></p>
+                            <p><b>Note</b> <?php echo $request["note"]; ?></p> 
                         </div>
                         <div class="col-md-4">
                             <h3 style="opacity:0">_</h3>
@@ -91,18 +92,18 @@ while ($request = mysqli_fetch_array($rs_result)) {
             </div>
             <div class="arrow-toggle"><span>❯</span></div>
             <div class="live_request single-order-body panel-collapse">
-                <div class="row" style="padding: 50px 25px;">
+                <div class="row mb-5">
                     <div class="col-md-6 ml-5">
-                        <h4>Request attachments</h4>
+                        <p><b>Request attachments</b></p>
                     </div>
                     <?php if($request["request_status"] !== '0' ) : ?>
                     <div class="col-md-6">
-                        <h4>Offer attachments</h4>
+                        <p><b>Offer attachments</b></p>
                     </div>
                     <?php endif; ?>
                 </div>
-                <div class="mt-3" style="padding: 50px;">
-                    <h4>Packing list</h4>
+                <div class="mt-3" >
+                    <p><b>Packing list</b></p>
                     <?php 
                         $jsonColli = $request["colli"];
 

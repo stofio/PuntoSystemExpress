@@ -60,25 +60,23 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     </div>
                     <div class="header-controls">
                         <span class="order-status">TO SHIP</span>
-                        <a href="mailto:<?php echo $row["email"]; ?>">
-                            <button type="button">Send email</button>
-                        </a>
                     </div>
                 </div>
+                
                 <div class="arrow-toggle"><span>❯</span></div>
-            <div class="live_request single-order-body panel-collapse intransit">
-                <div class="row" style="padding: 50px 25px;">
+                <div class="live_request single-order-body panel-collapse intransit">
+                <div class="row mb-5">
                     <div class="col-md-6 ml-5">
-                        <h4>Request attachments</h4>
+                        <p><b>Request attachments</b></p>
                     </div>
                     <?php if($row["request_status"] !== '0' ) : ?>
                     <div class="col-md-6">
-                        <h4>Offer attachments</h4>
+                        <p><b>Offer attachments</b></p>
                     </div>
                     <?php endif; ?>
                 </div>
-                <div class="mt-3" style="padding: 50px;">
-                    <h4>Packing list</h4>
+                <div class="mt-3" >
+                    <p><b>Packing list</b></p>
                     <?php 
                         $jsonColli = $row["colli"];
 
@@ -111,9 +109,9 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <h4>€ <?php echo $row["price"]; ?></h4>
                     </div>
                 </div>
-            </div>
+                </div>
                 <div class="live_request single-order-body">
-                    <div class="single-offer">
+                    <div class="single-offer ts">
                         <input type="hidden" name="offer_id" value="<?php echo $row["offer_id"]; ?>">
                         <div class="offer-type">
                             <span>VEHICLE INFORMATION</span>

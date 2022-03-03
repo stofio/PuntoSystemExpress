@@ -6,7 +6,7 @@
             <span><a href="/client">Client dashboard</a></span> » 
             <span><?php echo $page_title; ?></span>
         </div>
-        <div class="row align-items-center">
+        <div class="align-items-center">
             <div>
                 <h1><?php echo $page_title; ?></h1>
                 <p>Discover your request history</p>

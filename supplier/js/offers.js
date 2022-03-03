@@ -100,7 +100,7 @@ $(document).ready(function() {
 
 $(document).on('submit', '.conf_shipped', (e) => {
   e.preventDefault();
-  var currentOffer = $(e.target).find('.single-offer');
+  var currentOffer = $(e.target).find('.single-offer.ts');
   var currentRequest = $(e.target).parents('.single-order');
   if (confirm(`Notify the client that the request '${currentRequest.find('.order-title').html()}' is IN TRANSIT?`)) {
     // YES
@@ -117,9 +117,9 @@ $(document).on('submit', '.conf_shipped', (e) => {
         console.log(dataResult);
 
         //show success message
-        var success = `<div style="padding: 10px 25px"
+        var success = `<div style="padding: 10px 25px">
             <h2>The client will be notified that the shipping is on the way.</h2>
-              <p class="mb-4">You can find this request in the IN TRANSIT tab.<p>
+              <p class="mb-4">You can find this request in the IN TRANSIT tab on <a href="/supplier/offers">My offers</a> page.<p>
               
               </div>
               `;
@@ -189,7 +189,7 @@ $(document).on('submit', '.conclude_form', (e) => {
         console.log(dataResult);
 
         //show success message
-        var success = `<div style="padding: 10px 25px"
+        var success = `<div style="padding: 10px 25px">
             <h2>The user will be notified by email about the changes.</h2>
               <p class="mb-4">You can find this request in the <a href="/supplier/shipped">ARCHIVE.<p>
               </div>
@@ -201,8 +201,8 @@ $(document).on('submit', '.conclude_form', (e) => {
     });
 
 
-    var success = `<div style="padding: 10px 25px"
-              <h2 class="mb-4 mt-5">Shipment completed.<h2>
+    var success = `<div class="action-notice" style="padding-top: 50px">
+              <h2 class="mb-4 mt-5">Shipment completed.</h2>
               <p>The user will be notified about the changes.</p>
               <p>You can find this request in the <a href="/supplier/shipped">archive</a></p>
               </div>

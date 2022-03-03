@@ -23,7 +23,7 @@ else {
 
 ?>
 
-<div class="container single-order">
+<div class="container single-req">
     <input type="hidden" class="req_id" value="<?php echo $row["id"]; ?>" />
     <div class="my-5">
         <div class="d-flex choose-offer-details" style="justify-content: space-between">
@@ -35,6 +35,7 @@ else {
                         <p><b>To</b> <?php echo $row["to_place"]; ?>, <?php echo $row["discharge_point"]; ?></p>
                         <p><b>Available</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
                         <p><b>Delivered</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
+                        <p><b>Note</b> <?php echo $row["note"]; ?></p>
                     </div>
                     <div class="col-md-6">
                         <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
@@ -43,7 +44,7 @@ else {
                         <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="mt-5">
                 <p><b>Packing list</b></p>
                 <?php 
                     $jsonColli = $row["colli"];
@@ -61,16 +62,17 @@ else {
                         }
                     
                     ?>
+                </div>  
+                <div class="row mt-5 mb-5">
+                    <div class="col-md-6 ml-5">
+                        <p><b>Request attachments</b></p>
+                    </div>
                 </div>   
-                <div class="mt-4">
-                    <p><b>Note</b></p>
-                    <p><?php echo $row["note"] ?></p>
-                </div>    
             </div>     
         </div>
 
-        <div class="live_request single-order-body panel-collapse">
-            <h1 class="mt-4"><u>Choose the best option for you</u></h1>
+        <div class="live_request single-order-body mt-5">
+            <h2 class="mt-4">Choose the best option for you</h2>
             <?php
                 $reqId = $row['id'];
                 include 'include/choose_offer/get_all_offers.php'; 

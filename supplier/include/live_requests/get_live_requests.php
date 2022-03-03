@@ -10,13 +10,11 @@ $limit = 5;
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;  
 
-
-
+ 
 //get requestidfk from offers where useridfk = $userID
 $sql = "SELECT *
 FROM `requests` 
 INNER JOIN `offers` on `requests`.`id` = `offers`.`requestidfk` 
-INNER JOIN `users` on `users`.`userid` = `requests`.`useridfk`
 WHERE `offers`.`offer_useridfk` = $userId AND `requests`.`request_status` IN (1,2)
 ORDER BY `requests`.`created` DESC LIMIT $start_from, $limit";
 $rs_result = mysqli_query($conn, $sql);  
@@ -40,31 +38,41 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <p><b>Available from</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
                         <p><b>Delivered within</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
                     </div>
-                    <div class="mt-3">
-                        <p><b>Packing list</b></p>
-                        <?php 
-                            $jsonColli = $row["colli"];
-
-                            $colli = unserialize($jsonColli);
-                            //var_dump($colli['colli']);
-                            foreach ($colli['colli'] as $c) {
-                                $n = $c['name'];
-                                $we = $c['weight'];
-                                $le = $c['lenght'];
-                                $wi = $c['width'];
-                                $hi = $c['height'];
-                                $st = $c['stack'] == 1 ? '✓' : '✗';
-                                echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
-                              }
-                            
-                            ?>
-                    </div>
                 </div>
                 <div class="header-controls">
                     <span class="order-status">Processing</span>
-                    <a href="mailto:<?php echo $row["email"]; ?>">
-                        <button type="button">Send email</button>
-                    </a>
+                </div>
+            </div>
+            <div class="arrow-toggle"><span>❯</span></div>
+            <div class="live_request single-order-body panel-collapse intransit">
+                <div class="row mb-5">
+                    <div class="col-md-6 ml-5">
+                        <p><b>Request attachments</b></p>
+                    </div>
+                    <?php if($row["request_status"] !== '0' ) : ?>
+                    <div class="col-md-6">
+                        <p><b>Offer attachments</b></p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="mt-3" >
+                    <p><b>Packing list</b></p>
+                    <?php 
+                        $jsonColli = $row["colli"];
+
+                        $colli = unserialize($jsonColli);
+                        //var_dump($colli['colli']);
+                        foreach ($colli['colli'] as $c) {
+                            $n = $c['name'];
+                            $we = $c['weight'];
+                            $le = $c['lenght'];
+                            $wi = $c['width'];
+                            $hi = $c['height'];
+                            $st = $c['stack'] == 1 ? '✓' : '✗';
+                            echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                            }
+                        
+                        ?>
                 </div>
             </div>
             <div class="live_request single-order-body">
@@ -89,6 +97,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     </div> -->
                 </div>
             </div>
+
         </div>
 
 <?php  

@@ -65,8 +65,8 @@ function submitAndApprove(formData, target) {
       success: function(dataResult) {
         //show success message
         console.log(dataResult)
-        var success = `<div style="padding: 10px 25px"
-              <h2 class="mb-4 mt-5">Request approved.<h2>
+        var success = `<div class="notice-success" style="padding: 10px 25px">
+              <h2 class="mb-4 mt-5">Request approved.</h2>
               <p>The supplier will be notified about the changes.</p>
               <p>The BeOne Ref. Number is: ${formData.get('beone_ref')}</p>
               <p>You can find this request in the <a href="/admin/archive">archive</a></p>

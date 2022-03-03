@@ -60,34 +60,68 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     </div>
                 </div>
             </div>
+            <div class="arrow-toggle"><span>❯</span></div>
+            <div class="live_request single-order-body panel-collapse intransit">
+                <div class="row mb-5">
+                    <div class="col-md-6 ml-5">
+                        <p><b>Request attachments</b></p>
+                    </div>
+                    <?php if($row["request_status"] !== '0' ) : ?>
+                    <div class="col-md-6">
+                        <p><b>Offer attachments</b></p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="mt-3" >
+                    <p><b>Packing list</b></p>
+                    <?php 
+                        $jsonColli = $row["colli"];
+
+                        $colli = unserialize($jsonColli);
+                        //var_dump($colli['colli']);
+                        foreach ($colli['colli'] as $c) {
+                            $n = $c['name'];
+                            $we = $c['weight'];
+                            $le = $c['lenght'];
+                            $wi = $c['width'];
+                            $hi = $c['height'];
+                            $st = $c['stack'] == 1 ? '✓' : '✗';
+                            echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                            }
+                        
+                        ?>
+                </div>
+            </div>
             <div class="live_request single-order-body">
                 <?php if(!$row["is_manual"]) : ?>
                     <?php
+
+                      $reqId = $row["id"];
                       
                       //GET OFFER
-                      //GET SUPPLIER
-                        
+                      $sql2 = "SELECT *
+                        FROM `offers` 
+                        WHERE `offers`.`requestidfk` = $reqId
+                        AND `offers`.`offer_status` = 3";
+
+
+                        $result2 = mysqli_query($conn, $sql2);  
+                        $offer = mysqli_fetch_assoc($result2);
+                      
                     ?>
-                    <div class="single-offer">
-                        <input type="hidden" class="offer_id" value="<?php echo $row["offer_id"]; ?>">
+                    <div class="single-offer"> 
+                        <input type="hidden" class="offer_id" value="<?php echo $offer["offer_id"]; ?>">
                         <div class="offer-type">
-                            <p><b>Name</b> <?php echo $row['name'] . ' ' . $row['surname']; ?></p>
-                            <p><b>Email</b> <?php echo $row['email']; ?></p>
-                            <p><b>Phone</b> <?php echo $row['phone']; ?></p>
+                            <span>Supplier offer</span>
                         </div>
                         <div class="offer-collection">
-                            <p><b>Good Collection</b><br><?php echo substr($row["collect_time"], 0, -3); ?></p>
+                            <p><b>Good Collection</b><br><?php echo substr($offer["collect_time"], 0, -3); ?></p>
                         </div>
                         <div class="offer-delivery">
-                            <p><b>Good Delivery</b><br><?php echo substr($row["deliver_time"], 0, -3); ?></p>
+                            <p><b>Good Delivery</b><br><?php echo substr($offer["deliver_time"], 0, -3); ?></p>
                         </div>
                         <div class="offer-price">
-                            <h4>€ <?php echo $row["price"]; ?></h4>
-                        </div>
-                        <div class="contact-supplier">
-                            <a href="mailto:<?php echo $row["email"]; ?>">
-                                <button type="button">Send email</button>
-                            </a>
+                            <h4>€ <?php echo $offer["price"]; ?></h4>
                         </div>
                     </div>
                     <?php endif; ?> 

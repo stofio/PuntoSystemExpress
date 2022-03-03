@@ -14,7 +14,7 @@ $start_from = ($page-1) * $limit;
 $sql = "SELECT * FROM requests WHERE `request_status` = 1 ORDER BY created DESC LIMIT $start_from, $limit";  
 $rs_result = mysqli_query($conn, $sql);  
 
-//get offers of current user
+//get offers of current user 
 $sql2 = "SELECT `requestidfk` FROM offers WHERE `offer_useridfk` = $userId";  
 $offers_result = mysqli_query($conn, $sql2);  
 $offers_result_array = mysqli_fetch_all($offers_result);
@@ -60,8 +60,13 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 </div>
             </div>
             <div class="arrow-toggle"><span>❯</span></div>
-            <div class="live_request single-order-body panel-collapse">
-                <div class="mt-3" style="padding: 50px;">
+            <div class="make-offer live_request single-order-body panel-collapse">
+                <div class="row mb-5">
+                    <div class="col-md-6 ml-5">
+                        <p><b>Request attachments</b></p>
+                    </div>
+                </div>
+                <div class="mt-3" >
                         <p><b>Packing list</b></p>
                         <?php 
                             $jsonColli = $row["colli"];

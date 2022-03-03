@@ -55,8 +55,8 @@ $(document).on("submit", ".offer_form", (e) => {
       //send email
 
       //show success message
-      var success = `<div style="padding: 10px 25px"
-                      <h2 class="mb-4">You have sent your offer<h2>
+      var success = `<div class="notice-success" style="padding-top: 50px">
+                      <h2 class="mb-4">You have sent your offer</h2>
                       <p>You will be notified if your offer get accepted.</p>
                       </div>
                       `;

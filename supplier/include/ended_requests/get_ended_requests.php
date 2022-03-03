@@ -40,17 +40,10 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <p><b>Available from</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
                         <p><b>Delivered within</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
                         <p>Offer Available Until <?php echo substr($row["valid_until"], 0, -3); ?></p>
-                        <br>
-                        <p><b>Name</b> <?php echo $row['name'] . ' ' . $row['surname']; ?></p>
-                        <p><b>Email</b> <?php echo $row['email']; ?></p>
-                        <p><b>Phone</b> <?php echo $row['phone']; ?></p>
                     </div>
                 </div>
                 <div class="header-controls">
                     <span class="order-status">ENDED</span>
-                    <a href="mailto:<?php echo $row["email"]; ?>">
-                        <button type="button">Send email</button>
-                    </a>
                 </div>
             </div>
             <div class="live_request single-order-body">

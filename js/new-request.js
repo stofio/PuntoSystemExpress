@@ -96,7 +96,10 @@
 
   //allow only numbers input
   $(document).on('input', 'input.collo-kg, input.collo-l, input.collo-w, input.collo-h', (e) => {
-    $(e.target).val($(e.target).val().replace(/[^\d]/, ''));
+    if (($(e.target).val().split(".").length - 1) > 1) {
+      $(e.target).val($(e.target).val().slice(0, -1));
+    }
+    $(e.target).val($(e.target).val().replace(/[^0-9.]/g, ''));
   });
 
 

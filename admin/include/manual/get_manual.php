@@ -56,6 +56,9 @@ while ($request = mysqli_fetch_array($rs_result)) {
                             <p><b>ADR</b> <?php echo $request["adr"] == 0 ? '✗' : '✓'; ?></p>
                             <p><b>Temp. Control</b> <?php echo $request["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
                         </div>
+                        <div class="col-md-12">
+                            <p><b>Note</b> <?php echo $request["note"]; ?></p> 
+                        </div>
                     </div>
                 </div>
                 <div class="header-controls">
@@ -66,13 +69,13 @@ while ($request = mysqli_fetch_array($rs_result)) {
             </div>
             <div class="arrow-toggle"><span>❯</span></div>
             <div class="live_request single-order-body panel-collapse">
-            <div class="row" style="padding: 50px 25px;">
+            <div class="row mb-5">
                     <div class="col-md-6 ml-5">
-                        <h4>Request attachments</h4>
+                        <p><b>Request attachments</b></p>
                     </div>
                 </div>
-                <div class="mt-3" style="padding: 50px;">
-                    <h4>Packing list</h4>
+                <div class="mt-3 mb-5">
+                    <p><b>Packing list</b></p>
                     <?php 
                         $jsonColli = $request["colli"];
 

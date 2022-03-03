@@ -34,18 +34,26 @@ if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
   
 ?>
 
-<div class="container single-order">
+<div class="container">
     <input type="hidden" class="req_id" value="<?php echo $row["id"]; ?>" />
     <div class="my-5">
         <div class="d-flex choose-offer-details" style="justify-content: space-between">
             <div class="header-details" style="width: 100%">
-                <h2 class="order-title">ID #<?php echo $row["id"]; ?> - Status <span style="color:#e6342a"><?php echo $status_name ?></span></h2>
+                <h2 class="order-title">ID #<?php echo $row["id"]; ?> - Status <span style="color:#e6342a"><?php echo $status_name ?></span>
+                <?php if($row['request_status'] == 2) : //if is BOOKED ?>
+                    <span>(waiting admin approval)</span>
+                <?php elseif($row['request_status'] == 3) : //if is APPROVED ?>
+                    <span>(waiting supplier info)</span>
+                <?php endif; ?>
+                </h2>
+                
                 <div class="order-details row">
                     <div class="col-md-6">
                         <p><b>From</b> <?php echo $row["from_place"]; ?>, <?php echo $row["loading_point"]; ?></p>
                         <p><b>To</b> <?php echo $row["to_place"]; ?>, <?php echo $row["discharge_point"]; ?></p>
                         <p><b>Available</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
                         <p><b>Delivered</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
+                        <p><b>Note</b> <?php echo $row["note"]; ?></p>
                     </div>
                     <div class="col-md-6">
                         <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
@@ -54,6 +62,16 @@ if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
                         <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
                     </div>
                 </div>
+                <div class="row mt-5 mb-5">
+                    <div class="col-md-6 ml-5">
+                        <p><b>Request attachments</b></p>
+                    </div>
+                    <?php if($row["request_status"] !== '0' ) : ?>
+                    <div class="col-md-6">
+                        <p><b>Offer attachments</b></p>
+                    </div>
+                    <?php endif; ?>
+                </div> 
                 <div class="mt-4">
                 <p><b>Packing list</b></p>
                 <?php 
@@ -72,10 +90,6 @@ if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
                         }
                     
                     ?>
-                </div>    
-                <div class="mt-4">
-                    <p><b>Note</b></p>
-                    <p><?php echo $row["note"] ?></p>
                 </div>  
 
                 <div class="mt-5">
@@ -108,9 +122,9 @@ if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
                     <?php endif; ?>
 
                 </div>
-                
             </div>     
         </div>
+        
     </div>
 
 </div> <!-- container -->

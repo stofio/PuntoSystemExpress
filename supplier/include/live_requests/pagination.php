@@ -8,7 +8,7 @@ $userId = $_SESSION['user_id'];
 $limit = 5;
 $sql = "SELECT COUNT(id)
 FROM `requests` INNER JOIN `offers` on `requests`.`id` = `offers`.`requestidfk` 
-WHERE `offers`.`offer_useridfk` = 87 AND `requests`.`request_status` = 1";  
+WHERE `offers`.`offer_useridfk` = $userId AND `requests`.`request_status` IN (1,2)";  
 $rs_result = mysqli_query($conn, $sql);  
 $row = mysqli_fetch_row($rs_result);  
 $total_records = $row[0];  

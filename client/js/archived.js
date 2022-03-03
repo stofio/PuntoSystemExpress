@@ -28,5 +28,21 @@ $(document).ready(function() {
     location.href = "/client/view-request?i=" + reqId;
   });
 
+  //expand request
+  $(document).on("click", ".arrow-toggle", function(e) {
+    var $_target = $(e.currentTarget);
+    var $_panelBody = $_target.next(".panel-collapse");
+    if ($_panelBody) {
+      //$_panelBody.slideToggle('fast');
+    }
+    if ($_panelBody.css('display') !== 'none') {
+      $_panelBody.slideUp(300);
+      $_target.find('span').css({ 'transform': 'rotate(90deg)' });
+    } else {
+      $_panelBody.slideDown(300);
+      $_target.find('span').css({ 'transform': 'rotate(-90deg)' });
+    }
+  })
+
 
 });

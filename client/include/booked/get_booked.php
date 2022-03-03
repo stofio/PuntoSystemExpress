@@ -46,7 +46,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     </div>
                 </div>
                 <div class="header-controls">
-                    <span class="order-status">BOOKED
+                    <span class="order-status">BOOKED 
                         <?php if($row['request_status'] == 2) : //if is BOOKED ?>
                             <span class="order-notice">(waiting admin approval)</span>
                         <?php elseif($row['request_status'] == 3) : //if is APPROVED ?>
