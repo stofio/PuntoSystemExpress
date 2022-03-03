@@ -1,5 +1,5 @@
 <?php
 
-echo 'Access denied';
+//echo 'Access denied';
 
 ?>
