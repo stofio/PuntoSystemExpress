@@ -49,8 +49,8 @@
       type: 'POST',
       success: function(data) {
         hideLoading();
-
-        //SEND 1 EMAIL
+        console.log(data)
+          //SEND 1 EMAIL
 
         if (isManual) { //manual
           var success = `

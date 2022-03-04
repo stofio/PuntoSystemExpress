@@ -19,6 +19,10 @@ $(document).ready(function() {
         $("#target-content").html(dataResult);
         $(".pageitem").removeClass("active");
         $("#" + select_id).addClass("active");
+
+        $(".good_collection").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
+        $(".good_delivery").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
+        $(".offer_active_until").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
       }
     });
   });
@@ -44,6 +48,8 @@ $(document).on("submit", ".offer_form", (e) => {
 
   var formData = new FormData(e.currentTarget);
 
+  showLoading();
+
   $.ajax({
     url: '/supplier/include/active_requests/create_offer.php',
     data: formData,
@@ -51,6 +57,7 @@ $(document).on("submit", ".offer_form", (e) => {
     contentType: false,
     type: 'POST',
     success: function(data) {
+      hideLoading();
       console.log(data);
       //send email
 
@@ -84,3 +91,16 @@ $(document).on("click", ".arrow-toggle", function(e) {
     $_target.find('span').css({ 'transform': 'rotate(-90deg)' });
   }
 })
+
+
+function showLoading() {
+  $('body').append(`
+  <div class="load-screen">
+    <img src="/media/loading-buffering.gif" />
+  </div>
+  `).css("overflow", "hidden");
+}
+
+function hideLoading() {
+  $('.load-screen').remove();
+}

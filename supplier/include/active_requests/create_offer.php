@@ -98,23 +98,23 @@
 
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully <br>";
+        /**
+         * send email 
+         */
+        //get db data
+        $offerId = mysqli_insert_id($conn);
+        $reqId = $request_id;
+        $sql = "SELECT * FROM `requests` INNER JOIN `offers`
+                ON `requests`.`id` = `offers`.`requestidfk`
+                WHERE `requests`.`id` = $reqId AND `offers`.`offer_id` = $offerId";
+
+        $result = mysqli_query($conn, $sql);  
+        $array_termin = mysqli_fetch_assoc($result);
+        include $_SERVER['DOCUMENT_ROOT'].'/supplier/mails/mail-new-offer/send_email_client.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/supplier/mails/mail-new-offer/send_email_supplier.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/supplier/mails/mail-new-offer/send_email_admin.php';
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-
-
-    //mark request as TOCONFIRM
-    $sql2 = "SELECT COUNT(offer_id) FROM offers WHERE `requestidfk` = $request_id";
-    $sql2result = mysqli_query($conn, $sql2);
-    $sql2rows = mysqli_fetch_row($sql2result)[0];  
-    
-    //if there are 3 or more offers
-    if($sql2rows >= 3) {
-        //mark request as TOCONFIRM
-        $sql3 = "UPDATE requests SET request_status= 2 WHERE id = $request_id";
-        if(mysqli_query($conn, $sql3)) {
-            echo "Updated request TOCONFIRM <br>";
-        }
     }
 
 

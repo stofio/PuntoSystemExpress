@@ -3,14 +3,44 @@
 
 <div class="container mt-5">
 
-<h1>Supplier dashboard</h1>
+<h1 style="text-align: center;">Supplier dashboard</h1>
 
-    <ul>
-        <li><a href="/supplier/today">Discover and apply to today shipping requests</a></li>
-        <li><a href="/supplier/offers">See your active offers and confirm shipping</a></li>
-        <li><a href="/supplier/shipped">See your shipped shipments</a></li>
-        <li><a href="/supplier/account">Edit your account</a></li>
-    </ul>
+    <div class="dashboard-box mt-5">
+
+        <div class="row">
+            <div class="col-md-8">
+                <a href="/supplier/active">
+                    <span>Active Requests</span>
+                    Discover and make an offer to active shipping requests
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/supplier/offers">
+                    <span>My Offers</span>
+                    See your active offers and processing one
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/supplier/shipped">
+                    <span>Archive</span>
+                    See your archived/completed requests
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/supplier/account">
+                    <span>My Account</span>
+                    Edit your profile info
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/logout"><span>Logout</span></a>
+            </div>
+        </div>
+
+    </div>
 
 </div>
 

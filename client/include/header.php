@@ -29,7 +29,7 @@ require_once 'include/auth.php';
   </head>
   <body>
  
-
+ 
 	
 	<header class="container py-3 border-bottom">
 		<div class="d-flex flex-wrap justify-content-center align-items-center">
@@ -38,7 +38,7 @@ require_once 'include/auth.php';
 			</a>
 
 			<ul class="nav">
-				<li class="nav-item"><a href="/client" class="nav-link" aria-current="page">Home</a></li>
+				<li class="nav-item"><a href="/client" class="nav-link" aria-current="page">Dashboard</a></li>
 				<li class="nav-item"><a href="/client/new-request" class="nav-link">New shipment</a></li>
 				<li class="nav-item"><a href="/client/my-requests" class="nav-link">My quotes</a></li>
 				<li class="nav-item"><a href="/client/archived" class="nav-link">Archive</a></li>

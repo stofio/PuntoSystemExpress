@@ -120,7 +120,7 @@
     
     $from_formatted = date('Y-m-d h:i:s', strtotime($from_time));
     $to_formatted = date('Y-m-d h:i:s', strtotime($to_time));
-    
+     
     
     
     //set request status to LIVE - 1
@@ -131,9 +131,16 @@
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";
         /**
-         * send email to all clients
+         * send email 
          */
-        //sendEmailNewRequest();
+        //get db data
+        $reqId = mysqli_insert_id($conn);
+        $sql = "SELECT * FROM `requests` WHERE `requests`.`id` = $reqId";
+        $result = mysqli_query($conn, $sql);  
+        $array_termin = mysqli_fetch_assoc($result);
+        include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_supplier.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_client.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_admin.php';
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
