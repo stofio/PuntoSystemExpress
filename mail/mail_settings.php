@@ -1,4 +1,8 @@
 <?php
+/**
+ * SWITCH EMAIL ON/OFF
+ */
+define('EMAILS_ACTIVATED', true);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -6,13 +10,21 @@ require $_SERVER['DOCUMENT_ROOT'].'/mail/PHPMailer/src/Exception.php';
 require $_SERVER['DOCUMENT_ROOT'].'/mail/PHPMailer/src/PHPMailer.php';
 require $_SERVER['DOCUMENT_ROOT'].'/mail/PHPMailer/src/SMTP.php';
 
+
+//GLOBALS
+$AdminEmail = 'dejanstofio@gmail.com'; //sales@puntosystemgroup.com)
+$ccAdminEmail = [];
+//$ccAdminEmail = ["nicholas.schibuola@puntosystemgroup.com"];
+
 /**
  * $to - email
  * $subject - text
  * $content - text
  * $ccArary - array (email=>name)
  */
-function sendEmail($to, $subject, $content, $ccArray = null) {
+function sendEmail($to, $subject, $content, $ccArray = null, $attachment = '') {
+    if(!EMAILS_ACTIVATED) return;
+
     $mail = new PHPMailer(true);
     $mail->CharSet = 'UTF-8';
     $mail->IsSMTP();
@@ -45,6 +57,10 @@ function sendEmail($to, $subject, $content, $ccArray = null) {
 
     $mail->Subject = $subject;
     $content = $content;
+
+    if($attachment !== '') {
+        $mail->addAttachment($_SERVER['DOCUMENT_ROOT']."/pdfSaved/".$attachment);
+    }
 
     $mail->MsgHTML($content); 
     if(!$mail->Send()) {

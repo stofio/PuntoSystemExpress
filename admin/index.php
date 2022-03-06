@@ -2,16 +2,45 @@
 <?php require_once 'include/header.php'; ?>
 
 <div class="container pt-5">
-<h1>Admin dashboard</h1>
 
-    <ul>
-        <li class="nav-item"><a href="/admin" class="nav-link" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/admin/waiting-approval" class="nav-link">Waiting approval</a></li>
-        <li class="nav-item"><a href="/admin/manual" class="nav-link">Manual</a></li>
-        <li class="nav-item"><a href="/admin/archive" class="nav-link">Archive</a></li>
-        <li class="nav-item"><a href="/admin/commissions" class="nav-link">Commissions</a></li>
-        <li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
-    </ul>
+    <h1 style="text-align: center;">Admin dashboard</h1>
+
+    <div class="dashboard-box mt-5">
+
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/admin/waiting-approval">
+                    <span>Waiting approval</span>
+                    Approve requests waiting for shipment
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="/admin/manual">
+                    <span>Manual Requests</span>
+                    View requests completed manually
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/admin/archive">
+                    <span>Archive</span>
+                    View archived or processed requests
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/admin/account">
+                    <span>Commissions</span>
+                    Edit commissions by default or by user
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/logout"><span>Logout</span></a>
+            </div>
+        </div>
+
+    </div>
 
 </div>
 

@@ -7,6 +7,7 @@ $(document).ready(function() {
     var currentRequest = $(e.target).parents('.single-req');
     if (confirm(`Do you want to accept the offer of ${currentOffer.find('.offer-price h4').html()}? The offer will be moved to BOOKED tab. `)) {
       // YES
+      showLoading();
       $.ajax({
         url: "include/choose_offer/block_offer.php",
         type: "POST",
@@ -17,7 +18,8 @@ $(document).ready(function() {
         cache: false,
         success: function(dataResult) {
           console.log(dataResult)
-            //show success message
+          hideLoading();
+          //show success message
           var success = `<div class="notice-success"  style="padding-top:50px">
                 <h2 class="mb-4 mt-5">Shipment waiting admin approval.</h2>
                 <p>You will be notified by email when the shipment is on the way.</p>
@@ -33,6 +35,20 @@ $(document).ready(function() {
       });
     }
   });
+
+
+  function showLoading() {
+    $('body').append(`
+    <div class="load-screen">
+      <img src="/media/loading-buffering.gif" />
+    </div>
+    `).css("overflow", "hidden");
+  }
+
+  function hideLoading() {
+    $('.load-screen').remove();
+    $('body').css("overflow", "auto");
+  }
 
 
 

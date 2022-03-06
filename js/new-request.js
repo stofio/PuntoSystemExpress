@@ -362,6 +362,7 @@
 
   function hideLoading() {
     $('.load-screen').remove();
+    $('body').css("overflow", "auto");
   }
 
 

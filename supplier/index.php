@@ -3,7 +3,7 @@
 
 <div class="container mt-5">
 
-<h1 style="text-align: center;">Supplier dashboard</h1>
+    <h1 style="text-align: center;">Supplier dashboard</h1>
 
     <div class="dashboard-box mt-5">
 

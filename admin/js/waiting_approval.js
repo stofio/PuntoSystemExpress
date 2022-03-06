@@ -55,6 +55,7 @@ $(document).on('submit', '.offer_form', (e) => {
 function submitAndApprove(formData, target) {
   if (confirm(`Confirm and submit BeOne Ref. Number: ${formData.get('beone_ref')}?`)) {
     // YES
+    showLoading();
     $.ajax({
       url: "include/waiting_approval/submit-beone.php",
       type: "POST",
@@ -64,7 +65,7 @@ function submitAndApprove(formData, target) {
       cache: false,
       success: function(dataResult) {
         //show success message
-        console.log(dataResult)
+        console.log(dataResult);
         var success = `<div class="notice-success" style="padding: 10px 25px">
               <h2 class="mb-4 mt-5">Request approved.</h2>
               <p>The supplier will be notified about the changes.</p>
@@ -72,6 +73,7 @@ function submitAndApprove(formData, target) {
               <p>You can find this request in the <a href="/admin/archive">archive</a></p>
               </div>
               `;
+        hideLoading();
 
         //SEND EMAIL TO ADMIN
         $(target).fadeOut('slow', () => {
@@ -80,4 +82,19 @@ function submitAndApprove(formData, target) {
       }
     });
   }
+}
+
+
+
+function showLoading() {
+  $('body').append(`
+  <div class="load-screen">
+    <img src="/media/loading-buffering.gif" />
+  </div>
+  `).css("overflow", "hidden");
+}
+
+function hideLoading() {
+  $('.load-screen').remove();
+  $('body').css("overflow", "auto");
 }

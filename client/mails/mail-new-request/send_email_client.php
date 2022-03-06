@@ -13,7 +13,7 @@ $result2 = mysqli_query($conn, $sql2);
 $client = mysqli_fetch_assoc($result2);
 
 /**
- * template
+ * template ($array_termin near inclusion)
  */
 $template = file_get_contents( __DIR__ . '/tmp_client.html');  
 foreach($array_termin as $row => $value){
@@ -25,6 +25,7 @@ foreach($array_termin as $row => $value){
  * send email
  */
 $to = $client['contact_email'] == "" ? $client['email'] : $client['contact_email']; //client email
+
 $subject = "New request of shipment ID #" . $reqId;
 $content = $template;
 

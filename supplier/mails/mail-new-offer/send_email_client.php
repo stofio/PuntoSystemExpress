@@ -13,7 +13,7 @@ $result2 = mysqli_query($conn, $sql2);
 $client = mysqli_fetch_assoc($result2);
 
 /**
- * template
+ * template ($array_termin near inclusion)
  */ 
 $template = file_get_contents( __DIR__ . '/tmp_client.html');  
 foreach($array_termin as $row => $value){
@@ -28,6 +28,7 @@ $template = str_replace('{{ price_with_commission }}', $priceCommission, $templa
  * send email
  */
 $to = $client['contact_email'] == "" ? $client['email'] : $client['contact_email']; //client email
+
 $subject = "New offer for ID #" . $reqId;
 $content = $template;
 

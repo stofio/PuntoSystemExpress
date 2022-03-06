@@ -13,7 +13,7 @@ $result2 = mysqli_query($conn, $sql2);
 $supplier = mysqli_fetch_assoc($result2);
 
 /**
- * template
+ * template ($array_termin near inclusion)
  */ 
 $template = file_get_contents( __DIR__ . '/tmp_supplier.html');  
 foreach($array_termin as $row => $value){
@@ -24,6 +24,7 @@ foreach($array_termin as $row => $value){
  * send email
  */
 $to = $supplier['contact_email'] == "" ? $supplier['email'] : $supplier['contact_email']; //supplier email
+
 $subject = "New offer for ID #" . $reqId;
 $content = $template;
 

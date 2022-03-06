@@ -7,7 +7,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 
 /**
- * template
+ * template ($array_termin near inclusion)
  */
 $template = file_get_contents( __DIR__ . '/tmp_admin.html');  
 foreach($array_termin as $row => $value){
@@ -20,11 +20,11 @@ $template = str_replace('{{ price_with_commission }}', $priceCommission, $templa
 /**
  * send email
  */
-$to = "dejanstofio@gmail.com"; //admin email
-//$to = "enquiries@puntosystemgroup.com"; //admin email
+$to = $AdminEmail; //admin email
+$ccArray = $ccAdminEmail; 
+
 $subject = "New offer for ID #" . $reqId;
 $content = $template;
-$ccArray = ["nicholas.schibuola@puntosystemgroup.com"];
 
 //sendEmail($to, $subject, $content, );
 sendEmail($to, $subject, $content, $ccArray);
