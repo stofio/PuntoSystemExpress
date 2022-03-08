@@ -11,9 +11,8 @@ if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 $start_from = ($page-1) * $limit;  
   
 //get all LIVE requests
-$sql = "SELECT * FROM requests INNER JOIN offers
-ON requests.id = offers.requestidfk
-WHERE `request_status` = 1 ORDER BY created DESC LIMIT $start_from, $limit";  
+$sql = "SELECT * FROM requests 
+WHERE `request_status` = 1 ORDER BY id DESC LIMIT $start_from, $limit";  
 $rs_result = mysqli_query($conn, $sql);  
 
 //get offers of current user 

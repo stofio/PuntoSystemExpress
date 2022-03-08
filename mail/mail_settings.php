@@ -12,9 +12,9 @@ require $_SERVER['DOCUMENT_ROOT'].'/mail/PHPMailer/src/SMTP.php';
 
 
 //GLOBALS
-$AdminEmail = 'dejanstofio@gmail.com'; //sales@puntosystemgroup.com)
-$ccAdminEmail = [];
-//$ccAdminEmail = ["nicholas.schibuola@puntosystemgroup.com"];
+$AdminEmail = 'sales@puntosystemgroup.com'; //sales@puntosystemgroup.com
+//$ccAdminEmail = [];
+$ccAdminEmail = ["nicholas.schibuola@puntosystemgroup.com"];
 
 /**
  * $to - email

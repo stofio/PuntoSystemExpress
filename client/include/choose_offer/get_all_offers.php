@@ -18,7 +18,7 @@ while ($row = mysqli_fetch_array($rs_result2)) {
     <?php $offerImages = unserialize($row["offer_attachments"]); //array of offerImages ?>
     <?php if(!empty($offerImages)) : ?>
     <div class="gallery-attach">
-        <div class="imageGallery<?php echo $currentRequestId ?>">
+        <div class="imageGallery0<?php echo $currentRequestId ?>">
 
             <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
             <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_array($rs_result2)) {
             
             
             <script>
-                $('.imageGallery<?php echo $currentRequestId ?> a').simpleLightbox();
+                $('.imageGallery0<?php echo $currentRequestId ?> a').simpleLightbox();
             </script>
 
 

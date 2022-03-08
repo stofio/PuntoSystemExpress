@@ -22,9 +22,9 @@ $mail->Password   = "qmcbrnbedwifplya"; // google App Password
 
 $mail->IsHTML(true);
 $mail->SetFrom("dev.test.dejan@gmail.com", "Punto System Express");
-$mail->AddAddress("stofio@live.com");
+$mail->AddAddress("dev.test.dejan@gmail.com");
 //$mail->AddReplyTo("dev.test.dejan@gmail.com", "reply-to-name");
-//$mail->AddCC("stofio@gmail.com", "cc-recipient-name");
+//$mail->AddCC("mail@gmail.com", "cc-recipient-name");
 $mail->Subject = "Test Email Gmail SMTP Server - PHP Mailer";
 $content = "<b>Content of the test email.</b>";
 

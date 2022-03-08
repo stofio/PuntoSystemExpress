@@ -28,13 +28,14 @@ $template = str_replace('{{ button_text }}', $buttonText, $template);
 /**
  * send email
  */
-$to = "stofio@live.com"; //supplier emails
+$to = "nicholas.schibuola@puntosystemgroup.com"; //supplier emails
 
 //get all supplier emails and send to all
 // $sql2 = "SELECT email, contact_email FROM `users` WHERE `users`.`roleidfk` = 1";
 // $result2 = mysqli_query($conn, $sql2);  
 // while ($user = mysqli_fetch_array($result2)) {
     //     $to = $user['contact_email'] == "" ? $user['email'] : $user['contact_email'];
+    //     if($to == '' || $to == null) continue;
     //     sendEmail($to, $subject, $content);
     // }
 

@@ -16,7 +16,7 @@ if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 $start_from = ($page-1) * $limit;  
   
 $sql = "SELECT * FROM requests WHERE `request_status` in (1) AND `useridfk` = $userid 
-ORDER BY created DESC LIMIT $start_from, $limit";  
+ORDER BY id DESC LIMIT $start_from, $limit";       
 $rs_result = mysqli_query($conn, $sql);   
 
 
