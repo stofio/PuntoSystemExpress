@@ -209,3 +209,5 @@
             </div>
         </div>
     </div>
+
+    <script src="/defaults.js"></script>

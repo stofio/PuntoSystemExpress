@@ -304,7 +304,7 @@
 
   function checkWeight() {
     var totWeight = 0;
-    var maxWeight = 1100;
+    var maxWeight = maxWeightDef;
 
     $.each($('.collo-kg'), (i, weight) => {
       totWeight = totWeight + $(weight).val() * 1;
@@ -331,9 +331,9 @@
   }
 
   function checkMeasures() {
-    var maxL = 240;
-    var maxW = 300;
-    var maxH = 200;
+    var maxL = maxLenghtDef;
+    var maxW = maxWidthDef;
+    var maxH = maxHeightDef;
 
     $('#warn-measure').remove();
     forManual.measures = false;
