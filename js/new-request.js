@@ -95,7 +95,7 @@
   $(document).on('input', 'input.collo-l, input.collo-w, input.collo-h', checkMeasures);
 
   //allow only numbers input
-  $(document).on('input', 'input.collo-kg, input.collo-l, input.collo-w, input.collo-h', (e) => {
+  $(document).on('input', 'input.collo-l, input.collo-w, input.collo-h, input.collo-kg', (e) => {
     if (($(e.target).val().split(".").length - 1) > 1) {
       $(e.target).val($(e.target).val().slice(0, -1));
     }
@@ -138,6 +138,7 @@
     for (var pair of formDataSaved.entries()) {
       console.log(pair[0] + ', ' + pair[1]);
     }
+    showLoading();
     $.ajax({
       url: '/include/create_request.php',
       data: formDataSaved,
@@ -145,6 +146,7 @@
       contentType: false,
       type: 'POST',
       success: function(data) {
+        hideLoading();
         if (typeof callback === 'function') {
           callback();
         }
@@ -245,19 +247,28 @@
     <div class="collo-single">
     <span class="coll-nu">1</span>
     <div>
-        <label>Packaging</label><input type="text" class="collo-name" placeholder="Packaging" required>
+      <label>Packaging Type</label>
+      <select class="collo-name" placeholder="Packaging Type" required>
+          <option value="Carton">Carton</option>
+          <option value="Pallet">Pallet</option>
+          <option value="Piece">Piece</option>
+          <option value="Case">Case</option>
+          <option value="Cage">Cage</option>
+          <option value="Bundle">Bundle</option>
+          <option value="Reel">Reel</option>
+      </select>
     </div>
     <div>
-        <label>Weight</label><input type="text" class="collo-kg" placeholder="In KG, E.g. 350" required>
+        <label>Lenght (cm)</label><input type="text" class="collo-l" placeholder="In m, E.g. 35" required>
     </div>
     <div>
-        <label>Lenght</label><input type="text" class="collo-l" placeholder="In m, E.g. 5" required>
+        <label>Width (cm)</label><input type="text" class="collo-w" placeholder="In m, E.g. 10.5" required>
     </div>
     <div>
-        <label>Width</label><input type="text" class="collo-w" placeholder="In m, E.g. 1.2" required>
+        <label>Height (cm)</label><input type="text" class="collo-h" placeholder="In m, E.g. 30" required>
     </div>
     <div>
-        <label>Height</label><input type="text" class="collo-h" placeholder="In m, E.g. 2.4" required>
+        <label>Weight (kg)</label><input type="text" class="collo-kg" placeholder="E.g. 350" required>
     </div>
     <div>
         <label>Stackable</label>

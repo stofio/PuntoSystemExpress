@@ -134,11 +134,14 @@
          * send email 
          */
         //get db data
+        $isManaul = $manual;
         $reqId = mysqli_insert_id($conn);
         $sql = "SELECT * FROM `requests` WHERE `requests`.`id` = $reqId";
         $result = mysqli_query($conn, $sql);  
         $array_termin = mysqli_fetch_assoc($result); //needed for email template
-        include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_supplier.php';
+        if(!$isManaul) {
+            include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_supplier.php';
+        }
         include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_client.php';
         include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_admin.php';
     } else {

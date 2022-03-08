@@ -172,18 +172,18 @@
 
     $.each($('.collo-single'), (i, collo) => {
       var name = $(collo).find('.collo-name').val();
-      var we = $(collo).find('.collo-kg').val();
       var le = $(collo).find('.collo-l').val();
       var wi = $(collo).find('.collo-w').val();
       var he = $(collo).find('.collo-h').val();
+      var we = $(collo).find('.collo-kg').val();
       var stack = $(collo).find('.collo-stack').is(":checked");
 
       colliArr.push({
         name: name,
-        weight: we,
         lenght: le,
         width: wi,
         height: he,
+        weight: we,
         stack: stack
       });
     })
@@ -254,19 +254,28 @@
     <div class="collo-single">
     <span class="coll-nu">1</span>
     <div>
-        <label>Packaging</label><input type="text" class="collo-name" placeholder="Packaging" required>
+      <label>Packaging Type</label>
+      <select class="collo-name" placeholder="Packaging Type" required>
+          <option value="Carton">Carton</option>
+          <option value="Pallet">Pallet</option>
+          <option value="Piece">Piece</option>
+          <option value="Case">Case</option>
+          <option value="Cage">Cage</option>
+          <option value="Bundle">Bundle</option>
+          <option value="Reel">Reel</option>
+      </select>
     </div>
     <div>
-        <label>Weight</label><input type="text" class="collo-kg" placeholder="In KG, E.g. 350" required>
+        <label>Lenght (cm)</label><input type="text" class="collo-l" placeholder="E.g. 35" required>
     </div>
     <div>
-        <label>Lenght</label><input type="text" class="collo-l" placeholder="In m, E.g. 5" required>
+        <label>Width (cm)</label><input type="text" class="collo-w" placeholder="E.g. 10.5" required>
     </div>
     <div>
-        <label>Width</label><input type="text" class="collo-w" placeholder="In m, E.g. 1.2" required>
+        <label>Height (cm)</label><input type="text" class="collo-h" placeholder="E.g. 30" required>
     </div>
     <div>
-        <label>Height</label><input type="text" class="collo-h" placeholder="In m, E.g. 2.4" required>
+        <label>Weight (kg)</label><input type="text" class="collo-kg" placeholder="E.g. 350" required>
     </div>
     <div>
         <label>Stackable</label>

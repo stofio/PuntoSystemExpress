@@ -104,6 +104,8 @@ $(document).on('submit', '.conf_shipped', (e) => {
   var currentRequest = $(e.target).parents('.single-order');
   if (confirm(`Notify the client that the request '${currentRequest.find('.order-title').html()}' is IN TRANSIT?`)) {
     // YES
+    showLoading();
+
     var formData = new FormData(e.currentTarget);
 
     $.ajax({
@@ -115,7 +117,7 @@ $(document).on('submit', '.conf_shipped', (e) => {
       cache: false,
       success: function(dataResult) {
         console.log(dataResult);
-
+        hideLoading();
         //show success message
         var success = `<div style="padding: 10px 25px">
             <h2>The client will be notified that the shipping is on the way.</h2>
@@ -134,8 +136,8 @@ $(document).on('submit', '.conf_shipped', (e) => {
 
 
 $(document).on('click', '.conf_deliv', (e) => {
-  var currentRequest = $(e.target).parents('.single-order');
-  var reqId = currentRequest.find('input.request_id').val();
+  var $currentRequest = $(e.target).parents('.single-order');
+  var reqId = $currentRequest.find('input.request_id').val();
   if (confirm(`Do you want to set this shipping as DELIVERED? The user will be notified about the changes.`)) {
     // YES
 
@@ -155,12 +157,12 @@ $(document).on('click', '.conf_deliv', (e) => {
         <input type="file" name="files[]" id="files" multiple />
         </label>
         </form>`;
-        $('.offer-conclude').append(podForm).hide(0);
+        $currentRequest.find('.offer-conclude').append(podForm).hide(0);
 
-        $('.conf_deliv').fadeOut('slow', () => {
-          $('.offer-conclude').fadeIn('fast');
-          $('.conclude_form').fadeIn('fast');
-          $('.order-status').html('TO COMPLETE');
+        $currentRequest.find('.conf_deliv').fadeOut('slow', () => {
+          $currentRequest.find('.offer-conclude').fadeIn('fast');
+          $currentRequest.find('.conclude_form').fadeIn('fast');
+          $currentRequest.find('.order-status').html('TO COMPLETE');
         });
       }
     });
@@ -175,7 +177,7 @@ $(document).on('submit', '.conclude_form', (e) => {
   var currentOffer = $(e.target).parents('.single-offer');
   if (confirm(`Mark current order as SHIPPED?`)) {
     // YES
-
+    showLoading();
     var formData = new FormData(e.currentTarget);
 
     //SET ORDER AS CONCLUDED
@@ -187,7 +189,7 @@ $(document).on('submit', '.conclude_form', (e) => {
       type: 'POST',
       success: function(dataResult) {
         console.log(dataResult);
-
+        hideLoading();
         //show success message
         var success = `<div style="padding: 10px 25px">
             <h2>The user will be notified by email about the changes.</h2>
@@ -246,4 +248,17 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+function showLoading() {
+  $('body').append(`
+  <div class="load-screen">
+    <img src="/media/loading-buffering.gif" />
+  </div>
+  `).css("overflow", "hidden");
+}
+
+function hideLoading() {
+  $('.load-screen').remove();
+  $('body').css("overflow", "auto");
 }

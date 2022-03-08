@@ -3,7 +3,7 @@ include '../functions.php';
 
 $userId = $_SESSION['user_id']; 
 
-$limit = 5;  
+$limit = 20;  
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;   
 

@@ -3,7 +3,9 @@ include '../functions.php';
 
 
 $limit = 5;
-$sql = "SELECT COUNT(id) FROM requests WHERE `request_status` = 1";  
+$sql = "SELECT COUNT(id) FROM requests INNER JOIN offers
+ON requests.id = offers.requestidfk
+WHERE `request_status` = 1";  
 $rs_result = mysqli_query($conn, $sql);  
 $row = mysqli_fetch_row($rs_result);  
 $total_records = $row[0];  

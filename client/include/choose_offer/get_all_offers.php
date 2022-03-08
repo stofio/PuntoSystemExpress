@@ -15,6 +15,35 @@ while ($row = mysqli_fetch_array($rs_result2)) {
 ?> 
 
 <div class="single-offer">
+    <?php $offerImages = unserialize($row["offer_attachments"]); //array of offerImages ?>
+    <?php if(!empty($offerImages)) : ?>
+    <div class="gallery-attach">
+        <div class="imageGallery<?php echo $currentRequestId ?>">
+
+            <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+            <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+            
+                <?php $i = 1; ?>
+                <?php foreach($offerImages as $image) : ?>
+                    <?php if($i == 1) : ?>
+                        <?php $i++; ?>
+                        <a href="/uploads/<?php echo $image; ?>">View images</a>
+                    <?php else : ?>
+                        <a href="/uploads/<?php echo $image; ?>"></a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            
+            
+            <script>
+                $('.imageGallery<?php echo $currentRequestId ?> a').simpleLightbox();
+            </script>
+
+
+
+        </div>
+    </div>
+    <?php endif; ?>
     <div class="offer-collection">
         <p><b>Good Collection</b><br><?php echo substr($row['collect_time'], 0, -3); ?></p>
     </div>

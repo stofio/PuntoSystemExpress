@@ -15,9 +15,17 @@ $client = mysqli_fetch_assoc($result2);
 /**
  * template ($array_termin near inclusion)
  */
-$template = file_get_contents( __DIR__ . '/tmp_client.html');  
-foreach($array_termin as $row => $value){
-    $template = str_replace('{{ '.$row.' }}', $value, $template);
+if($isManaul) {
+    $template = file_get_contents( __DIR__ . '/tmp_client_manual.html');  
+    foreach($array_termin as $row => $value){
+        $template = str_replace('{{ '.$row.' }}', $value, $template);
+    }
+}
+else {
+    $template = file_get_contents( __DIR__ . '/tmp_client.html');  
+    foreach($array_termin as $row => $value){
+        $template = str_replace('{{ '.$row.' }}', $value, $template);
+    }
 }
 
 

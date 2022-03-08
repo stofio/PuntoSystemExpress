@@ -34,6 +34,17 @@ if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
   
 ?>
 
+<?php
+
+//get offers of this request
+$currentRequestId = $row["id"];
+$sql2 = "SELECT * FROM offers WHERE `requestidfk` = $currentRequestId AND `offer_status` not in (1)";
+$rs_result2 = mysqli_query($conn, $sql2);  
+
+$offer = mysqli_fetch_assoc($rs_result2);
+
+?>
+
 <div class="container">
     <input type="hidden" class="req_id" value="<?php echo $row["id"]; ?>" />
     <div class="my-5">
@@ -65,10 +76,77 @@ if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
                 <div class="row mt-5 mb-5">
                     <div class="col-md-6 ml-5">
                         <p><b>Request attachments</b></p>
+                        <div class="gallery-attach">
+                            <div class="imageGallery1">
+
+                                <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+                                <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+                                <?php $images = unserialize($row["attachments"]); //array of images ?>
+
+
+                                <?php foreach($images as $image) : ?>
+                                    <a href="/uploads/<?php echo $image; ?>"><img src="/uploads/<?php echo $image; ?>"/></a>
+                                <?php endforeach; ?>
+
+                                <script>
+                                    $('.imageGallery1 a').simpleLightbox();
+                                </script>
+
+
+                            </div>
+                        </div> 
                     </div>
-                    <?php if($row["request_status"] !== '0' ) : ?>
+                    <?php if($row["is_manual"] == 0 ) : ?>
                     <div class="col-md-6">
                         <p><b>Offer attachments</b></p>
+                        <div class="gallery-attach">
+                            <div class="imageGallery2">
+
+                                <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+                                <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+                                <?php $images = unserialize($offer["offer_attachments"]); //array of images ?>
+
+
+                                <?php foreach($images as $image) : ?>
+                                    <a href="/uploads/<?php echo $image; ?>"><img src="/uploads/<?php echo $image; ?>"/></a>
+                                <?php endforeach; ?>
+
+                                <script>
+                                    $('.imageGallery2 a').simpleLightbox();
+                                </script>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-5">
+                        <p><b>POD</b></p>
+                        <div class="gallery-attach">
+                            <div class="imageGallery3">
+                                <?php if($row["POD"] != ''): ?>
+
+                                    <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+                                    <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+                                    <?php $images = unserialize($row["POD"]); //array of images 
+
+                                    ?>
+
+
+                                    <?php foreach($images as $image) : ?>
+                                        <a href="/uploads/<?php echo $image; ?>"><img src="/uploads/<?php echo $image; ?>"/></a>
+                                    <?php endforeach; ?>
+
+                                    <script>
+                                        $('.imageGallery3 a').simpleLightbox();
+                                    </script>
+
+                                <?php endif; ?>
+                                
+                            </div>
+                        </div>
                     </div>
                     <?php endif; ?>
                 </div> 
@@ -81,28 +159,19 @@ if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
                     //var_dump($colli['colli']);
                     foreach ($colli['colli'] as $c) {
                         $n = $c['name'];
-                        $we = $c['weight'];
                         $le = $c['lenght'];
                         $wi = $c['width'];
                         $hi = $c['height'];
+                        $we = $c['weight'];
                         $st = $c['stack'] == 1 ? '✓' : '✗';
-                        echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                        echo "<p><b>$n</b> - [ Lenght: $le cm ], [ Width: $wi cm ], [ Height: $hi cm ], [ Weight: $we Kg ], [ Stackable: $st ]</p>";
                         }
                     
                     ?>
                 </div>  
 
                 <div class="mt-5">
-                <?php
-
-                    //get offers of this request
-                    $currentRequestId = $row["id"];
-                    $sql2 = "SELECT * FROM offers WHERE `requestidfk` = $currentRequestId AND `offer_status` not in (1)";
-                    $rs_result2 = mysqli_query($conn, $sql2);  
-
-                    $offer = mysqli_fetch_assoc($rs_result2);
-
-                ?>
+                
 
                     <?php if( !$row['is_manual'] ) : ?>
                     <div class="single-offer">

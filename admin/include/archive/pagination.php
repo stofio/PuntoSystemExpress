@@ -1,7 +1,7 @@
 <?php 
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
  
-$limit = 5;  
+$limit = 20;  
 $sql = "SELECT COUNT(id) FROM requests WHERE `request_status` NOT IN (1,2) ORDER BY created DESC";  //select APPROVED and MANUAL
 $rs_result = mysqli_query($conn, $sql);  
 $row = mysqli_fetch_row($rs_result);  

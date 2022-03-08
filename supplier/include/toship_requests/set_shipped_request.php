@@ -4,6 +4,7 @@ session_start();
 
 include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
+
 $offer_id = $_POST['offer_id'];
 $request_id = $_POST['request_id'];
 $final_price_with_comm = test_input($_POST['final_price_with_comm']);
@@ -38,6 +39,15 @@ $sql2 = "UPDATE requests SET
 
 if ($conn->query($sql2) === TRUE) {
     echo "Request updated successfully";
+    /**
+     * send email 
+     */
+    //get db data
+    $reqId = $request_id;  
+    $offerId = $offer_id;
+    $array_termin = $_POST; //needed for email template
+    include $_SERVER['DOCUMENT_ROOT'].'/supplier/mails/mail-vehicle-info/send_email_client.php';
+
   } else {
     echo "Error updating request: " . $conn->error;
   }

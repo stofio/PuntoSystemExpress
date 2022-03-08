@@ -594,6 +594,11 @@ button.greybtn {
   height: 35px !important;
 }
 
+.collo-single .collo-name {
+  height: 35px !important;
+  width: 140px;
+}
+
 .collo-single input:not(:last-child) {}
 
 .collo-single label {
@@ -666,6 +671,10 @@ button.greybtn {
   background-color: #E6342A;
   color: #fff;
   font-weight: 500;
+}
+
+.conclude_form {
+  text-align: left;
 }
 
 .conclude_form input[type="file"] {
@@ -753,6 +762,19 @@ button.greybtn {
 
 .order-details {
   width: 100%;
+}
+
+.order-details p {
+  white-space: pre-wrap;
+  /* CSS3 */
+  white-space: -moz-pre-wrap;
+  /* Firefox */
+  white-space: -pre-wrap;
+  /* Opera <7 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* IE */
 }
 
 .admin-approval h3 {

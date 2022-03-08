@@ -78,6 +78,20 @@ $sql = "UPDATE requests SET
 
 if ($conn->query($sql) === TRUE) {
   echo "Offer updated successfully";
+  /**
+     * send email 
+     */
+    //get db data
+    $reqId = $reqId;  
+    //get request
+    $sql2 = "SELECT * FROM `requests` INNER JOIN `offers`
+            ON `requests`.`id` = `offers`.`requestidfk`
+            WHERE `requests`.`id` = $reqId AND `offer_status` = 3";
+    $result2 = mysqli_query($conn, $sql2);  
+    $requestAndOffer = mysqli_fetch_assoc($result2);
+    include $_SERVER['DOCUMENT_ROOT'].'/supplier/mails/mail-complete/send_email_client.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/supplier/mails/mail-complete/send_email_supplier.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/supplier/mails/mail-complete/send_email_admin.php';
 } else {
   echo "Error updating offer: " . $conn->error;
 }

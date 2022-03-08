@@ -1,9 +1,10 @@
+<?php
+session_start();
+?>
 <link href="/vendor/bootstrap-datetimepicker-master/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <script src="/vendor/bootstrap-datetimepicker-master/bootstrap-datetimepicker.min.js"></script>
 
 <?php
-
-session_start();
 
 include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
@@ -68,10 +69,50 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 <div class="row mb-5">
                     <div class="col-md-6 ml-5">
                         <p><b>Request attachments</b></p>
+                        <div class="gallery-attach">
+                            <div class="imageGallery1">
+
+                                <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+                                <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+                                <?php $images = unserialize($row["attachments"]); //array of images ?>
+
+
+                                <?php foreach($images as $image) : ?>
+                                    <a href="/uploads/<?php echo $image; ?>"><img src="/uploads/<?php echo $image; ?>"/></a>
+                                <?php endforeach; ?>
+
+                                <script>
+                                    $('.imageGallery1 a').simpleLightbox();
+                                </script>
+
+
+                            </div>
+                        </div>
                     </div>
                     <?php if($row["request_status"] !== '0' ) : ?>
                     <div class="col-md-6">
                         <p><b>Offer attachments</b></p>
+                        <div class="gallery-attach">
+                            <div class="imageGallery2">
+
+                                <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+                                <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+                                <?php $images = unserialize($row["offer_attachments"]); //array of images ?>
+
+
+                                <?php foreach($images as $image) : ?>
+                                    <a href="/uploads/<?php echo $image; ?>"><img src="/uploads/<?php echo $image; ?>"/></a>
+                                <?php endforeach; ?>
+
+                                <script>
+                                    $('.imageGallery2 a').simpleLightbox();
+                                </script>
+
+
+                            </div>
+                        </div>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -89,7 +130,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             $wi = $c['width'];
                             $hi = $c['height'];
                             $st = $c['stack'] == 1 ? '✓' : '✗';
-                            echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                            echo "<p><b>$n</b> - [ Lenght: $le cm ], [ Width: $wi cm ], [ Height: $hi cm ], [ Weight: $we Kg ], [ Stackable: $st ]</p>";
                             }
                         
                         ?>

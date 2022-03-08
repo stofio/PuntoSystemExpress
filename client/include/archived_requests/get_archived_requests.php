@@ -6,7 +6,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 $userId = $_SESSION['user_id'];
 
-$limit = 5;  
+$limit = 20;  
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;  
 
@@ -60,38 +60,6 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     </div>
                 </div>
             </div>
-            <div class="arrow-toggle"><span>❯</span></div>
-            <div class="live_request single-order-body panel-collapse intransit">
-                <div class="row mb-5">
-                    <div class="col-md-6 ml-5">
-                        <p><b>Request attachments</b></p>
-                    </div>
-                    <?php if($row["request_status"] !== '0' ) : ?>
-                    <div class="col-md-6">
-                        <p><b>Offer attachments</b></p>
-                    </div>
-                    <?php endif; ?>
-                </div>
-                <div class="mt-3" >
-                    <p><b>Packing list</b></p>
-                    <?php 
-                        $jsonColli = $row["colli"];
-
-                        $colli = unserialize($jsonColli);
-                        //var_dump($colli['colli']);
-                        foreach ($colli['colli'] as $c) {
-                            $n = $c['name'];
-                            $we = $c['weight'];
-                            $le = $c['lenght'];
-                            $wi = $c['width'];
-                            $hi = $c['height'];
-                            $st = $c['stack'] == 1 ? '✓' : '✗';
-                            echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
-                            }
-                        
-                        ?>
-                </div>
-            </div>
             <div class="live_request single-order-body">
                 <?php if(!$row["is_manual"]) : ?>
                     <?php
@@ -121,7 +89,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             <p><b>Good Delivery</b><br><?php echo substr($offer["deliver_time"], 0, -3); ?></p>
                         </div>
                         <div class="offer-price">
-                            <h4>€ <?php echo $offer["price"]; ?></h4>
+                            <h4>€ <?php echo $row["final_price_with_comm"]; ?></h4>
                         </div>
                     </div>
                     <?php endif; ?> 

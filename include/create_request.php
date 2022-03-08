@@ -123,10 +123,20 @@
 
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";
-        /**
-         * send email to all clients
+         /**
+         * send email 
          */
-        //sendEmailNewRequest();
+        //get db data
+        $isManaul = $manual;
+        $reqId = mysqli_insert_id($conn);
+        $sql = "SELECT * FROM `requests` WHERE `requests`.`id` = $reqId";
+        $result = mysqli_query($conn, $sql);  
+        $array_termin = mysqli_fetch_assoc($result); //needed for email template
+        if(!$isManaul) {
+            include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_supplier.php';
+        }
+        include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_client.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/client/mails/mail-new-request/send_email_admin.php';
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }

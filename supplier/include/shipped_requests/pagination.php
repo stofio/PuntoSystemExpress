@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 $userId = $_SESSION['user_id'];
 
-$limit = 5;
+$limit = 20;
 $sql = "SELECT COUNT(id) 
 FROM `requests` 
 INNER JOIN `offers` on `requests`.`id` = `offers`.`requestidfk` 

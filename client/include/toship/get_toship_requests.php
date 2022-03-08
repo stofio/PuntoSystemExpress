@@ -41,10 +41,9 @@ while ($row = mysqli_fetch_array($rs_result)) {
                                 <p><b>Estimated time unloading</b> <?php echo substr($row["final_to_time"], 0, -3); ?></p>
                             </div>
                             <div class="col-md-6">
-                                <p><b>Commodity</b> <?php echo $row["commodity"]; ?></p>
-                                <p><b>ADR</b> <?php echo $row["adr"] == 0 ? '✗' : '✓'; ?></p>
-                                <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
-                                <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
+                                <p><b>Driver name</b> <?php echo $row["driver_name"]; ?></p>
+                                <p><b>Vehicle num.</b> <?php echo $row["vehicle_num"]; ?></p>
+                                <p><b>BeOne ref.</b> <?php echo $row["beone_ref"]; ?></p>
                             </div>
                         </div>
                         
@@ -63,10 +62,50 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 <div class="row mb-5">
                     <div class="col-md-6 ml-5">
                         <p><b>Request attachments</b></p>
+                        <div class="gallery-attach">
+                            <div class="imageGallery1">
+
+                                <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+                                <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+                                <?php $images = unserialize($row["attachments"]); //array of images ?>
+
+
+                                <?php foreach($images as $image) : ?>
+                                    <a href="/uploads/<?php echo $image; ?>"><img src="/uploads/<?php echo $image; ?>"/></a>
+                                <?php endforeach; ?>
+
+                                <script>
+                                    $('.imageGallery1 a').simpleLightbox();
+                                </script>
+
+
+                            </div>
+                        </div>
                     </div>
                     <?php if($row["request_status"] !== '0' ) : ?>
                     <div class="col-md-6">
                         <p><b>Offer attachments</b></p>
+                        <div class="gallery-attach">
+                            <div class="imageGallery2">
+
+                                <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+                                <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+                                <?php $images = unserialize($row["offer_attachments"]); //array of images ?>
+
+
+                                <?php foreach($images as $image) : ?>
+                                    <a href="/uploads/<?php echo $image; ?>"><img src="/uploads/<?php echo $image; ?>"/></a>
+                                <?php endforeach; ?>
+
+                                <script>
+                                    $('.imageGallery2 a').simpleLightbox();
+                                </script>
+
+
+                            </div>
+                        </div>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -79,12 +118,12 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         //var_dump($colli['colli']);
                         foreach ($colli['colli'] as $c) {
                             $n = $c['name'];
-                            $we = $c['weight'];
                             $le = $c['lenght'];
                             $wi = $c['width'];
                             $hi = $c['height'];
+                            $we = $c['weight'];
                             $st = $c['stack'] == 1 ? '✓' : '✗';
-                            echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                            echo "<p><b>$n</b> - [ Lenght: $le cm ], [ Width: $wi cm ], [ Height: $hi cm ], [ Weight: $we Kg ], [ Stackable: $st ]</p>";
                             }
                         
                         ?>
@@ -101,7 +140,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <p><b>Good Delivery</b><br><?php echo substr($row["final_to_time"], 0, -3); ?></p>
                     </div>
                     <div class="offer-price">
-                        <h4>€ <?php echo $row["price"]; ?></h4>
+                        <h4>€ <?php echo $row["final_price_with_comm"]; ?></h4>
                     </div>
                 </div>
             </div>

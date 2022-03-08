@@ -15,7 +15,7 @@
     $files_names_array = array();
 
     //files
-    $upload_dir = '../../uploads/';
+    $upload_dir = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
     $allowed_types = array('jpg', 'png', 'jpeg', 'gif', 'pdf', 'xml', 'doc', 'docx', 'zip', 'rar');
     $maxsize = 50 * 1024 * 1024; //50 MiB
 
@@ -95,6 +95,8 @@
 
     $sql = "INSERT INTO offers (offer_useridfk, requestidfk, offer_status, collect_time, deliver_time, valid_until, price, offer_note, offer_attachments, offer_created)
     VALUES ('$userid', '$request_id', '1', '$from_formatted', '$to_formatted', '$valid_formatted', '$offer_price', '$note', '$attach', '$created')";
+
+    var_dump($attach);
 
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully <br>";

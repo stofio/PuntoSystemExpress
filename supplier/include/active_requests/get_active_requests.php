@@ -11,16 +11,18 @@ if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 $start_from = ($page-1) * $limit;  
   
 //get all LIVE requests
-$sql = "SELECT * FROM requests WHERE `request_status` = 1 ORDER BY created DESC LIMIT $start_from, $limit";  
+$sql = "SELECT * FROM requests INNER JOIN offers
+ON requests.id = offers.requestidfk
+WHERE `request_status` = 1 ORDER BY created DESC LIMIT $start_from, $limit";  
 $rs_result = mysqli_query($conn, $sql);  
 
 //get offers of current user 
-$sql2 = "SELECT `requestidfk` FROM offers WHERE `offer_useridfk` = $userId";  
-$offers_result = mysqli_query($conn, $sql2);  
-$offers_result_array = mysqli_fetch_all($offers_result);
+// $sql2 = "SELECT `requestidfk` FROM offers WHERE `offer_useridfk` = $userId";  
+// $offers_result = mysqli_query($conn, $sql2);  
+// $offers_result_array = mysqli_fetch_all($offers_result);
 
 
-$offers_array = array_column($offers_result_array, 0);
+// $offers_array = array_column($offers_result_array, 0);
 
 
 if($rs_result->num_rows == 0) echo '<p class="mt-4">No currently active requests...</p>';
@@ -31,7 +33,7 @@ if($rs_result->num_rows == 0) echo '<p class="mt-4">No currently active requests
 while ($row = mysqli_fetch_array($rs_result)) {  
 
     // skip if there is an offer already
-    if(in_array($row["id"], $offers_array)) continue;
+    //if(in_array($row["id"], $offers_array)) continue;
     
 ?>  
 
@@ -54,7 +56,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         </div>
                     </div>
                    
-                </div>
+                </div> 
                 <div class="header-controls">
                     <span class="order-status">LIVE</span>
                 </div>
@@ -64,6 +66,26 @@ while ($row = mysqli_fetch_array($rs_result)) {
                 <div class="row mb-5">
                     <div class="col-md-6 ml-5">
                         <p><b>Request attachments</b></p>
+                        <div class="gallery-attach">
+                            <div class="imageGallery1">
+
+                                <script src="/vendor/simpleLightbox/simpleLightbox.min.js"></script>
+                                <link href="/vendor/simpleLightbox/simpleLightbox.min.css" rel="stylesheet">
+
+                                <?php $images = unserialize($row["attachments"]); //array of images ?>
+
+
+                                <?php foreach($images as $image) : ?>
+                                    <a href="/uploads/<?php echo $image; ?>"><img src="/uploads/<?php echo $image; ?>"/></a>
+                                <?php endforeach; ?>
+
+                                <script>
+                                    $('.imageGallery1 a').simpleLightbox();
+                                </script>
+
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-3" >
@@ -75,12 +97,12 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             //var_dump($colli['colli']);
                             foreach ($colli['colli'] as $c) {
                                 $n = $c['name'];
-                                $we = $c['weight'];
                                 $le = $c['lenght'];
                                 $wi = $c['width'];
                                 $hi = $c['height'];
+                                $we = $c['weight'];
                                 $st = $c['stack'] == 1 ? '✓' : '✗';
-                                echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                                echo "<p><b>$n</b> - [ Lenght: $le cm ], [ Width: $wi cm ], [ Height: $hi cm ], [ Weight: $we Kg ], [ Stackable: $st ]</p>";
                               }
                             
                             ?>

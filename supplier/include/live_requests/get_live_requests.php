@@ -64,12 +64,12 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         //var_dump($colli['colli']);
                         foreach ($colli['colli'] as $c) {
                             $n = $c['name'];
-                            $we = $c['weight'];
                             $le = $c['lenght'];
                             $wi = $c['width'];
                             $hi = $c['height'];
+                            $we = $c['weight'];
                             $st = $c['stack'] == 1 ? '✓' : '✗';
-                            echo "<p><b>$n</b> - [ Weight: $we Kg ], [ Lenght: $le m ], [ Width: $wi m ], [ Height: $hi m ], [ Stackable: $st ]</p>";
+                            echo "<p><b>$n</b> - [ Lenght: $le cm ], [ Width: $wi cm ], [ Height: $hi cm ], [ Weight: $we Kg ], [ Stackable: $st ]</p>";
                             }
                         
                         ?>
