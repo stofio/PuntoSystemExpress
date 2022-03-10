@@ -2,7 +2,7 @@
 /**
  * SWITCH EMAIL ON/OFF
  */
-define('EMAILS_ACTIVATED', true);
+define('EMAILS_ACTIVATED', false);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -12,9 +12,9 @@ require $_SERVER['DOCUMENT_ROOT'].'/mail/PHPMailer/src/SMTP.php';
 
 
 //GLOBALS
-$AdminEmail = 'sales@puntosystemgroup.com'; //sales@puntosystemgroup.com
+$AdminEmail = 'stofio@live.com'; //sales@puntosystemgroup.com
 //$ccAdminEmail = [];
-$ccAdminEmail = ["nicholas.schibuola@puntosystemgroup.com"];
+//$ccAdminEmail = ["nicholas.schibuola@puntosystemgroup.com"];
 
 /**
  * $to - email

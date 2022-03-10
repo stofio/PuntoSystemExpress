@@ -46,7 +46,7 @@ else { //IF NOT MANUAL
 $to = $AdminEmail; //admin email
 $ccArray = $ccAdminEmail;
 
-$subject = "Waiting admin confirmation ID #" . $reqId;
+$subject = "New request of shipment ID #" . $reqId;
 $content = $template;
 
 

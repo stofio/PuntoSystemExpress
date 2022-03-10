@@ -85,6 +85,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
 
                             </div>
                         </div>
+                        <p><b>Note</b> <?php echo $row["note"]; ?></p> 
                     </div>
                 </div>
                 <div class="mt-3" >

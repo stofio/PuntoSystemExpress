@@ -26,7 +26,7 @@ $pdfName = $PdfName;
 $to = $AdminEmail; //admin email
 $ccArray = $ccAdminEmail;
 
-$subject = "Waiting admin approval ID #" . $reqId;
+$subject = "New Custom Offer Received ID #" . $reqId;
 $content = $template;
 
 sendEmail($to, $subject, $content, $ccArray, $pdfName);

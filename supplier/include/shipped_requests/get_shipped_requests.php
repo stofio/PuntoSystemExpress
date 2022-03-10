@@ -72,7 +72,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
             <div class="single-offer">
                 <input type="hidden" class="offer_id" value="<?php echo $row["offer_id"]; ?>">
                 <div class="offer-type">
-                    <span>MY OFFER</span>
+                    <span>OFFER CONCLUDED</span>
                 </div>
                 <div class="offer-collection">
                     <p><b>Good Collection</b><br><?php echo substr($row["final_from_time"], 0, -3); ?></p>
@@ -157,6 +157,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         </div>
                     </div>
                 </div>
+                <p><b>Note</b> <?php echo $row["note"]; ?></p> 
                 <div class="mt-3" >
                     <p><b>Packing list</b></p>
                     <?php 

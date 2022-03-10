@@ -121,6 +121,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     </div>
                     <?php endif; ?>
                 </div>
+                <p><b>Note</b> <?php echo $row["note"]; ?></p>  
                 <div class="mt-3" >
                     <p><b>Packing list</b></p>
                     <?php 

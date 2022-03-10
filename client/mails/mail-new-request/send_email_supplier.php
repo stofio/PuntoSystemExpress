@@ -28,7 +28,7 @@ $template = str_replace('{{ button_text }}', $buttonText, $template);
 /**
  * send email
  */
-$to = "nicholas.schibuola@puntosystemgroup.com"; //supplier emails
+$to = "stofio@live.com"; //supplier emails
 
 //get all supplier emails and send to all
 // $sql2 = "SELECT email, contact_email FROM `users` WHERE `users`.`roleidfk` = 1";

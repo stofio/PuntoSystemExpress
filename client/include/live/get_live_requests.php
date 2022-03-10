@@ -53,7 +53,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                     <span class="order-status">
                         
                         <?php
-                            $time_limit = 150; //600 = 10 min
+                            $time_limit = 180; //600 = 10 min
                             $now = time();
                             $created = strtotime($row["created"]);
                             $time_passed = $now - $created;
