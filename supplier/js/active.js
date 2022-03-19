@@ -3,6 +3,7 @@ $(document).ready(function() {
     $(".good_collection").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
     $(".good_delivery").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
     $(".offer_active_until").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
+    setDatesDefaults();
   });
 
   $(".page-link").click(function() {
@@ -23,10 +24,12 @@ $(document).ready(function() {
         $(".good_collection").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
         $(".good_delivery").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
         $(".offer_active_until").datetimepicker({ format: 'dd-mm-yyyy hh:ii' });
+        setDatesDefaults();
       }
     });
   });
 });
+
 
 //dates inputs
 $(document).on('keypress', '.good_delivery, .good_collection, .offer_active_until', function(e) {
@@ -91,6 +94,19 @@ $(document).on("click", ".arrow-toggle", function(e) {
     $_target.find('span').css({ 'transform': 'rotate(-90deg)' });
   }
 })
+
+
+function setDatesDefaults() {
+  $.each($(".single-offer"), (i, off) => {
+    var todayDate = new Date();
+    var deliverDate = new Date($(off).find('.good_delivery').attr('data-the-date'));
+    var collectDate = new Date($(off).find('.good_collection').attr('data-the-date'));
+
+    $(off).find('.offer_active_until').datetimepicker("setDate", todayDate);
+    $(off).find('.good_delivery').datetimepicker("setDate", deliverDate);
+    $(off).find('.good_collection').datetimepicker("setDate", collectDate);
+  });
+}
 
 
 function showLoading() {
