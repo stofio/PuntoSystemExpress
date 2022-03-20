@@ -44,10 +44,11 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             <p><b>Delivered</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
                         </div>
                         <div class="col-md-6">
-                            <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
                             <p><b>Commodity</b> <?php echo $row["commodity"]; ?></p>
                             <p><b>ADR</b> <?php echo $row["adr"] == 0 ? '✗' : '✓'; ?></p>
                             <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
+                            <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
+                            <p><b>PuntoSystem Ref.</b> {<?php echo $row["beone_ref"]; ?>}</p>
                         </div>
                     </div>
                 </div>
@@ -83,10 +84,10 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             <span>Supplier offer</span>
                         </div>
                         <div class="offer-collection">
-                            <p><b>Good Collection</b><br><?php echo substr($offer["collect_time"], 0, -3); ?></p>
+                            <p><b>Goods Collection</b><br><?php echo substr($offer["collect_time"], 0, -3); ?></p>
                         </div>
                         <div class="offer-delivery">
-                            <p><b>Good Delivery</b><br><?php echo substr($offer["deliver_time"], 0, -3); ?></p>
+                            <p><b>Goods Delivery</b><br><?php echo substr($offer["deliver_time"], 0, -3); ?></p>
                         </div>
                         <div class="offer-price">
                             <h4>€ <?php echo $row["final_price_with_comm"]; ?></h4>

@@ -53,7 +53,7 @@ $(document).on('submit', '.offer_form', (e) => {
 
 
 function submitAndApprove(formData, target) {
-  if (confirm(`Confirm and submit BeOne Ref. Number: ${formData.get('beone_ref')}?`)) {
+  if (confirm(`Confirm and submit PuntoSystem Ref. Number: ${formData.get('beone_ref')}?`)) {
     // YES
     showLoading();
     $.ajax({
@@ -69,7 +69,7 @@ function submitAndApprove(formData, target) {
         var success = `<div class="notice-success" style="padding: 10px 25px">
               <h2 class="mb-4 mt-5">Request approved.</h2>
               <p>The supplier will be notified about the changes.</p>
-              <p>The BeOne Ref. Number is: ${formData.get('beone_ref')}</p>
+              <p>The PuntoSystem Ref. Number is: ${formData.get('beone_ref')}</p>
               <p>You can find this request in the <a href="/admin/archive">archive</a></p>
               </div>
               `;

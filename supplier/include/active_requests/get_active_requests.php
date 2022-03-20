@@ -117,11 +117,11 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <div class="offer-delivery">
 
                             <p class="mb-3">
-                                <b>Good Delivery Time</b><br>
+                                <b>Goods Delivery Time</b><br>
                                 <input size="16" type="text" data-the-date="<?php echo substr($row["to_time"], 0, -3) ?>" placeholder="dd-mm-yyyy hh:ii" class="good_delivery" name="good_delivery" required>
                             </p>
                             <p class="mb-3">
-                                <b>Good Collection Time</b><br>
+                                <b>Goods Collection Time</b><br>
                                 <input size="16" type="text" data-the-date="<?php echo substr($row["from_time"], 0, -3); ?>" placeholder="dd-mm-yyyy hh:ii" class="good_collection" name="good_collection" required>
                             </p>
                             <p>

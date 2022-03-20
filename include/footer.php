@@ -9,7 +9,8 @@
           41012 Carpi (MO) Italy <br>
           Tel: +39 (059) 63.22.511 <br>
           E-mail: sales@puntosystemgroup.com <br>
-          <a href="https://puntosystemgroup.com/">www.puntosystemgroup.com</a>
+          <a href="https://puntosystemgroup.com/">www.puntosystemgroup.com</a> <br>
+          VAT: IT01861040366
           </p>
         </div>
         <div class="col-md-4 footer-right">

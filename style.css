@@ -154,7 +154,7 @@ section.hero-section .refresh {
 
 @media(min-width: 768px) {
   .how-it-work {
-    background-image: url(media/home-how-it-w.png);
+    background-image: url(media/home-how-it-w.jpg);
     background-position: 100% 0;
     background-size: 42%;
     background-repeat: no-repeat;
@@ -933,4 +933,13 @@ h2.order-title {
   font-size: 24px;
   font-weight: 600;
   text-decoration: underline;
+}
+
+.lab-tip {
+  border: none;
+  background-color: #000;
+  color: #fff;
+  border-radius: 100px;
+  font-size: 13px;
+  padding: 0px 4px;
 }

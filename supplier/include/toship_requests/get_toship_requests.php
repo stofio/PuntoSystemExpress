@@ -55,6 +55,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                                     <p><b>ADR</b> <?php echo $row["adr"] == 0 ? '✗' : '✓'; ?></p>
                                     <p><b>Temp. Control</b> <?php echo $row["temp_cont"] == 0 ? '✗' : '✓'; ?></p>
                                     <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
+                                    <p><b>Puntosystem Ref.</b> {<?php echo $row["beone_ref"]; ?>}</p>
                                 </div>
                             </div>
                         </div>
@@ -142,10 +143,10 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <span>MY OFFER</span> 
                     </div>
                     <div class="offer-collection">
-                        <p><b>Good Collection</b><br><?php echo substr($row["from_time"], 0, -3); ?></p>
+                        <p><b>Goods Collection</b><br><?php echo substr($row["from_time"], 0, -3); ?></p>
                     </div>
                     <div class="offer-delivery">
-                        <p><b>Good Delivery</b><br><?php echo substr($row["to_time"], 0, -3); ?></p>
+                        <p><b>Goods Delivery</b><br><?php echo substr($row["to_time"], 0, -3); ?></p>
                     </div>
                     <div class="offer-price">
                         <h4>€ <?php echo $row["price"]; ?></h4>
@@ -159,23 +160,23 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             <span>VEHICLE INFORMATION</span>
                         </div>
                         <div class="offer-collection">
-                            <label><b>Driver name</b><br>
-                                <input type="text" name="driver_name" placeholder="Drive name" required/>
+                            <label><b>Driver name </b><span class="lab-tip" data-toggle="tooltip" title="If more than 1 driver, please separate with commas">?</span><br>
+                                <input type="text" name="driver_name" placeholder="Driver Name" required/>
                             </label><br>
-                            <label class="mt-4"><b>Vehicle reg. number</b><br>
-                                <input type="text" name="vehicle_num" placeholder="Vehicle reg. number" required/>
+                            <label class="mt-4"><b>Vehicle Plate Number</b> <span class="lab-tip" data-toggle="tooltip" title="If more than 1 vehicle, please separate with commas">?</span><br>
+                                <input type="text" name="vehicle_num" placeholder="Vehicle Plate Number" required/>
                             </label>
                         </div>
                         <div class="offer-delivery">
                             <label><b>Time of arrival for loading</b><br>
-                                <input type="text" name="final_from_time" class="from-t" placeholder="Cargo loading at" required/>
+                                <input type="text" name="final_from_time" data-the-date="<?php echo substr($row["from_time"], 0, -3) ?>" class="from-t" placeholder="Cargo loading at" required/>
                             </label><br>
                             <label class="mt-4"><b>Estimated time unloading</b><br>
-                                <input type="text" name="final_to_time" class="to-t" placeholder="Cargo at destination at" required/>
+                                <input type="text" name="final_to_time" data-the-date="<?php echo substr($row["to_time"], 0, -3) ?>" class="to-t" placeholder="Cargo at destination at" required/>
                             </label>
                         </div>
                         <div class="offer-button confirm-shipped">
-                            <button class="confirm_shipped" type="submit">Confirm Shipped</button>
+                            <button class="confirm_shipped" type="submit">Activate Shipment</button>
                         </div>
                     </div>
                 </div>

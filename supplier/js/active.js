@@ -31,6 +31,7 @@ $(document).ready(function() {
 });
 
 
+
 //dates inputs
 $(document).on('keypress', '.good_delivery, .good_collection, .offer_active_until', function(e) {
   e.preventDefault();

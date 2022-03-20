@@ -53,10 +53,10 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <span>MY OFFER</span>
                     </div>
                     <div class="offer-collection">
-                        <p><b>Good Collection</b><br><?php echo substr($row["collect_time"], 0, -3); ?></p>
+                        <p><b>Goods Collection</b><br><?php echo substr($row["collect_time"], 0, -3); ?></p>
                     </div>
                     <div class="offer-delivery">
-                        <p><b>Good Delivery</b><br><?php echo substr($row["deliver_time"], 0, -3); ?></p>
+                        <p><b>Goods Delivery</b><br><?php echo substr($row["deliver_time"], 0, -3); ?></p>
                     </div>
                     <div class="offer-price">
                         <h4>€ <?php echo $row["price"]; ?></h4>

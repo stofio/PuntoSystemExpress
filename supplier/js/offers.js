@@ -25,7 +25,12 @@ $(document).ready(function() {
   //
   //load TOSHIP tab 
   //
-  $("#target-content2").load("include/toship_requests/get_toship_requests.php?page=1");
+  $("#target-content2").load("include/toship_requests/get_toship_requests.php?page=1", () => {
+    //tooltip (question mark with message)
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    setDatesDefaults();
+  });
+
   $(".page-link2.page-link").click(function() {
     var id = $(this).attr("data-id");
     var select_id = $(this).parent().attr("id");
@@ -41,6 +46,9 @@ $(document).ready(function() {
         $("#target-content2").html(dataResult);
         $(".pageitem2").removeClass("active");
         $("#tc-" + select_id).addClass("active");
+        //tooltip (question mark with message)
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        setDatesDefaults();
       }
     });
   });
@@ -92,9 +100,8 @@ $(document).ready(function() {
   // });
 
 
-
-
 });
+
 
 
 
@@ -102,7 +109,7 @@ $(document).on('submit', '.conf_shipped', (e) => {
   e.preventDefault();
   var currentOffer = $(e.target).find('.single-offer.ts');
   var currentRequest = $(e.target).parents('.single-order');
-  if (confirm(`Notify the client that the request '${currentRequest.find('.order-title').html()}' is IN TRANSIT?`)) {
+  if (confirm(`Notify the client that the request '${currentRequest.find('.order-title').html()}' is ACTIVE?`)) {
     // YES
     showLoading();
 
@@ -120,8 +127,8 @@ $(document).on('submit', '.conf_shipped', (e) => {
         hideLoading();
         //show success message
         var success = `<div style="padding: 10px 25px">
-            <h2>The client will be notified that the shipping is on the way.</h2>
-              <p class="mb-4">You can find this request in the IN TRANSIT tab on <a href="/supplier/offers">My offers</a> page.<p>
+            <h2>The client will be notified that the vehicle is on the way.</h2>
+            <p class="mb-4">You can find this request on <a href="/supplier/offers">My offers</a> page (IN TRANSIT tab).<p>
               
               </div>
               `;
@@ -154,7 +161,7 @@ $(document).on('click', '.conf_deliv', (e) => {
         <input type="hidden" name="request_id" value="${reqId}">
         <button class="sped_conclude" type="submit" style="float:right">Shipment completed</button><br>
         <label class="mt-3"><b>POD</b> <br>
-        <input type="file" name="files[]" id="files" multiple />
+          <input type="file" name="files[]" class="files" multiple />
         </label>
         </form>`;
         $currentRequest.find('.offer-conclude').append(podForm).hide(0);
@@ -174,7 +181,12 @@ $(document).on('click', '.conf_deliv', (e) => {
 
 $(document).on('submit', '.conclude_form', (e) => {
   e.preventDefault();
-  var currentOffer = $(e.target).parents('.single-offer');
+  var $currentOffer = $(e.target).parents('.single-offer');
+  var $pod = $(e.target).find('.files')[0];
+  if ($pod.files.length == 0) {
+    alert('To complete the process, upload POD first');
+    return;
+  }
   if (confirm(`Mark current order as SHIPPED?`)) {
     // YES
     showLoading();
@@ -196,8 +208,8 @@ $(document).on('submit', '.conclude_form', (e) => {
               <p class="mb-4">You can find this request in the <a href="/supplier/shipped">ARCHIVE.<p>
               </div>
               `;
-        $(currentOffer).fadeOut('slow', () => {
-          $(currentOffer).empty().html(success).fadeIn();
+        $($currentOffer).fadeOut('slow', () => {
+          $($currentOffer).empty().html(success).fadeIn();
         });
       }
     });
@@ -261,4 +273,15 @@ function showLoading() {
 function hideLoading() {
   $('.load-screen').remove();
   $('body').css("overflow", "auto");
+}
+
+
+function setDatesDefaults() {
+  $.each($(".single-order"), (i, off) => {
+    var deliverDate = new Date($(off).find('.to-t').attr('data-the-date'));
+    var collectDate = new Date($(off).find('.from-t').attr('data-the-date'));
+
+    $(off).find('.to-t').datetimepicker("setDate", deliverDate);
+    $(off).find('.from-t').datetimepicker("setDate", collectDate);
+  });
 }

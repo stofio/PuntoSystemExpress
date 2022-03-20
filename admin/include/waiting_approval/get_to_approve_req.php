@@ -177,7 +177,7 @@ while ($request = mysqli_fetch_array($rs_result)) {
                             <?php if ($request["request_status"] == 0) : ?>
                                 <button type="submit" style="float:right">Move to manual</button>
                             <?php else : ?>
-                                <p><b>BeOne Ref. Number</b></p>
+                                <p><b>PuntoSystem Ref. Number</b></p>
                                     <input type="text" class="beone_ref" name="beone_ref" required>
                                 <br><br>
                                 <button type="submit" style="float:right">Approve request</button>

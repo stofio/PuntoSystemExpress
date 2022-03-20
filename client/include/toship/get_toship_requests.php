@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             <div class="col-md-6">
                                 <p><b>Driver name</b> <?php echo $row["driver_name"]; ?></p>
                                 <p><b>Vehicle num.</b> <?php echo $row["vehicle_num"]; ?></p>
-                                <p><b>BeOne ref.</b> <?php echo $row["beone_ref"]; ?></p>
+                                <p><b>PuntoSystem Ref.</b> {<?php echo $row["beone_ref"]; ?>}</p>
                             </div>
                         </div>
                         
@@ -134,10 +134,10 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <span>BOOKED OFFER</span>
                     </div>
                     <div class="offer-collection">
-                        <p><b>Good Collection</b><br><?php echo substr($row["final_from_time"], 0, -3); ?></p>
+                        <p><b>Goods Collection</b><br><?php echo substr($row["final_from_time"], 0, -3); ?></p>
                     </div>
                     <div class="offer-delivery">
-                        <p><b>Good Delivery</b><br><?php echo substr($row["final_to_time"], 0, -3); ?></p>
+                        <p><b>Goods Delivery</b><br><?php echo substr($row["final_to_time"], 0, -3); ?></p>
                     </div>
                     <div class="offer-price">
                         <h4>€ <?php echo $row["final_price_with_comm"]; ?></h4>

@@ -66,12 +66,12 @@ $a = $account_data;
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <label>Default Loading place<br>
+                        <label>Default Loading place (Exact Address)<br>
                             <input type="text" value="<?php echo $a['def_loading_place'] ?>" name="def_load_place" placeholder="Default Loading place"/>
                         </label>
                     </div>
                     <div class="col-md-6">
-                        <label>Default Delivery place<br>
+                        <label>Default Delivery place (Exact Address)<br>
                             <input type="text" value="<?php echo $a['def_disch_place'] ?>" name="def_deliv_place" placeholder="Default Delivery place"/>
                         </label>
                     </div>

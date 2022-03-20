@@ -100,8 +100,8 @@ p {
 </br>
 <h4><b>OFFER</b></h4>
 </br>
-<p><b>Good Collection</b> {$array_termin['collect_time']}</p>
-<p><b>Good Delivery</b> {$array_termin['deliver_time']}</p>
+<p><b>Goods Collection</b> {$array_termin['collect_time']}</p>
+<p><b>Goods Delivery</b> {$array_termin['deliver_time']}</p>
 <p><b>Offer</b> {$priceCommission} €</p>
 
 

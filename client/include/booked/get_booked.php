@@ -35,7 +35,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             <p><b>From</b> <?php echo $row["from_place"]; ?>, <?php echo $row["loading_point"]; ?></p>
                             <p><b>To</b> <?php echo $row["to_place"]; ?>, <?php echo $row["discharge_point"]; ?></p>
                             <p><b>Available</b> <?php echo substr($row["from_time"], 0, -3); ?></p>
-                            <p><b>Delivered</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
+                            <p><b>Planned Delivery</b> <?php echo substr($row["to_time"], 0, -3); ?></p>
                         </div>
                         <div class="col-md-6">
                             <p><b>Shipment Ref.</b> <?php echo $row["shipment_ref"]; ?></p>
@@ -50,7 +50,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <?php if($row['request_status'] == 2) : //if is BOOKED ?>
                             <span class="order-notice">(waiting admin approval)</span>
                         <?php elseif($row['request_status'] == 3) : //if is APPROVED ?>
-                            <span class="order-notice">(waiting supplier info)</span>
+                            <span class="order-notice">(Waiting Truck Details)</span>
                         <?php endif; ?>
                     </span>
                     <div class="offer-button view-button mt-3">
@@ -77,10 +77,10 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <span>BOOKED OFFER</span>
                     </div>
                     <div class="offer-collection">
-                        <p><b>Good Collection</b><br><?php echo substr($offer['collect_time'], 0, -3); ?></p>
+                        <p><b>Goods Collection</b><br><?php echo substr($offer['collect_time'], 0, -3); ?></p>
                     </div>
                     <div class="offer-delivery">
-                        <p><b>Good Delivery</b><br><?php echo substr($offer['deliver_time'], 0, -3); ?></p>
+                        <p><b>Goods Delivery</b><br><?php echo substr($offer['deliver_time'], 0, -3); ?></p>
                     </div>
                     <div class="offer-price">
                     <h4>€ <?php echo getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']) ?></h4>

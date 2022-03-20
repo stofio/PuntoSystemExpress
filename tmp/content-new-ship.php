@@ -78,7 +78,7 @@
                         </label>
                     </div>
                     <div class="col-md-4">
-                        <label>Loading place<br>
+                        <label>Loading place (Exact Address)<br>
                             <input type="text" name="loading_point" placeholder="Loading place" required/>
                         </label>
                     </div>
@@ -102,7 +102,7 @@
                         </label>
                     </div>
                     <div class="col-md-4">
-                        <label>Delivery place<br>
+                        <label>Delivery place (Exact Address)<br>
                             <input type="text" name="discharge_point" placeholder="Delivery place" required/>
                         </label>
                     </div>
