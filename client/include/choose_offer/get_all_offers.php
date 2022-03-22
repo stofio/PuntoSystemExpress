@@ -10,11 +10,25 @@ $rs_result2 = mysqli_query($conn, $sql2);
 if($rs_result2->num_rows == 0) echo '<p class="mt-4">Waiting for offers...</p>';
 
 while ($row = mysqli_fetch_array($rs_result2)) {  
-   // var_dump($row);
-    
+
+        //allert if dates are different
+        $clientCollect = strtotime($currentRequestFromTime);
+        $supplierCollect = strtotime($row['collect_time']);
+        $clientDeliver = strtotime($currentRequestToTime);
+        $supplierDeliver= strtotime($row['deliver_time']);
+        $isDiffDate = false;
+
+        if($supplierCollect < $clientCollect) {
+            $isDiffDate = true;
+        }
+        if($supplierDeliver > $clientDeliver) {
+            $isDiffDate = true;
+        }
+   
 ?> 
 
-<div class="single-offer">
+
+<div class="single-offer choose-best">
     <?php $offerImages = unserialize($row["offer_attachments"]); //array of offerImages ?>
     <?php if(!empty($offerImages)) : ?>
     <div class="gallery-attach">
@@ -44,6 +58,13 @@ while ($row = mysqli_fetch_array($rs_result2)) {
         </div>
     </div>
     <?php endif; ?>
+
+    <div class="off-err">
+        <?php if($isDiffDate): ?>
+            <p class="error-warn"><span>⚠</span> Attention: one of the two dates does not correspond to those requested, this is our best proposal.</p>
+        <?php endif; ?>
+    </div>    
+
     <div class="offer-collection">
         <p><b>Goods Collection</b><br><?php echo substr($row['collect_time'], 0, -3); ?></p>
     </div>

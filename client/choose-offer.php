@@ -13,6 +13,7 @@ $sql = "SELECT * FROM requests WHERE `id` = $requestid AND `request_status` = 1 
 //get request, if null redirect
 $result = mysqli_query($conn, $sql);
 
+
 if($result->num_rows == 0) {
    echo "<script>location='/client/my-requests'</script>";
    exit();
@@ -20,6 +21,11 @@ if($result->num_rows == 0) {
 else {
     $row = mysqli_fetch_array($result);
 }
+
+
+//save variables for comparison with every offer 
+$currentRequestFromTime = $row["from_time"];
+$currentRequestToTime = $row["to_time"];
 
 ?>
 

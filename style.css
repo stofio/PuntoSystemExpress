@@ -943,3 +943,17 @@ h2.order-title {
   font-size: 13px;
   padding: 0px 4px;
 }
+
+.single-offer .off-err {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.single-offer.choose-best {
+  flex-wrap: wrap;
+}
+
+.single-offer.choose-best .error-warn {
+  line-height: 0px !important;
+  border: none;
+}

@@ -97,6 +97,13 @@ $(document).on("click", ".arrow-toggle", function(e) {
 })
 
 
+$(document).on("change dp.change", ".good_collection", (e) => {
+  var $order = $(e.target).parents('.single-order');
+  console.log($(e.target).val())
+
+});
+
+
 function setDatesDefaults() {
   $.each($(".single-offer"), (i, off) => {
     var todayDate = new Date();

@@ -105,7 +105,7 @@ while ($row = mysqli_fetch_array($rs_result)) {
                                 echo "<p><b>$n</b> - [ Lenght: $le cm ], [ Width: $wi cm ], [ Height: $hi cm ], [ Weight: $we Kg ], [ Stackable: $st ]</p>";
                               }
                             
-                            ?>
+                            ?> 
                     </div>
                 <form class="offer_form" enctype="multipart/form-data" autocomplete="off">
                     <input type="hidden" class="request_id" name="request_id" value="<?php echo $row["id"]; ?>">
