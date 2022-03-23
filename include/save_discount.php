@@ -13,17 +13,17 @@
     if(mysqli_num_rows($discountUsed) > 0){
         return;    
     }
-
-
-
-    $sql = "INSERT INTO user_discounts (useridfk, requestidfk, disc_code, disc_percent)
-    VALUES ('$userid', '$reqId', '$code', '$percent')";
-
-
-    if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    else {
+        $sql = "INSERT INTO user_discounts (useridfk, requestidfk, disc_code, disc_percent)
+        VALUES ('$userid', '$reqId', '$code', '$percent')";
+    
+    
+        if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
+
  
 ?>

@@ -6,6 +6,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 $userId = $_SESSION['user_id'];
 
+
 $limit = 20;  
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;  
@@ -28,6 +29,9 @@ if($rs_result->num_rows == 0) echo '<p class="mt-4">No archived requests yet...<
    
 <?php  
 while ($row = mysqli_fetch_array($rs_result)) {  
+
+    //check for discount
+    $discountInfo = getDiscountinfo($userId, $row["id"]);
     
 ?>  
 
@@ -90,7 +94,11 @@ while ($row = mysqli_fetch_array($rs_result)) {
                             <p><b>Goods Delivery</b><br><?php echo substr($offer["deliver_time"], 0, -3); ?></p>
                         </div>
                         <div class="offer-price">
-                            <h4>€ <?php echo $row["final_price_with_comm"]; ?></h4>
+                            <?php if($discountInfo == null): ?>
+                                <h4>€ <?php echo $row["final_price_with_comm"] ?></h4>
+                            <?php else: ?>
+                                <h4>€ <?php echo calculateDiscount($row["final_price_with_comm"], $discountInfo['disc_percent'] == null ? 0 : $discountInfo['disc_percent']) ?></h4> <p class="disc-under-price">-<?php echo $discountInfo["disc_percent"]; ?>% calculated</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <?php endif; ?> 

@@ -18,10 +18,14 @@ $rs_result = mysqli_query($conn, $sql);
 
 if($rs_result->num_rows == 0) echo '<p class="mt-4">No requests to confirm...</p>';
 
+
 ?>
    
-<?php  
-while ($row = mysqli_fetch_array($rs_result)) {  
+   <?php  
+while ($row = mysqli_fetch_array($rs_result)) {
+
+    //check for discount
+    $discountInfo = getDiscountinfo($userid, $row["id"]);
 ?>  
 
 
@@ -83,7 +87,11 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <p><b>Goods Delivery</b><br><?php echo substr($offer['deliver_time'], 0, -3); ?></p>
                     </div>
                     <div class="offer-price">
-                    <h4>€ <?php echo getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']) ?></h4>
+                    <?php if($discountInfo == null): ?>
+                        <h4>€ <?php echo getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']) ?></h4>
+                    <?php else: ?>
+                        <h4>€ <?php echo calculateDiscount(getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']), $discountInfo['disc_percent'] == null ? 0 : $discountInfo['disc_percent']) ?></h4> <p class="disc-under-price">-<?php echo $discountInfo["disc_percent"]; ?>% calculated</p>
+                    <?php endif; ?>
                     </div>
                 </div>
                 

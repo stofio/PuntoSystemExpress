@@ -160,7 +160,7 @@ $(document).on('click', '.conf_deliv', (e) => {
         var podForm = `<form class="conclude_form" enctype="multipart/form-data" autocomplete="off">
         <input type="hidden" name="request_id" value="${reqId}">
         <button class="sped_conclude" type="submit" style="float:right">Shipment completed</button><br>
-        <label class="mt-3"><b>POD</b> <br>
+        <label class="mt-3"><b>Upload POD to complete</b> <br>
           <input type="file" name="files[]" class="files" multiple />
         </label>
         </form>`;

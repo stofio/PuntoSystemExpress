@@ -42,6 +42,9 @@ while ($request = mysqli_fetch_array($rs_result)) {
         $supplier = mysqli_fetch_assoc($result4);
     endif;
 
+    //check for discount
+    $discountInfo = getDiscountinfo($request["useridfk"], $request["id"]);
+
 
 ?>  
 
@@ -75,6 +78,9 @@ while ($request = mysqli_fetch_array($rs_result)) {
                             <h3>Offer</h3> 
                             <p><b>Price</b> <?php echo $offer["price"]; ?> €</p>
                             <p><b>Price (+commission)</b> <?php echo getClientCommissionsCalculated($offer['price'], $request["id"]) ?> €</p>
+                            <?php if($discountInfo !== null): ?>
+                                <p><b>Price (<span style="color:green"> -<?php echo $discountInfo['disc_percent']; ?> discount </span>)</b> <?php echo calculateDiscount(getClientCommissionsCalculated($offer['price'], $request["useridfk"]), $discountInfo['disc_percent'] == null ? 0 : $discountInfo['disc_percent']) ?> €</p>
+                            <?php endif; ?>
                             <p><b>Collect time</b> <?php echo substr($offer["collect_time"], 0, -3); ?></p>
                             <p><b>Deliver time</b> <?php echo substr($offer["deliver_time"], 0, -3); ?></p>
                             <p><b>Valid ultil</b> <?php echo substr($offer["valid_until"], 0, -3); ?></p>

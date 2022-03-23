@@ -25,8 +25,7 @@ while ($row = mysqli_fetch_array($rs_result2)) {
             $isDiffDate = true;
         }
    
-?> 
-
+?>
 
 <div class="single-offer choose-best">
     <?php $offerImages = unserialize($row["offer_attachments"]); //array of offerImages ?>
@@ -53,8 +52,6 @@ while ($row = mysqli_fetch_array($rs_result2)) {
                 $('.imageGallery0<?php echo $currentRequestId ?> a').simpleLightbox();
             </script>
 
-
-
         </div>
     </div>
     <?php endif; ?>
@@ -72,7 +69,11 @@ while ($row = mysqli_fetch_array($rs_result2)) {
         <p><b>Goods Delivery</b><br><?php echo substr($row['deliver_time'], 0, -3); ?></p>
     </div>
     <div class="offer-price">
-        <h4>€ <?php echo getClientCommissionsCalculated($row['price'], $_SESSION['user_id']) ?></h4>
+        <?php if($discountInfo == null): ?>
+            <h4>€ <?php echo getClientCommissionsCalculated($row['price'], $_SESSION['user_id']) ?></h4>
+        <?php else: ?>
+            <h4>€ <?php echo calculateDiscount(getClientCommissionsCalculated($row['price'], $_SESSION['user_id']), $discountInfo['disc_percent'] == null ? 0 : $discountInfo['disc_percent']) ?></h4> <p class="disc-under-price">-<?php echo $discountInfo["disc_percent"]; ?>% calculated</p>
+        <?php endif; ?>
     </div>
     <div class="offer-button">
         <input type="hidden" class="offer_id" value="<?php echo $row['offer_id'] ?>">

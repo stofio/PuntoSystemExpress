@@ -51,6 +51,17 @@ function getClientCommissionsCalculated($supplierPrice, $clientId) {
     return $calculatedPrice;
 }
 
+//return discounted price
+function calculateDiscount($price, $discountPercent) {
+    return $price - ($price * ($discountPercent/100));
+}
+
+function getDiscountinfo($userid, $requestid) {
+    require 'db/conn.php';
+    $discountUsed = mysqli_query($conn, "SELECT * FROM user_discounts WHERE useridfk='$userid' and requestidfk='$requestid'");
+    return mysqli_fetch_assoc($discountUsed);
+}
+
 
 /**
  * calculate commissions. Return minimum, or bigger

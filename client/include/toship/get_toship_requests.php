@@ -24,6 +24,9 @@ if($rs_result->num_rows == 0) echo '<p class="mt-4">No requests in transit...</p
    
 <?php  
 while ($row = mysqli_fetch_array($rs_result)) {  
+
+    //check for discount
+    $discountInfo = getDiscountinfo($userid, $row["id"]);
 ?>  
 
 
@@ -140,7 +143,11 @@ while ($row = mysqli_fetch_array($rs_result)) {
                         <p><b>Goods Delivery</b><br><?php echo substr($row["final_to_time"], 0, -3); ?></p>
                     </div>
                     <div class="offer-price">
-                        <h4>€ <?php echo $row["final_price_with_comm"]; ?></h4>
+                        <?php if($discountInfo == null): ?>
+                            <h4>€ <?php echo $row["final_price_with_comm"] ?></h4>
+                        <?php else: ?>
+                            <h4>€ <?php echo calculateDiscount($row["final_price_with_comm"], $discountInfo['disc_percent'] == null ? 0 : $discountInfo['disc_percent']) ?></h4> <p class="disc-under-price">-<?php echo $discountInfo["disc_percent"]; ?>% calculated</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

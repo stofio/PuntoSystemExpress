@@ -22,10 +22,13 @@ else {
     $row = mysqli_fetch_array($result);
 }
 
-
 //save variables for comparison with every offer 
 $currentRequestFromTime = $row["from_time"];
 $currentRequestToTime = $row["to_time"];
+
+
+//check for discount
+$discountInfo = getDiscountinfo($userid, $requestid);
 
 ?>
 
@@ -94,6 +97,11 @@ $currentRequestToTime = $row["to_time"];
                         </div>
                     </div>
                 </div>   
+                <?php if($discountInfo !== null): ?>
+                    <div class="discount">
+                        <p>You have used the discount code <?php echo $discountInfo["disc_code"]; ?> for this request and you are eligible for a <span style="color: green; font-weight: bold"> <?php echo $discountInfo["disc_percent"]; ?>% discount </span></p>
+                    </div>
+                <?php endif; ?>
             </div>     
         </div>
 

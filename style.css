@@ -957,3 +957,10 @@ h2.order-title {
   line-height: 0px !important;
   border: none;
 }
+
+.disc-under-price {
+  text-align: center;
+  font-weight: 600;
+  color: green;
+  font-size: 15px !important;
+}

@@ -31,6 +31,9 @@ if(  $row['request_status'] == 1 && !$row['is_manual'] ) {
     echo "<script>location='/client/my-requests'</script>";
     header('Location: /client/my-requests');
 }
+
+//check for discount
+$discountInfo = getDiscountinfo($userid, $requestid);
   
 ?>
 
@@ -171,6 +174,12 @@ $offer = mysqli_fetch_assoc($rs_result2);
                     ?>
                 </div>  
 
+                <?php if($discountInfo !== null): ?>
+                    <div class="discount mt-5">
+                        <p>You have used the discount code <?php echo $discountInfo["disc_code"]; ?> for this request and you are eligible for a <span style="color: green; font-weight: bold"> <?php echo $discountInfo["disc_percent"]; ?>% discount </span></p>
+                    </div>
+                <?php endif; ?>
+
                 <div class="mt-5">
                 
 
@@ -186,7 +195,11 @@ $offer = mysqli_fetch_assoc($rs_result2);
                             <p><b>Goods Delivery</b><br><?php echo substr($offer['deliver_time'], 0, -3); ?></p>
                         </div>
                         <div class="offer-price">
-                         <h4>€ <?php echo getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']) ?></h4>
+                        <?php if($discountInfo == null): ?>
+                            <h4>€ <?php echo getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']) ?></h4>
+                        <?php else: ?>
+                            <h4>€ <?php echo calculateDiscount(getClientCommissionsCalculated($offer['price'], $_SESSION['user_id']), $discountInfo['disc_percent'] == null ? 0 : $discountInfo['disc_percent']) ?></h4> <p class="disc-under-price">-<?php echo $discountInfo["disc_percent"]; ?>% calculated</p>
+                        <?php endif; ?>
                         </div>
                     </div>
                     <?php endif; ?>
