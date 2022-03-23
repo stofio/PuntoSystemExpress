@@ -158,10 +158,17 @@
                         <textarea placeholder="Note" name="note"></textarea>
                     </label>
                 </div>
-                <div class="col-md-12">
-                    <label>Attachments (files larger then 50MB will not be uploaded)<br>
-                        <input type="file" name="files[]" id="files" multiple />
-                    </label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Attachments (max 50MB)<br>
+                            <input type="file" name="files[]" id="files" multiple />
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Do you have a discount code? <span class="disc-not"></span> <span class="lab-tip" data-toggle="tooltip" title="A discount code will have effect only once">?</span><br>
+                            <input type="text" name="discount_code" class="discount_code" placeholder="Discount code"/>
+                        </label>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <div class="error-container"></div>

@@ -136,6 +136,7 @@
         //get db data
         $isManaul = $manual;
         $reqId = mysqli_insert_id($conn);
+        $_SESSION["last_request_id"] = $reqId; //save session for discount
         $sql = "SELECT * FROM `requests` WHERE `requests`.`id` = $reqId";
         $result = mysqli_query($conn, $sql);  
         $array_termin = mysqli_fetch_assoc($result); //needed for email template

@@ -27,7 +27,7 @@
     $note = test_input($_POST['note']);
     $colli = $_POST['colli'];
     $files_names_array = array();
-    $created = date('Y-m-d h:i:s', time());
+    $created = date('Y-m-d H:i:s', time());
     $manual = test_input($_POST['manual']); //manual or live
 
     //files
@@ -129,6 +129,7 @@
         //get db data
         $isManaul = $manual;
         $reqId = mysqli_insert_id($conn);
+        $_SESSION["last_request_id"] = $reqId; //save session for discount
         $sql = "SELECT * FROM `requests` WHERE `requests`.`id` = $reqId";
         $result = mysqli_query($conn, $sql);  
         $array_termin = mysqli_fetch_assoc($result); //needed for email template

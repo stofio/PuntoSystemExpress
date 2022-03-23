@@ -2,6 +2,12 @@
 
   var euCountries = [];
   var nonEuCountries = [];
+  var discountsCode = [];
+
+  var currentDiscount = {
+    'code': '',
+    'percent': ''
+  };
 
   var isManual = 0; //0 if all forManual = false
 
@@ -59,10 +65,13 @@
             <span>Wrong username or password. Request a CLIENT account or retry.</span>
             </div>`);
         } else if (accepted == 1) { //if client
-          pubblishRequest(() => {
-            //send email then
-            location.href = "/client/my-requests";
-          });
+          pubblishRequest()
+            .then(() => {
+              saveDiscount()
+                .then(() => {
+                  location.href = "/client/my-requests";
+                })
+            });
         }
       }
     });
@@ -132,27 +141,137 @@
       //addNonEuCountriesOptions('.request_from_non_eu_group', countriesArray);
       addNonEuCountriesOptions('.request_to_non_eu_group', countriesArray);
     });
+
+    //get discounts
+    readCountries("/discounts.txt", discounts => {
+      discountsCode = discounts;
+    });
+
+    //init tooltips '?'
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
   });
 
-  function pubblishRequest(callback) {
-    for (var pair of formDataSaved.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
+
+  $(document).on('change, keydown, input', '.discount_code', (e) => {
+    checkDiscountCode(e);
+  });
+
+  function checkDiscountCode(e) {
+    if (e.target.value === '') {
+      removeDiscountStyle(e);
+      return;
     }
-    showLoading();
-    $.ajax({
-      url: '/include/create_request.php',
-      data: formDataSaved,
-      processData: false,
-      contentType: false,
-      type: 'POST',
-      success: function(data) {
-        hideLoading();
-        if (typeof callback === 'function') {
-          callback();
+    $.each(discountsCode, (i, disc) => {
+        var code = disc.split(" ")[0];
+        var percent = disc.split(" ")[1];
+        if (code == e.target.value) {
+          currentDiscount.code = code;
+          currentDiscount.percent = percent;
+          return false;
+        } else {
+          currentDiscount.code = '';
+          currentDiscount.percent = '';
         }
-      }
+      })
+      //console.log(currentDiscount.code)
+    if (currentDiscount.code === '') {
+      showInvalidCode(e);
+    } else {
+      showValidCode(e);
+    }
+  }
+
+  function showValidCode(e) {
+    $('.disc-not').css('color', 'green').html(`VALID ${currentDiscount.percent}%`);
+  }
+
+  function showInvalidCode(e) {
+    $('.disc-not').css('color', 'red').html('NOT VALID');
+  }
+
+  function removeDiscountStyle(e) {
+    $('.disc-not').css('color', 'initial').html('');
+  }
+
+  function pubblishRequest() {
+    return new Promise((resolve, reject) => {
+      showLoading();
+      $.ajax({
+        url: '/include/create_request.php',
+        data: formDataSaved,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function(data) {
+          hideLoading();
+          resolve();
+        }
+      });
     });
   }
+
+  // function pubblishRequest(callback) {
+  //   showLoading();
+  //   $.ajax({
+  //     url: '/include/create_request.php',
+  //     data: formDataSaved,
+  //     processData: false,
+  //     contentType: false,
+  //     type: 'POST',
+  //     success: function(data) {
+  //       hideLoading();
+  //       if (typeof callback === 'function') {
+  //         callback();
+  //       }
+  //     }
+  //   });
+  // }
+
+
+  function saveDiscount() {
+    if (currentDiscount.code == '') return;
+    return new Promise((resolve, reject) => {
+      var formData = formDataSaved;
+      formData.append("code", currentDiscount.code);
+      formData.append("percent", currentDiscount.percent);
+      showLoading();
+      $.ajax({
+        url: '/include/save_discount.php',
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function(data) {
+          console.log(data)
+          hideLoading();
+          resolve();
+        }
+      });
+
+    });
+  }
+
+  // function saveDiscount(callback) {
+  //   if (currentDiscount.code == '') return;
+  //   var formData = formDataSaved;
+  //   formData.append("code", currentDiscount.code);
+  //   formData.append("percent", currentDiscount.percent);
+  //   showLoading();
+  //   $.ajax({
+  //     url: '/include/save_discount.php',
+  //     data: formData,
+  //     processData: false,
+  //     contentType: false,
+  //     type: 'POST',
+  //     success: function(data) {
+  //       console.log(data)
+  //       hideLoading();
+  //       if (typeof callback === 'function') {
+  //         callback();
+  //       }
+  //     }
+  //   });
+  // }
 
 
   /**

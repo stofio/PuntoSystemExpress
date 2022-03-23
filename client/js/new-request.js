@@ -2,6 +2,12 @@
 
   var euCountries = [];
   var nonEuCountries = [];
+  var discountsCode = [];
+
+  var currentDiscount = {
+    'code': '',
+    'percent': ''
+  };
 
   var isManual = 0; //0 if all forManual = false
 
@@ -11,16 +17,7 @@
     country: false
   };
 
-  $('h1').on('click', () => {
-    if (forManual.measures || forManual.weight || forManual.country) {
-      isManual = 1;
-    } else {
-      isManual = 0;
-    }
-
-    console.log(forManual)
-    console.log(isManual)
-  });
+  var formDataSaved;
 
 
   //form submit
@@ -49,6 +46,7 @@
       type: 'POST',
       success: function(data) {
         hideLoading();
+        saveDiscount();
         console.log(data)
           //SEND 1 EMAIL
 
@@ -137,8 +135,58 @@
       addNonEuCountriesOptions('.request_to_non_eu_group', countriesArray);
     });
 
+
+    //get discounts
+    readCountries("/discounts.txt", discounts => {
+      discountsCode = discounts;
+    });
+
+    //init tooltips '?'
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
     get_default_user_data();
   });
+
+  $(document).on('change, keydown, input', '.discount_code', (e) => {
+    checkDiscountCode(e);
+  });
+
+  function checkDiscountCode(e) {
+    if (e.target.value === '') {
+      removeDiscountStyle(e);
+      return;
+    }
+    $.each(discountsCode, (i, disc) => {
+        var code = disc.split(" ")[0];
+        var percent = disc.split(" ")[1];
+        if (code == e.target.value) {
+          currentDiscount.code = code;
+          currentDiscount.percent = percent;
+          return false;
+        } else {
+          currentDiscount.code = '';
+          currentDiscount.percent = '';
+        }
+      })
+      //console.log(currentDiscount.code)
+    if (currentDiscount.code === '') {
+      showInvalidCode(e);
+    } else {
+      showValidCode(e);
+    }
+  }
+
+  function showValidCode(e) {
+    $('.disc-not').css('color', 'green').html(`VALID ${currentDiscount.percent}%`);
+  }
+
+  function showInvalidCode(e) {
+    $('.disc-not').css('color', 'red').html('NOT VALID');
+  }
+
+  function removeDiscountStyle(e) {
+    $('.disc-not').css('color', 'initial').html('');
+  }
 
 
   function get_default_user_data() {
@@ -157,6 +205,29 @@
         $('input[name="discharge_point"]').val(userObj.def_disch_place);
 
       }
+    });
+  }
+
+  function saveDiscount() {
+    if (currentDiscount.code == '') return;
+    return new Promise((resolve, reject) => {
+      var formData = formDataSaved;
+      formData.append("code", currentDiscount.code);
+      formData.append("percent", currentDiscount.percent);
+      showLoading();
+      $.ajax({
+        url: '/include/save_discount.php',
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function(data) {
+          console.log(data)
+          hideLoading();
+          resolve();
+        }
+      });
+
     });
   }
 
@@ -191,6 +262,7 @@
     var data = { colli: colliArr };
     var serializedColli = JSON.stringify(data)
     formData.append('colli', serializedColli);
+    formDataSaved = formData;
     return formData;
   }
 
